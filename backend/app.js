@@ -2,17 +2,18 @@
 const express = require('express');
 const app = express();
 
-
+const { test, loadmodel } = require('./models/index');
 
 const path = require('path');
 
-
+test();
+loadmodel();
 
 //ROUTES
 
-//const saucesRoutes = require('./routes/sauces');
-const userRoutes = require('./routes/user');
 
+const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
 
 
 
@@ -32,8 +33,7 @@ app.use((req, res, next) => {
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-//app.use('/api/sauces', saucesRoutes);
-
+//routes
 app.use('/api/auth', userRoutes);
-
+app.use('/api/post', postRoutes);
 module.exports = app;

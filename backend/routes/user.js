@@ -6,11 +6,11 @@ const router = express.Router();
 
 const userCtrl = require('../controllers/user');
 
-const Password = require('../middleware/Password');
+//const Password = require('../middleware/Password');
 
 
 
-router.post('/signup', Password, userCtrl.signup);
+router.post('/signup', userCtrl.signup);
 
 router.post('/login', userCtrl.login);
 

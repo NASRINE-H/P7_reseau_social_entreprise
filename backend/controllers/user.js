@@ -4,6 +4,7 @@
 //  utilise l'algorithme bcrypt pour hasher le mot de passe 
 const bcrypt = require('bcrypt');
 
+
 //Les JSON web tokens sont des tokens encodés qui peuvent être utilisés pour l'autorisation.
 
 const jwt = require('jsonwebtoken');
@@ -11,24 +12,38 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 // Middleware pour  un nouveau utilisateur
-exports.signup = (req, res, next) => {
 
+/**pour créer un nouveau utilisateur */
+exports.signup = (req, res, next) => {
+    console.log(req.body);
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({
+                username: req.body.username,
                 email: req.body.email,
-                password: hash
+                password: hash,
+                isAadmin: 0
             });
-            user.save()
-                .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-                .catch(error => res.status(400).json({ error }));
+            user.save(user)
+
+            .then((user) => {
+                    if (user) {
+                        return res.status(201).json({ message: 'Utilisateur créé !' })
+                    }
+                })
+                .catch((error) => { res.status(400).json({ error }) });
         })
-        .catch(error => res.status(500).json({ error }));
+
+    .catch((error) => { res.status(500).json({ error }) });
 };
 
+
+/**login pour se connecter */
 exports.login = (req, res, next) => {
 
-    User.findOne({ email: req.body.email })
+    User.findOne({
+            where: { email: req.body.email }
+        })
         .then(user => {
 
             if (!user) {
