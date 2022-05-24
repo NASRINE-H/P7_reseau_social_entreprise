@@ -1,3 +1,4 @@
+const { post } = require('../app');
 const Post = require('../models/post'); //exiger
 const User = require('../models/user');
 /**
@@ -14,20 +15,20 @@ exports.getAll = (req, res) => {
 /** créer un post */
 //pour créer un post 
 exports.createPost = (req, res, next) => {
-    
-    
+
+
 
     const PostObject = JSON.parse(req.body.post);
-    let imagePost = "";
-    delete PostObject._id;
+
+    const post = new Post({
+        UserId: PostObject.UserId,
+        titre: PostObject.titre,
+        content: PostObject.content
+    })
     if (req.file) {
         imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
     }
-    const post = new Post({
-        UserId: req.body.UserId,
-        post: req.body.post,
-        postUrl: imagePost
-    })
+
     console.log(post);
     post.save().then(
             () => {
@@ -46,7 +47,7 @@ exports.createPost = (req, res, next) => {
 
 };
 
-//exports.updatePost = (req, res) => {};
+exports.modifyPostt = (req, res) => {};
 
 //exports.readPost = (req, res) => {};
 //exports.deletePost = (req, res) => {};
