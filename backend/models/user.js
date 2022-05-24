@@ -17,11 +17,14 @@ module.exports = bdd.define("user", {
         allowNull: false
     },
 
-    isAadmin: {
+    isAdmin: {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
 }, {
     bdd,
-    tableName: 'users'
+    tableName: 'users',
+    //timestamps: false
+
+
 });

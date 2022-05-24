@@ -1,24 +1,25 @@
-//init
 const express = require('express');
 const app = express();
 
 const { test, loadmodel } = require('./models/index');
 
 const path = require('path');
+//const auth = require("./middelware/auth");
+
 
 test();
 loadmodel();
 
 //ROUTES
 
-
+//const authRoutes = require("./routes/auth");
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 
 
 
 //il nous donne accer au corps de la requete
-app.use(express.json());
+//app.use(express.json());
 
 //CORS
 app.use((req, res, next) => {
@@ -28,11 +29,11 @@ app.use((req, res, next) => {
     next();
 });
 
+//app.use((req, res, next) => console.log(req.body));
 
-
-
+app.use(express.urlencoded({ extended: true }));
 app.use('/images', express.static(path.join(__dirname, 'images')));
-
+//app.use("/api/auth  ", authRoutes)
 //routes
 app.use('/api/auth', userRoutes);
 app.use('/api/post', postRoutes);

@@ -26,10 +26,12 @@ module.exports = bdd.define("post", {
 
 
         },
+        //likers, timestamps
     }, {
 
         bdd,
-        tableName: 'Post'
+        tableName: 'Post',
+        //timestamps: false
     }
 
 );

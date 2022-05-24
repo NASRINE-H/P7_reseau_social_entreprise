@@ -11,41 +11,42 @@ exports.getAll = (req, res) => {
         .catch(error => res.status(400).json({ error }))
 }
 
+/** créer un post */
 //pour créer un post 
 exports.createPost = (req, res, next) => {
-    const { body } = req
-    console.log(body)
+    
+    
 
-    /* const PostObject = JSON.parse(req.body.post);
-     let imagePost = "";
-     delete PostObject._id;
-
-     if (req.file) {
-         imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-     }
-
-     const post = new Post({
-         UserId: req.body.UserId,
-         post: req.body.post,
-         postUrl: imagePost
-     })
-     console.log(post);
-     post.save().then(
-         () => {
-             res.status(201).json({
-                 message: 'Post créé'
-             });
-         }
-     )
-
-     .catch(
-         (error) => {
-             res.status(400).json({
-                 error: error
-             });
-         }
-     );*/
+    const PostObject = JSON.parse(req.body.post);
+    let imagePost = "";
+    delete PostObject._id;
+    if (req.file) {
+        imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+    }
+    const post = new Post({
+        UserId: req.body.UserId,
+        post: req.body.post,
+        postUrl: imagePost
+    })
+    console.log(post);
+    post.save().then(
+            () => {
+                res.status(201).json({
+                    message: 'Post créé'
+                });
+            }
+        )
+        .catch(
+            (error) => {
+                res.status(400).json({
+                    error: error
+                });
+            }
+        );
 
 };
 
-//exports.updateOne = (req, res) => {};
+//exports.updatePost = (req, res) => {};
+
+//exports.readPost = (req, res) => {};
+//exports.deletePost = (req, res) => {};

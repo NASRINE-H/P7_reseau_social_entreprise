@@ -25,7 +25,8 @@ const loadmodel = async() => {
     const User = require('./user');
     const Post = require('./post');
     Post.belongsTo(User); //L' A.belongsTo(B)association signifie qu'une relation un-à-un existe entre Aet B, la clé étrangère étant définie dans le modèle source ( A).
-    bdd.sync({ alter: true });
+    bdd.sync({ alter: true })
+        .catch(error => console.log(error))
 }
 
 module.exports = { bdd, test, loadmodel };
