@@ -15,15 +15,16 @@ const User = require('../models/user');
 
 /**pour créer un nouveau utilisateur */
 exports.signup = (req, res, next) => {
-    console.log(req.body);
-    bcrypt.hash(req.body.password, 10)
+    const userJson = JSON.parse(req.body.user);
+    bcrypt.hash(userJson.password, 10)
         .then(hash => {
             const user = new User({
-                username: req.body.username,
-                email: req.body.email,
+                username: userJson.username,
+                email: userJson.email,
                 password: hash,
-                isAadmin: 0
+                isAdmin: userJson.isAdmin
             });
+            console.log("new user" + user);
             user.save(user)
 
             .then((user) => {
@@ -40,9 +41,10 @@ exports.signup = (req, res, next) => {
 
 /**login pour se connecter */
 exports.login = (req, res, next) => {
-
+    const userJson = JSON.parse(req.body.user);
+    console.log(userJson.email);
     User.findOne({
-            where: { email: req.body.email }
+            where: { email: userJson.email }
         })
         .then(user => {
 
@@ -50,7 +52,7 @@ exports.login = (req, res, next) => {
                 return res.status(401).json({ error: 'Utilisateur non trouvé !' });
             }
 
-            bcrypt.compare(req.body.password, user.password)
+            bcrypt.compare(userJson.password, user.password)
                 .then(valid => {
 
                     if (!valid) {
@@ -69,7 +71,7 @@ exports.login = (req, res, next) => {
                         )
                     });
                 })
-                .catch(error => res.status(500).json({ error }));
+                .catch(error => res.status(401).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
 };
