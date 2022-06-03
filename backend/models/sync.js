@@ -21,12 +21,12 @@ const test = async() => {
         console.error('Unable to connect to the database:', error);
     }
 }
-const loadmodel = async() => {
-    const User = require('./user');
-    const Post = require('./post');
-    Post.belongsTo(User); //L' A.belongsTo(B)association signifie qu'une relation un-à-un existe entre Aet B, la clé étrangère étant définie dans le modèle source ( A).
-    bdd.sync()
-        .catch(error => console.log(error))
-}
-
-module.exports = { bdd, test, loadmodel };
+const User = require('./user');
+const Post = require('./post');
+Post.belongsTo(User);
+bdd.sync({ alter: true })
+    .then(result => {
+        console.log("bdd mise a jour")
+        process.exit(1)
+    })
+    .catch(error => console.log(error));
