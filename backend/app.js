@@ -11,7 +11,7 @@ test();
 loadmodel();
 
 //ROUTES
-app.use(express.json())
+app.use(express.json());
 
 //const authRoutes = require("./routes/auth");
 const userRoutes = require('./routes/user');

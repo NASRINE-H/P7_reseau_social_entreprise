@@ -1,5 +1,5 @@
 const express = require('express');
-const multer = require('../middelware/multer');
+//const multer = require('../middelware/multer');
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ const postCtrl = require('../controllers/post');
 
 
 router.get('/', postCtrl.getAllPosts);
-router.post('/', multer, postCtrl.createPost);
+router.post('/', postCtrl.createPost);
 router.get('/:id', postCtrl.getOnePost);
 router.put('/:id', postCtrl.modifyPost);
 router.delete('/:id', postCtrl.deletePost);
