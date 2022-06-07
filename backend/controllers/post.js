@@ -15,8 +15,8 @@ const fs = require("fs");
 exports.getOnePost = (req, res) => {
     // verifier si la requête contient l'ID du post
     if (!req.params.id) {
-        console.log("req.params.id=", req.params.id)
-        console.log("req.headers.authorization=", req.headers.authorization)
+        //console.log("req.params.id=", req.params.id)
+        // console.log("req.headers.authorization=", req.headers.authorization)
         res.status(400).json({
             message: "Requête incomplète."
         });
@@ -25,11 +25,11 @@ exports.getOnePost = (req, res) => {
         const postId = req.params.id;
 
         // afficher dans la console pour debeug
-        console.log("fonction getOne");
-        console.log("PostId:" + postId);
+        // console.log("fonction getOne");
+        //console.log("PostId:" + postId);
 
         Post.findOne({
-                _id: postId
+                id: postId
             })
             .then(post => res.status(200).json(post))
             .catch((error) => {
@@ -46,7 +46,7 @@ exports.getAllPosts = (req, res) => {
     Post.findAll({
             include: User
         })
-        .then(posts => res.status(200).json("Voici tous les posts trouvés pour le user:" + User + "" + posts))
+        .then(posts => res.status(200).json(posts))
         .catch((error) => {
             res.status(500).json({
                 message: 'aucun post trouvé, findAll a retourné une erreur',

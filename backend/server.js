@@ -3,7 +3,7 @@ const app = require('./app');
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
-
+    //nan not a number
     if (isNaN(port)) {
         return val;
     }

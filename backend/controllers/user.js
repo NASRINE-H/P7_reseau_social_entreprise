@@ -133,7 +133,7 @@ exports.getAllUsers = (req, res) => {
 
 
 exports.modifyUser = (req, res) => {
-    const data = req.body;
+
 
 
 
@@ -143,6 +143,7 @@ exports.modifyUser = (req, res) => {
             }
         })
         .then((user) => {
+            // console.log("************req.body.username:" + req.body.username)
             if (user.id === req.auth.userId) {
                 user.email = req.body.email;
                 user.username = req.body.username;
@@ -187,5 +188,7 @@ exports.deleteUser = (req, res, next) => {
 
 
         })
-        .catch((error) => res.status(500).json(error));
+        .catch((error) => {
+            res.status(500).json(error)
+        });
 };
