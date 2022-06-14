@@ -22,7 +22,7 @@ exports.signup = (req, res, next) => {
                 username: userJson.username,
                 email: userJson.email,
                 password: hash,
-                isAdmin: userJson.isAdmin
+
             });
             console.log("new user" + user);
             user.save(user)
@@ -76,11 +76,14 @@ exports.login = (req, res, next) => {
                     }
 
                     res.status(200).json({
-                        userId: user._id,
+                        userId: user.id,
+                        isAdmin: user.isAdmin,
 
                         //utliliser la librairie  jwt pour generer un token 
                         token: jwt.sign({
-                                userId: user.id
+                                userId: user.id,
+                                isAdmin: user.isAdmin,
+
 
                             },
                             'RANDOM_TOKEN_SECRET', {
@@ -134,22 +137,36 @@ exports.getAllUsers = (req, res) => {
 
 exports.modifyUser = (req, res) => {
 
-
-
-
     User.findOne({
             where: {
                 id: req.params.id
             }
         })
         .then((user) => {
-            // console.log("************req.body.username:" + req.body.username)
+
+
             if (user.id === req.auth.userId) {
-                user.email = req.body.email;
-                user.username = req.body.username;
-                user.save()
-                    .then((user) => res.status(200).json(user))
-                    .catch((error) => res.status(404).json(error));
+                if (req.body.password) {
+                    bcrypt.hash(req.body.password, 10)
+                        .then(hash => {
+                            user.password = hash;
+                            user.email = req.body.email;
+                            user.username = req.body.username;
+
+                            user.save()
+                                .then((user) => res.status(200).json(user))
+                                .catch((error) => res.status(404).json(error));
+                        }).catch((error) => {
+                            res.status(400).json({
+                                error,
+                                message: "mot de passe non modifié"
+                            })
+                        });
+                } else {
+                    console.log("mot de passe non modifié");
+                }
+
+
 
             } else {
                 res.status(403).json({

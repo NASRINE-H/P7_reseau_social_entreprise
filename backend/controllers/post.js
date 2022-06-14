@@ -2,6 +2,9 @@ const post = require('../app');
 const Post = require('../models/post'); //exiger
 const User = require('../models/user');
 const getOneUser = require('./user');
+const jwt = require('jsonwebtoken');
+const postLikes = require('../models/postLikes');
+
 
 const fs = require("fs");
 
@@ -25,11 +28,13 @@ exports.getOnePost = (req, res) => {
         const postId = req.params.id;
 
         // afficher dans la console pour debeug
-        // console.log("fonction getOne");
-        //console.log("PostId:" + postId);
+        console.log("fonction getOne");
+        console.log("PostId:" + postId);
 
         Post.findOne({
-                id: postId
+                where: {
+                    id: postId
+                }
             })
             .then(post => res.status(200).json(post))
             .catch((error) => {
@@ -44,7 +49,12 @@ exports.getOnePost = (req, res) => {
 /**lire tous les postes */
 exports.getAllPosts = (req, res) => {
     Post.findAll({
-            include: User
+            include: {
+                model: User,
+                attributes: [
+                    "username"
+                ]
+            }
         })
         .then(posts => res.status(200).json(posts))
         .catch((error) => {
@@ -61,10 +71,14 @@ exports.createPost = (req, res, next) => {
     const PostObject = JSON.parse(req.body.post);
 
     const newPost = new Post({
-        userId: PostObject.UserId, // est ce que cet id est celui de l'utilisateur ou celui du post
+        userId: req.auth.userId, // est ce que cet id est celui de l'utilisateur ou celui du post
         //        id: PostObject.id, // est ce que cet id est celui de l'utilisateur ou celui du post
         titre: PostObject.titre,
-        content: PostObject.content
+        content: PostObject.content,
+        // likes: 0,
+        // dislikes: 0,
+        // usersLiked: [],
+        // usersDisliked: []
     });
     // afficher dans la console pour debeug
     console.log("fonction create");
@@ -117,51 +131,63 @@ exports.modifyPost = (req, res) => {
             imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
         }
         // recuperer le userID du user actuel qui est entrain de modifier le post et est ce qu'il est admin ou pas (à partir de la requete)
-        const actualUserId = req.params.actualUserId; // cette ligne doit être modifié
-        const isAdmin = true; // cette ligne doit être modifié
-        getOneUser(actualUserId)
-            .then((user) => {
-                isAdmin = user.isAdmin;
+        // const actualUserId = req.params.actualUserId; // cette ligne doit être modifié
+        // const isAdmin = true; // cette ligne doit être modifié
+
+
+        // trouver le post à modifier dans la BDD
+        Post.findOne({
+                where: {
+                    id: postId
+                }
             })
-            .catch(() => {
-                isAdmin = false
-            });
-        // recuperer le userID du createur du post 
-        const postUserId = post.UserId; // cette ligne doit être modifié (à partir du postId)
-        // afficher dans la console pour debeug
-        console.log("actualUserId:" + actualUserId, ", isAdmin:", isAdmin + ", postUserId:" + postUserId);
+            .then((post) => {
+                // récupérer le userId du créateur du post
+                const postUserId = post.userId;
 
-        if (actualUserId == postUserId ||
-            isAdmin
-        ) {
+                // récuperer l'id de l'utilisateur actuel
 
-            // modification du post numero "postId"
-            Post.update({
-                    titre: PostObject.titre,
-                    content: PostObject.content
-                }, {
-                    where: {
-                        id: postId
-                    }
-                })
-                .then(() => {
-                    res.status(201).json({
-                        message: 'Post modifié'
+
+                if (req.auth.userId == postUserId ||
+                    req.auth.isAdmin
+                ) {
+                    // modification du post numero "postId"
+                    Post.update({
+                            titre: PostObject.titre,
+                            content: PostObject.content
+                        }, {
+                            where: {
+                                id: postId
+                            }
+                        })
+                        .then(() => {
+                            res.status(201).json({
+                                message: 'Post modifié'
+                            });
+                        })
+                        .catch((error) => {
+                            res.status(500).json({
+                                message: 'Post non modifié, update a retourné une erreur',
+                                error: error
+                            });
+                        });
+                } else {
+                    res.status(403).json({
+                        message: "Action non autorisée, l'utilisateur n'est pas le propritaire du post ni un admin."
                     });
-                })
-                .catch((error) => {
-                    res.status(500).json({
-                        message: 'Post non modifié, update a retourné une erreur',
-                        error: error
-                    });
+
+                } // fin else actualUserId || admin
+
+
+            }) // fin findOne post then
+            .catch((error) => {
+                res.status(500).json({
+                    message: 'Post non trouvé, findOne a retourné une erreur',
+                    error: error
                 });
-        } else {
-            res.status(403).json({
-                message: "Action non autorisée, l'utilisateur n'est pas le propritaire du post ni un admin."
-            });
+            }); // fin findOne Post .catch
 
-        }
-    }
+    } // fin else !req.params.id
 };
 
 /**supprimer un poste */
@@ -188,32 +214,14 @@ exports.deletePost = (req, res) => {
             })
             .then((post) => {
                 // le post a été trouvé avec son ID
-                console.log("**********************post trouvé");
-                console.log("req.headers.authorization=", req.headers.authorization)
-                const token = jwt.getUserId(req.headers.authorization);
-                const actualUserId = token.userId;
-                const isAdmin = token.isAdmin;
 
-                console.log("actualUserId=", actualUserId)
-                console.log("isAdmin=", isAdmin)
 
-                // recuperer le userID du createur du post 
-                const postUserId = 1; // cette ligne doit être modifié (à partir du postId)
-                console.log("currentUserId:" + actualUserId + ", postUserId:" + postUserId, ", isAdmin:", isAdmin);
-                // getOneUser(actualUserId)
-                //     .then((user) => {
-                //         isAdmin = user.isAdmin;
-                //         console.log("admin trouvé");
-                //     })
-                //     .catch(() => {
-                //         isAdmin = false
-                //         console.log("admin false");
-                //     });
-                // // afficher dans la console pour debeug
-                // console.log("currentUserId:" + actualUserId + ", postUserId:" + postUserId, ", isAdmin:", isAdmin);
 
-                if (actualUserId == postUserId ||
-                    isAdmin
+
+
+
+                if (req.auth.userId == postUserId ||
+                    req.auth.isAdmin
                 ) {
 
                     // gestion des images / attachements
@@ -264,12 +272,135 @@ exports.deletePost = (req, res) => {
                         message: "Action non autorisée, l'utilisateur n'est pas le propritaire du post ni un admin."
                     });
                 }
-            })
+
+            }) // fin findOne post then
             .catch((error) => {
                 res.status(500).json({
                     message: 'Post non trouvé, findOne a retourné une erreur',
                     error: error
                 });
-            });
-    }
+            }); // fin findOne Post .catch
+
+    } // fin else !req.params.id
 };
+
+
+// /** créer un postLike */
+// function createPostLike(postId, userId, like) {
+
+//     const newPostLike = new postLikes({
+//         userId: userId,
+//         postId: postId,
+//         like: like,
+//     });
+//     // afficher dans la console pour debeug
+//     console.log("fonction create");
+//     console.log("PostLike:" + newPostLike);
+
+
+//     // Enregistrer dans la BDD
+//     newPostLike.save()
+//         .then(() => {
+//             res.status(201).json({
+//                 message: 'Postlike créé'
+//             });
+//         })
+//         .catch((error) => {
+//             res.status(400).json({
+//                 message: 'Postlike save a retourné une erreur',
+//                 error: error
+//             });
+//         });
+
+// };
+
+
+//faire like ou deislike 
+exports.likeDislikePost = (req, res, next) => {
+
+    console.log("***************************");
+
+    const reqlike = req.body.like
+    const postId = req.params.id
+    const token = req.headers.authorization.split(' ')[1];
+    const userId = jwt.decode(token).userId;
+
+    if (userId != null) {
+        Post.findOne({
+                where: {
+                    id: postId
+                }
+            })
+            .then(() => {
+
+                postLikes.findOne({
+                        where: {
+                            postId: postId,
+                            userId: userId
+                        }
+                    })
+                    .then(dblike => {
+                        // on teste le cas où on a reçu un like =1
+                        // on vérifie si l'utilisateur
+                        // Premier like de l'utilisateur
+                        if (dblike.like == reqlike) {
+
+                            console.log("LIKE TROUVE, FAUT SUPPRImer LIKE***************************");
+                        } else {
+                            // l'utilisateur a déjà likeé
+                            // On veut éviter like multiple
+                            console.log("On ne peut liker et disliker un poste au même temps***************************");
+
+                            //                            throw new Error("On ne peut liker et disliker un poste au même temps");
+                        }
+                    })
+                    .catch(() => {
+                        // l'utilisateur fait un nouveau like
+
+                        const newPostLike = new postLikes({
+                            userId: userId,
+                            postId: postId,
+                            like: like,
+                        });
+                        // afficher dans la console pour debeug
+                        console.log("fonction create");
+                        console.log("PostLike:" + newPostLike);
+
+
+                        // Enregistrer dans la BDD
+                        newPostLike.save()
+                            .then(() => {
+                                res.status(201).json({
+                                    message: 'Postlike créé'
+                                });
+                            })
+                            .catch((error) => {
+                                res.status(400).json({
+                                    message: 'Postlike save a retourné une erreur',
+                                    error: error
+                                });
+                            });
+                    })
+
+
+            }) // fin findOne post then
+            .catch((error) => {
+                res.status(500).json({
+                    message: 'Post non trouvé, findOne a retourné une erreur',
+                    error: error
+                });
+            }); // fin findOne Post .catch
+    } else {
+        // UserId NULL
+        throw new Error("UserID NULL")
+    }
+}
+
+// function checkUser(userIdArray, userId) {
+//     return userIdArray.find(id => id === userId);
+
+// }
+
+// function createNewUserIdArray(userIdArray, userId) {
+//     return userIdArray.filter(id => id !== userId);
+// }

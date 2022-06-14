@@ -1,5 +1,11 @@
-const { DataTypes, Models, Sequelize } = require('sequelize');
-const { bdd } = require('./index');
+const {
+    DataTypes,
+    Models,
+    Sequelize
+} = require('sequelize');
+const {
+    bdd
+} = require('./index');
 
 module.exports = bdd.define("post", {
 
@@ -17,10 +23,20 @@ module.exports = bdd.define("post", {
 
         },
         attachement: {
-            type: DataTypes.STRING,
-
-
+            type: DataTypes.STRING
         },
+        /* likes: {
+             type: DataTypes.INTEGER
+         },
+         dislikes: {
+             type: DataTypes.INTEGER
+         },
+         usersLiked: {
+             type: [DataTypes.INTEGER]
+         },
+         usersDisliked: {
+             type: [DataTypes.INTEGER]
+         },*/
         //likers, timestamps
     }, {
 
