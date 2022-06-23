@@ -16,10 +16,11 @@ app.use(express.json());
 //const authRoutes = require("./routes/auth");
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
+const commentRoutes = require('./routes/comment');
 
 
 
-//il nous donne accer au corps de la requete
+//il nous donne acces au corps de la requete
 //app.use(express.json());
 
 //CORS
@@ -38,4 +39,5 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 //routes
 app.use('/api/auth', userRoutes);
 app.use('/api/post', postRoutes);
+app.use('/api/comment', commentRoutes);
 module.exports = app;

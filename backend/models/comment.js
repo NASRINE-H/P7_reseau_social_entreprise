@@ -1,15 +1,15 @@
-const { DataTypes, Models, Sequelize } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const { bdd } = require('./index');
 
 module.exports = bdd.define("comment", {
 
-    comment: {
-        type: DataTypes.TEXT
-    }
+    content: {
+        type: DataTypes.STRING
+    },
 
 }, {
 
     bdd,
-    tableName: 'Post',
+    tableName: 'Comment',
     //timestamps: false
 });

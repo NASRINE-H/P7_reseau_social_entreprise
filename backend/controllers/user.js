@@ -100,7 +100,7 @@ exports.login = (req, res, next) => {
             error
         }));
 };
-
+// pour récupérer un seul utilisateur
 exports.getOneUser = (req, res) => {
     User.findOne({
             where: {
@@ -112,7 +112,7 @@ exports.getOneUser = (req, res) => {
             message: "aucun poste "
         }))
 };
-
+//récupérer tous les utilisateurs
 exports.getAllUsers = (req, res) => {
     User.findAll({
             //La commande ORDER BY permet de trier les lignes dans un résultat d’une requête SQL.
@@ -134,7 +134,7 @@ exports.getAllUsers = (req, res) => {
         .catch((error) => res.status(500).json(error));
 };
 
-
+//modifier un utilisateurs
 exports.modifyUser = (req, res) => {
 
     User.findOne({
@@ -179,6 +179,7 @@ exports.modifyUser = (req, res) => {
 
 
 };
+//suprimer un utilisateur
 exports.deleteUser = (req, res, next) => {
 
     User.findOne({
@@ -206,6 +207,9 @@ exports.deleteUser = (req, res, next) => {
 
         })
         .catch((error) => {
-            res.status(500).json(error)
+            res.status(500).json({
+                message: 'Utilisateur non trouvé',
+                error: error
+            });
         });
 };

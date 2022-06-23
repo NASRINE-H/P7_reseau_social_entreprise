@@ -24,11 +24,16 @@ const test = async() => {
 const loadmodel = async() => {
     const User = require('./user');
     const Post = require('./post');
-    const postLikes = require('./postLikes');
-    Post.belongsTo(User); //L' A.belongsTo(B)association signifie qu'une relation un-à-un existe entre Aet B, la clé étrangère étant définie dans le modèle source ( A).
-    postLikes.belongsTo(User);
-    postLikes.belongsTo(Post);
-    bdd.sync()
+    //const postLikes = require('./postLikes');
+    const Comment = require('./comment');
+    Post.belongsTo(User, { onDelete: "cascade" }); //L' A.belongsTo(B) = un-à-un 
+    //existe entre A et B, la clé étrangère étant définie dans le modèle source ( A).
+    Post.hasMany(Comment, { onDelete: "cascade" });
+    Comment.belongsTo(User, { onDelete: "cascade" });
+    //postLikes.belongsTo(User);
+    //postLikes.belongsTo(Post);
+
+    bdd.sync({ force: true })
         .catch(error => console.log(error))
 }
 

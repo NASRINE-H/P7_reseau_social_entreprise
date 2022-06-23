@@ -23,7 +23,10 @@ const test = async() => {
 }
 const User = require('./user');
 const Post = require('./post');
+const Comment = require('./comment');
 Post.belongsTo(User);
+Post.hasMany(Comment);
+Comment.belongsTo(User);
 bdd.sync({ alter: true })
     .then(result => {
         console.log("bdd mise a jour")

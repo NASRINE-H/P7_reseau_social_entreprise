@@ -1,12 +1,11 @@
-const post = require('../app');
 const Post = require('../models/post'); //exiger
 const User = require('../models/user');
-const getOneUser = require('./user');
-const jwt = require('jsonwebtoken');
-const postLikes = require('../models/postLikes');
+
+
 
 
 const fs = require("fs");
+const Comment = require('../models/comment');
 
 /**
  * recupère tous les posts 
@@ -18,8 +17,7 @@ const fs = require("fs");
 exports.getOnePost = (req, res) => {
     // verifier si la requête contient l'ID du post
     if (!req.params.id) {
-        //console.log("req.params.id=", req.params.id)
-        // console.log("req.headers.authorization=", req.headers.authorization)
+
         res.status(400).json({
             message: "Requête incomplète."
         });
@@ -49,12 +47,20 @@ exports.getOnePost = (req, res) => {
 /**lire tous les postes */
 exports.getAllPosts = (req, res) => {
     Post.findAll({
-            include: {
+            include: [{
                 model: User,
                 attributes: [
                     "username"
                 ]
-            }
+            }, {
+                model: Comment,
+                include: [{
+                    model: User,
+                    attributes: [
+                        "username"
+                    ]
+                }]
+            }]
         })
         .then(posts => res.status(200).json(posts))
         .catch((error) => {
@@ -71,14 +77,10 @@ exports.createPost = (req, res, next) => {
     const PostObject = JSON.parse(req.body.post);
 
     const newPost = new Post({
-        userId: req.auth.userId, // est ce que cet id est celui de l'utilisateur ou celui du post
-        //        id: PostObject.id, // est ce que cet id est celui de l'utilisateur ou celui du post
+        userId: req.auth.userId, // est ce que cet id est celui de l'utilisateur ou celui du post     
         titre: PostObject.titre,
         content: PostObject.content,
-        // likes: 0,
-        // dislikes: 0,
-        // usersLiked: [],
-        // usersDisliked: []
+
     });
     // afficher dans la console pour debeug
     console.log("fonction create");
@@ -119,6 +121,7 @@ exports.modifyPost = (req, res) => {
 
         // PostObject contient l'objet req.body en format JSON
         const PostObject = JSON.parse(req.body.post);
+        // const PostObject = (req.body.post);
         // postId
         const postId = req.params.id;
 
@@ -130,10 +133,6 @@ exports.modifyPost = (req, res) => {
         if (req.file) {
             imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
         }
-        // recuperer le userID du user actuel qui est entrain de modifier le post et est ce qu'il est admin ou pas (à partir de la requete)
-        // const actualUserId = req.params.actualUserId; // cette ligne doit être modifié
-        // const isAdmin = true; // cette ligne doit être modifié
-
 
         // trouver le post à modifier dans la BDD
         Post.findOne({
@@ -147,19 +146,27 @@ exports.modifyPost = (req, res) => {
 
                 // récuperer l'id de l'utilisateur actuel
 
-
                 if (req.auth.userId == postUserId ||
                     req.auth.isAdmin
                 ) {
                     // modification du post numero "postId"
-                    Post.update({
-                            titre: PostObject.titre,
-                            content: PostObject.content
-                        }, {
-                            where: {
-                                id: postId
-                            }
-                        })
+                    post.titre = PostObject.titre;
+                    post.content = PostObject.content;
+                    if (req.file) {
+                        post.attachement = imagePost
+
+                    }
+                    post.save()
+                        /*Post.update({
+                    
+                                titre: PostObject.titre,
+                                content: PostObject.content,
+                                 attachement: imagePost
+                            }, {
+                                where: {
+                                    id: postId
+                                }
+                            })*/
                         .then(() => {
                             res.status(201).json({
                                 message: 'Post modifié'
@@ -214,12 +221,7 @@ exports.deletePost = (req, res) => {
             })
             .then((post) => {
                 // le post a été trouvé avec son ID
-
-
-
-
-
-
+                const postUserId = post.userId;
                 if (req.auth.userId == postUserId ||
                     req.auth.isAdmin
                 ) {
@@ -283,124 +285,3 @@ exports.deletePost = (req, res) => {
 
     } // fin else !req.params.id
 };
-
-
-// /** créer un postLike */
-// function createPostLike(postId, userId, like) {
-
-//     const newPostLike = new postLikes({
-//         userId: userId,
-//         postId: postId,
-//         like: like,
-//     });
-//     // afficher dans la console pour debeug
-//     console.log("fonction create");
-//     console.log("PostLike:" + newPostLike);
-
-
-//     // Enregistrer dans la BDD
-//     newPostLike.save()
-//         .then(() => {
-//             res.status(201).json({
-//                 message: 'Postlike créé'
-//             });
-//         })
-//         .catch((error) => {
-//             res.status(400).json({
-//                 message: 'Postlike save a retourné une erreur',
-//                 error: error
-//             });
-//         });
-
-// };
-
-
-//faire like ou deislike 
-exports.likeDislikePost = (req, res, next) => {
-
-    console.log("***************************");
-
-    const reqlike = req.body.like
-    const postId = req.params.id
-    const token = req.headers.authorization.split(' ')[1];
-    const userId = jwt.decode(token).userId;
-
-    if (userId != null) {
-        Post.findOne({
-                where: {
-                    id: postId
-                }
-            })
-            .then(() => {
-
-                postLikes.findOne({
-                        where: {
-                            postId: postId,
-                            userId: userId
-                        }
-                    })
-                    .then(dblike => {
-                        // on teste le cas où on a reçu un like =1
-                        // on vérifie si l'utilisateur
-                        // Premier like de l'utilisateur
-                        if (dblike.like == reqlike) {
-
-                            console.log("LIKE TROUVE, FAUT SUPPRImer LIKE***************************");
-                        } else {
-                            // l'utilisateur a déjà likeé
-                            // On veut éviter like multiple
-                            console.log("On ne peut liker et disliker un poste au même temps***************************");
-
-                            //                            throw new Error("On ne peut liker et disliker un poste au même temps");
-                        }
-                    })
-                    .catch(() => {
-                        // l'utilisateur fait un nouveau like
-
-                        const newPostLike = new postLikes({
-                            userId: userId,
-                            postId: postId,
-                            like: like,
-                        });
-                        // afficher dans la console pour debeug
-                        console.log("fonction create");
-                        console.log("PostLike:" + newPostLike);
-
-
-                        // Enregistrer dans la BDD
-                        newPostLike.save()
-                            .then(() => {
-                                res.status(201).json({
-                                    message: 'Postlike créé'
-                                });
-                            })
-                            .catch((error) => {
-                                res.status(400).json({
-                                    message: 'Postlike save a retourné une erreur',
-                                    error: error
-                                });
-                            });
-                    })
-
-
-            }) // fin findOne post then
-            .catch((error) => {
-                res.status(500).json({
-                    message: 'Post non trouvé, findOne a retourné une erreur',
-                    error: error
-                });
-            }); // fin findOne Post .catch
-    } else {
-        // UserId NULL
-        throw new Error("UserID NULL")
-    }
-}
-
-// function checkUser(userIdArray, userId) {
-//     return userIdArray.find(id => id === userId);
-
-// }
-
-// function createNewUserIdArray(userIdArray, userId) {
-//     return userIdArray.filter(id => id !== userId);
-// }
