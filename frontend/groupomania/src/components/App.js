@@ -24,9 +24,12 @@ function App() {
 
 export default App;*/
 import Banner from './Banner'
-
+import Auth from '../pages/auth'
 function App() {
-    return <Banner / >
+    return (<div><Banner/>  <Auth/>  </div> 
+   
+    
+    )
 }
 
 export default App

@@ -1,5 +1,18 @@
+import logo from '../assets/logo.png'
+import '../styles/Banner.css'
+
 function Banner() {
-    return <h1 > groupomania < /h1>
+    const title = 'Groupomania'
+    return ( <
+        div className = 'gpm-banner' >
+        <
+        img src = { logo }
+        alt = 'Groupomania'
+        className = 'gpm-logo' / >
+        <
+        h1 className = 'gpm-title' > { title } < /h1> < /
+        div >
+    )
 }
 
 export default Banner
