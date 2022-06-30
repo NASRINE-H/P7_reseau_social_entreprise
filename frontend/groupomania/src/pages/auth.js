@@ -1,11 +1,12 @@
 import React from "react";
-import Login from "../components/Log/login";
-//import Log from '../components/Log':
-const auth = () => {
-    
+import Login from "../components/Log/lindex";
 
+const Auth = () => {
     return (
-    <Login />
+        <div>
+           <Login/>
+        </div>
     );
 };
-export default auth;
+
+export default Auth;
