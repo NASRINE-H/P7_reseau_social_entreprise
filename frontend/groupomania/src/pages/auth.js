@@ -1,12 +1,13 @@
 import React from "react";
-import Login from "../components/Log/lindex";
+// import Login from "../components/Log/login";
 
 const Auth = () => {
-    return (
+    return ( 
         <div>
-           <Login/>
+        <h>Auth </h>
         </div>
     );
 };
+//<Login/>
 
 export default Auth;

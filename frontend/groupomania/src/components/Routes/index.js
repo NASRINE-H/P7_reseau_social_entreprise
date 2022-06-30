@@ -1,21 +1,18 @@
 import React from "react";
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Switch, Router, Route, Navigate} from 'react-router-dom';
 import Home from '../../pages/Home';
 import Auth from '../../pages/Auth';
-import trending from '../../pages/trending';
+import Trending from '../../pages/trending';
 
 const index = () => {
     return (
         <Router>
-            <switch>
+        <Switch>
             <Route path="/" exact component={Home}/>
             <Route path="/Auth" exact component={Auth}/>
-            <Route path="/trending" exact component={trending}/> 
-            <Redirect to="/" />
-                
-
-            </switch>
-
+            <Route path="/trending" exact component={Trending}/> 
+            <Navigate to="/" />
+            </Switch>
         </Router>
     );
 };

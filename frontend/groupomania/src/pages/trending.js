@@ -1,11 +1,11 @@
 import React from "react";
 
-const trending = () => {
+const Trending = () => {
     return (
         <div>
-
+        <h>Trending</h>
         </div>
     );
 };
 
-export default trending;
+export default Trending;
