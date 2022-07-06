@@ -26,15 +26,27 @@ const loadmodel = async() => {
     const Post = require('./post');
     //const postLikes = require('./postLikes');
     const Comment = require('./comment');
-    Post.belongsTo(User, { onDelete: "cascade" }); //L' A.belongsTo(B) = un-à-un 
+    Post.belongsTo(User, {
+        onDelete: "cascade"
+    }); //L' A.belongsTo(B) = un-à-un 
     //existe entre A et B, la clé étrangère étant définie dans le modèle source ( A).
-    Post.hasMany(Comment, { onDelete: "cascade" });
-    Comment.belongsTo(User, { onDelete: "cascade" });
+    Post.hasMany(Comment, {
+        onDelete: "cascade"
+    });
+    Comment.belongsTo(User, {
+        onDelete: "cascade"
+    });
     //postLikes.belongsTo(User);
     //postLikes.belongsTo(Post);
 
-    bdd.sync({ force: true })
+    bdd.sync({
+            alter: true
+        })
         .catch(error => console.log(error))
 }
 
-module.exports = { bdd, test, loadmodel };
+module.exports = {
+    bdd,
+    test,
+    loadmodel
+};
