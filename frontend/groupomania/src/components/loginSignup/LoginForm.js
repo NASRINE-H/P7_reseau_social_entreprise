@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
       const [mode, setMode] = useState('login');
+      let navigate = useNavigate();
       const activeSignup = () => {
             setMode('signup');
       };
       const activeLogin = () => {
             setMode('login');
       };
-      const login = () => {
+
+      const login = (e) => {
+            e.preventDefault();
             let user = {
                   email: document.getElementById('login-email').value,
                   password: document.getElementById('login-pass').value,
             };
+
             fetch('http://localhost:3000/api/auth/login', {
                   method: 'POST',
                   headers: {
@@ -20,12 +25,50 @@ const LoginForm = () => {
                   },
                   body: JSON.stringify(user),
             })
-                  .then((response) => response.json())
-                  .then((data) => console.log('request succes:', data))
+                  .then((response) => {
+                        console.log('Response:', response);
+                        return response.json();
+                  })
+
+                  .then((data) => {
+                        console.log('request succes, Response:', data);
+                        localStorage.setItem('user', JSON.stringify(data));
+                        navigate('/Home', { replace: true });
+                  })
+
                   .catch((error) => {
                         console.log('request failed:', error);
                   });
       };
+
+      const signup = (e) => {
+            e.preventDefault();
+            let user = {
+                  email: document.getElementById('signup-email').value,
+                  password: document.getElementById('signup-pass').value,
+                  username: document.getElementById('signup-username').value,
+            };
+            fetch('http://localhost:3000/api/auth/signup', {
+                  method: 'POST',
+                  headers: {
+                        'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(user),
+            })
+                  .then((response) => {
+                        console.log('Response:', response);
+                        return response.json();
+                  })
+
+                  .then((data) => {
+                        console.log('request succes, Response:', data);
+                  })
+
+                  .catch((error) => {
+                        console.log('request failed:', error);
+                  });
+      };
+
       return (
             <div className="login-page">
                   {mode === 'login' && (
@@ -67,8 +110,9 @@ const LoginForm = () => {
                               <div className="Signupform">
                                     <form>
                                           <div className="input-container">
-                                                <label>Username </label>
+                                                <label>username </label>
                                                 <input
+                                                      id="signup-username"
                                                       type="text"
                                                       name="uname"
                                                       required
@@ -77,6 +121,7 @@ const LoginForm = () => {
                                           <div className="input-container">
                                                 <label>email </label>
                                                 <input
+                                                      id="signup-email"
                                                       type="text"
                                                       name="email"
                                                       required
@@ -85,16 +130,16 @@ const LoginForm = () => {
                                           <div className="input-container">
                                                 <label>Password </label>
                                                 <input
+                                                      id="signup-pass"
                                                       type="password"
                                                       name="pass"
                                                       required
                                                 />
                                           </div>
                                           <div className="button-container">
-                                                <input
-                                                      type="submit"
-                                                      value={'signup'}
-                                                />
+                                                <button onClick={signup}>
+                                                      signup
+                                                </button>
                                           </div>
                                     </form>
                               </div>
