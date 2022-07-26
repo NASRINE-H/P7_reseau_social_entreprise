@@ -1,7 +1,33 @@
 const Comment = require('../models/comment');
 const jwt = require('jsonwebtoken');
+const comment = require('../models/comment');
 
+exports.getAllComment = (req, res) => {
+    let postIdi = req.params.id;
+    if (postIdi) {
+        Comment.findAll({
+                where: {
+                    postId: postIdi
+                },
 
+                order: [
+                    ["createdAt", "DESC"]
+                ]
+            })
+            .then(comments => res.status(200).json(comments))
+            .catch((error) => {
+                res.status(500).json({
+                    message: 'aucun commentaire trouvé, findAll a retourné une erreur',
+                    error: error
+                });
+            });
+    } else {
+        res.status(500).json({
+            message: 'mauvaise requet, aucun postId trouvé',
+            error: error
+        });
+    }
+}
 exports.createComment = (req, res, next) => {
 
     //    const CommentObject = JSON.parse(req.body.content);

@@ -18,7 +18,7 @@ router.post('/', auth, multer, postCtrl.createPost);
 //Route qui permet de récupérer "un poste"
 router.get('/:id', auth, postCtrl.getOnePost);
 // Route qui permet de modifier "un poste"
-router.put('/:id', auth, postCtrl.modifyPost);
+router.put('/:id', auth, multer, postCtrl.modifyPost);
 // Route qui permet de supprimer "un poste"
 router.delete('/:id', auth, postCtrl.deletePost);
 

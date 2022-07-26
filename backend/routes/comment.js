@@ -18,6 +18,8 @@ router.post("/:id", auth, commentCtrl.createComment);
 // Supprimer un commentaire
 router.delete("/:id", auth, commentCtrl.deleteComment);
 
+//recupérer tous les postes
+router.get("/:id", auth, commentCtrl.getAllComment);
 
 
 

@@ -25,19 +25,7 @@ module.exports = bdd.define("post", {
         attachement: {
             type: DataTypes.STRING
         },
-        /* likes: {
-             type: DataTypes.INTEGER
-         },
-         dislikes: {
-             type: DataTypes.INTEGER
-         },
-         usersLiked: {
-             type: [DataTypes.INTEGER]
-         },
-         usersDisliked: {
-             type: [DataTypes.INTEGER]
-         },*/
-        //likers, timestamps
+
     }, {
 
         bdd,

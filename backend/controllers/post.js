@@ -60,7 +60,10 @@ exports.getAllPosts = (req, res) => {
                         "username"
                     ]
                 }]
-            }]
+            }],
+            order: [
+                ["createdAt", "DESC"]
+            ]
         })
         .then(posts => res.status(200).json(posts))
         .catch((error) => {
@@ -74,13 +77,12 @@ exports.getAllPosts = (req, res) => {
 /** créer un post */
 exports.createPost = (req, res, next) => {
     // PostObject contient l'objet req.body en format JSON
+    console.log("BackEND: body: ", req.body)
     const PostObject = JSON.parse(req.body.post);
-
     const newPost = new Post({
         userId: req.auth.userId, // est ce que cet id est celui de l'utilisateur ou celui du post     
         titre: PostObject.titre,
         content: PostObject.content,
-
     });
     // afficher dans la console pour debeug
     console.log("fonction create");
@@ -88,15 +90,14 @@ exports.createPost = (req, res, next) => {
 
     // gestion des images / attachements
     if (req.file) {
-
         newPost.attachement = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
     }
-
     // Enregistrer dans la BDD
     newPost.save()
         .then(() => {
             res.status(201).json({
-                message: 'Post créé'
+                message: 'Post créé',
+                post: newPost
             });
         })
         .catch((error) => {
@@ -169,7 +170,8 @@ exports.modifyPost = (req, res) => {
                             })*/
                         .then(() => {
                             res.status(201).json({
-                                message: 'Post modifié'
+                                message: 'Post modifié',
+                                post: post
                             });
                         })
                         .catch((error) => {
