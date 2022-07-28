@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AllPost from '../components/AllPost';
+import AllPost from '../components/post/AllPost';
 import Logo from '../components/Logo';
 
 const Home = () => {
@@ -13,12 +13,14 @@ const Home = () => {
                   },
             })
                   .then((response) => {
-                        console.log('Response:', response);
                         return response.json();
                   })
                   .then((data) => {
                         // on appelle setPost pour mettre data dans la state 'postState'
                         setAllPostState(data);
+                  })
+                  .catch((error) => {
+                        console.log('request failed:', error);
                   });
       }, []);
       return (

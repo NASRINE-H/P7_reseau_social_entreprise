@@ -1,36 +1,36 @@
 import React, { useState, useEffect } from 'react';
 
-const Comment = ({ commentData }) => {
-      const [comment, setComment] = useState({});
-      useEffect(() => {
-            setComment(commentData);
-      }, [commentData]);
-      //   const activeEmpty = () => {
-      //         setMode('EmptyComment');
-      //   };
-      //   const activeComment = () => {
-      //         setMode('Commenting');
-      //   };
-      //   if (cmnt && mode == 'EmptyComment') activeComment();
-      //   else activeEmpty();
-      // console.log('postid:', postid, ' cmnt:', cmnt);
+const Comment = ({ comment, deleteComment }) => {
+      //pour supprimer le commentaire
+      const deleteCmnt = (e) => {
+            e.preventDefault();
+            let user = JSON.parse(localStorage.getItem('user'));
+            fetch('http://localhost:3000/api/comment/' + comment.id, {
+                  method: 'DELETE',
+                  headers: {
+                        Authorization: 'bearer ' + user.token,
+                  },
+            })
+                  .then((result) => {
+                        if (result.status === 200 || result.status === 201) {
+                              deleteComment(comment.id);
+                              console.log(
+                                    'commentaire a été supprimé avec succes'
+                              );
+                        }
+                  })
+                  .catch((error) => {
+                        console.log('request failed:', error);
+                  });
+      };
+
       return (
-            <p>
-                  User: {comment.userId}
-                  commented: " {comment.content}" on this post
-            </p>
+            <div>
+                  <p>
+                        User: "{comment.userId}" commented: "{comment.content}"
+                  </p>
+                  <button onClick={deleteCmnt}>X</button>
+            </div>
       );
-      /**
-                    <div className="post-Page">
-                  <div>
-                        {' '}
-                        {cmnt.map((comment, index) => {
-                              <p key={index}>
-                                    User: {comment.userId}
-                                    commented: " {comment.content}" on this post{' '}
-                              </p>;
-                        })}
-                  </div>
-            </div> */
 };
 export default Comment;

@@ -40,12 +40,14 @@ exports.createComment = (req, res, next) => {
     newComment.save()
         .then(() => {
             res.status(201).json({
-                message: 'comment créé'
+                message: 'comment créé',
+                    comment: newComment
             });
         })
         .catch((error) => {
             res.status(400).json({
-                message: 'comment save a retourné une erreur'
+                message: 'comment save a retourné une erreur',
+                    error: error
             });
         });
 };

@@ -4,9 +4,10 @@ const NewComment = ({ addCmnt, postid }) => {
       const createNewComment = (e) => {
             e.preventDefault();
             let comment = {
-                  content: document.getElementById('comment-content').value,
+                  content: document.getElementById('comment-content' + postid)
+                        .value,
             };
-            console.log('comment content: ', comment, '\nPostId:', postid);
+
             let user = JSON.parse(localStorage.getItem('user'));
             fetch('http://localhost:3000/api/comment/' + postid, {
                   method: 'POST',
@@ -17,13 +18,12 @@ const NewComment = ({ addCmnt, postid }) => {
                   body: JSON.stringify(comment),
             })
                   .then((response) => {
-                        console.log('Response:', response);
                         return response.json();
                   })
 
                   .then((data) => {
-                        console.log('request succes, Response: ', data);
-                        // addCmnt(data.comment);
+                        console.log('request succes, Response Data: ', data);
+                        addCmnt(data.comment);
                   })
                   .catch((error) => {
                         console.log('request failed:', error);
@@ -33,9 +33,9 @@ const NewComment = ({ addCmnt, postid }) => {
             <div className="creat-comment">
                   <form className="form">
                         <div className="input-commentt">
-                              <label>commentaire:</label>
+                              <label> commentaire: </label>
                               <input
-                                    id="comment-content"
+                                    id={'comment-content' + postid}
                                     type="text"
                                     name="content"
                                     required
@@ -48,7 +48,7 @@ const NewComment = ({ addCmnt, postid }) => {
                                     >
                                           commenter
                                     </button>
-                              </div>{' '}
+                              </div>
                         </div>
                   </form>
             </div>

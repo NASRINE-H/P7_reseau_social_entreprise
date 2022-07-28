@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import NewComment from '../comments/NewComment';
 import Comment from './Comment';
-const ShowAllComment = ({ commentData }) => {
+const ShowAllComment = ({ commentData, postid }) => {
       const [commentList, setCommentList] = useState([]);
-
       useEffect(() => {
             setCommentList(commentData);
       }, [commentData]);
@@ -11,21 +10,29 @@ const ShowAllComment = ({ commentData }) => {
       const addCmnt = (Cmnt) => {
             setCommentList([Cmnt, ...commentList]);
       };
-      //  //pour supprimer le post
-      // const deleteCmnt = (id) => {
-      //       setCommentList(commentList.filter((Cmnt) => Cmnt.id !== id));
-      // };
+      const deleteComment = (id) => {
+            setCommentList(commentList.filter((Cmnt) => Cmnt.id !== id));
+      };
 
       return (
             <div>
-                  <NewComment addCmnt={addCmnt} />
-                  {commentList.map((comment) => {
-                        return (
-                              <Comment
-                                    key={'comment-' + comment.id}
-                                    commentData={comment}
-                              />
-                        );
+                  <NewComment
+                        key={`NewComment-${postid}`}
+                        addCmnt={addCmnt}
+                        postid={postid}
+                  />
+                  {commentList?.map((comment) => {
+                        if (comment.id)
+                              return (
+                                    <div key={`commentdiv-${comment.id}`}>
+                                          <Comment
+                                                key={`Comment-${comment.id}`}
+                                                comment={comment}
+                                                deleteComment={deleteComment}
+                                          />
+                                    </div>
+                              );
+                        else return null;
                   })}
             </div>
       );

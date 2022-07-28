@@ -76,3 +76,9 @@ form label {
         transform: rotate(360deg);
     }
 }
+
+#postImg {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+}
