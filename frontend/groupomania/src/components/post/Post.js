@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // import { useParams, useEffect, useState } from 'react';
 const Post = ({ post, deletePost, updatePost }) => {
       const [mode, setMode] = useState('printMode');
       const [file, setFile] = useState();
+      const [user, setUser] = useState({});
+      useEffect(() => {
+            setUser(JSON.parse(localStorage.getItem('user')));
+      }, []);
+      //permet d'activer le mode modifier
       const activeEdit = () => {
             setMode('editMode');
       };
+      //permet d'activer le mode afficher du poste
       const activePrint = () => {
             setMode('printMode');
       };
+      //permet de faire la requete delete du poste
       const delPost = (e) => {
             e.preventDefault();
 
-            let user = JSON.parse(localStorage.getItem('user'));
             fetch('http://localhost:3000/api/post/' + post.id, {
                   method: 'DELETE',
                   headers: {
@@ -28,10 +34,12 @@ const Post = ({ post, deletePost, updatePost }) => {
                   }
             });
       };
+      //permet de changer le state sur changement du fichier image
       const changeFile = (e) => {
             e.preventDefault();
             setFile(e.target.files[0]);
       };
+      //permet de faire la requete PUT pour modifier le poste
       const editPost = (e) => {
             e.preventDefault();
 
@@ -44,7 +52,6 @@ const Post = ({ post, deletePost, updatePost }) => {
             const body = new FormData();
             body.append('post', JSON.stringify(postedit));
             body.append('image', file);
-            let user = JSON.parse(localStorage.getItem('user'));
 
             fetch('http://localhost:3000/api/post/' + post.id, {
                   method: 'PUT',
@@ -78,21 +85,36 @@ const Post = ({ post, deletePost, updatePost }) => {
             <div className="post-Page">
                   {mode === 'printMode' && (
                         <div>
-                              <h1> titre: {post.titre} </h1>
-                              <h2>
-                                    postId: {post.id}, userId: {post.userId}
+                              <h1 id="title"> Titre: {post.titre} </h1>
+                              <h2 id="post-user">
+                                    postId: {post.id}, userName:
+                                    {post.user.username}
                               </h2>
-                              <p> content: {post.content} </p>
+                              <p id="content"> content: {post.content} </p>
                               <img id="postImg" src={post.attachement} alt="" />
-
-                              <button onClick={delPost}>supprimer</button>
-                              <button onClick={activeEdit}>modifier</button>
+                              {(user.userId === post.userId ||
+                                    user.isAdmin) && (
+                                    <div>
+                                          <button
+                                                id="supprimer"
+                                                onClick={delPost}
+                                          >
+                                                supprimer
+                                          </button>
+                                          <button
+                                                id="modifier"
+                                                onClick={activeEdit}
+                                          >
+                                                modifier
+                                          </button>
+                                    </div>
+                              )}
                         </div>
                   )}
                   {mode === 'editMode' && (
                         <div>
                               <h1>
-                                    titre:
+                                    Titre:
                                     <input
                                           id="post-titre-edit"
                                           type="text"
@@ -101,8 +123,9 @@ const Post = ({ post, deletePost, updatePost }) => {
                                     />
                               </h1>
 
-                              <h2>
-                                    postId: {post.id}, userId: {post.userId}
+                              <h2 id="post-user">
+                                    postId: {post.id}, userName:
+                                    {post.user.username}
                               </h2>
                               <p>
                                     content:
@@ -127,15 +150,16 @@ const Post = ({ post, deletePost, updatePost }) => {
                   )}
                   {mode === 'errorMode' && (
                         <div>
-                              <h1> titre: {post.titre} </h1>
-                              <h2>
-                                    postId: {post.id}, userId: {post.userId}
+                              <h1 id="title"> Titre: {post.titre} </h1>
+                              <h2 id="post-user">
+                                    postId: {post.id}, userName:
+                                    {post.user.username}
                               </h2>
-                              <p> content: {post.content} </p>
+                              <p id="content"> content: {post.content} </p>
                               <img id="postImg" src={post.attachement} alt="" />
 
-                              <button disabled={true}>------------</button>
-                              <button disabled={true}>------------</button>
+                              <button disabled={true}>supprimer</button>
+                              <button disabled={true}>modifier</button>
                         </div>
                   )}
             </div>

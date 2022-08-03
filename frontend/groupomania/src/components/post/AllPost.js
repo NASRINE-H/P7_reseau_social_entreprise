@@ -11,6 +11,7 @@ const AllPost = ({ AllPostData }) => {
       }, [AllPostData]);
       //pour eviter le rechargement de la page quand on fait supprimer d'aun post
       const addPost = (post) => {
+            console.log('Post:', post);
             setPostList([post, ...postList]);
       }; //pour supprimer le post
       const deletePost = (id) => {
@@ -21,6 +22,11 @@ const AllPost = ({ AllPostData }) => {
             Object.assign(postFound, post);
             setPostList(postList);
       };
+      const addComment = (comment) => {
+            let post = postList.find((p) => p.id === comment.postId);
+            post.comments = [comment, ...post.comments];
+            setPostList(postList);
+      }; //pour supprimer le post
 
       return (
             <div>
@@ -39,6 +45,7 @@ const AllPost = ({ AllPostData }) => {
                                                 commentData={post.comments}
                                                 key={`AllCommentFor-${post.id}`}
                                                 postid={post.id}
+                                                addComment={addComment}
                                           />
                                     </div>
                               );

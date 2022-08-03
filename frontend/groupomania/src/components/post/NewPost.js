@@ -4,10 +4,6 @@ const NewPost = ({ addPost }) => {
       const [file, setFile] = useState();
       const [fileName, setFileName] = useState('');
 
-      const uploadFile = async (e) => {
-            console.log('fileName:', fileName);
-      };
-
       const saveFile = (e) => {
             setFile(e.target.files[0]);
             setFileName(e.target.files[0].name);
@@ -53,16 +49,16 @@ const NewPost = ({ addPost }) => {
             <div className="creat-post">
                   <form className="form">
                         <div className="input-post">
-                              <label> titre </label>
+                              <label> Titre </label>{' '}
                               <input
                                     id="post-titre"
                                     type="text"
                                     name="titre"
                                     required
                               />
-                        </div>
+                        </div>{' '}
                         <div className="input-post">
-                              <label> content </label>
+                              <label> Content </label>{' '}
                               <input
                                     id="post-content"
                                     type="text"
@@ -70,19 +66,17 @@ const NewPost = ({ addPost }) => {
                                     required
                               />
                         </div>
-
-                        <input type="file" onChange={saveFile} />
-                        <button onClick={uploadFile}>Upload</button>
+                        <input type="file" onChange={saveFile} />{' '}
                         <div className="input-post">
                               <button
                                     type="submit"
                                     className="btn-create"
                                     onClick={CreateNewPost}
                               >
-                                    creer un post
-                              </button>
-                        </div>
-                  </form>
+                                    créer un post{' '}
+                              </button>{' '}
+                        </div>{' '}
+                  </form>{' '}
             </div>
       );
 };

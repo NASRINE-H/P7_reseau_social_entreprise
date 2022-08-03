@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NewComment = ({ addCmnt, postid }) => {
+const NewComment = ({ postid, addComment }) => {
       const createNewComment = (e) => {
             e.preventDefault();
             let comment = {
@@ -23,7 +23,7 @@ const NewComment = ({ addCmnt, postid }) => {
 
                   .then((data) => {
                         console.log('request succes, Response Data: ', data);
-                        addCmnt(data.comment);
+                        addComment(data.comment);
                   })
                   .catch((error) => {
                         console.log('request failed:', error);
@@ -32,8 +32,8 @@ const NewComment = ({ addCmnt, postid }) => {
       return (
             <div className="creat-comment">
                   <form className="form">
-                        <div className="input-commentt">
-                              <label> commentaire: </label>
+                        <div className="input-comment">
+                              <label> commentaire: </label>{' '}
                               <input
                                     id={'comment-content' + postid}
                                     type="text"
@@ -43,14 +43,14 @@ const NewComment = ({ addCmnt, postid }) => {
                               <div className="input-comment">
                                     <button
                                           type="submit"
-                                          className="btn-create"
+                                          className="btn-comment"
                                           onClick={createNewComment}
                                     >
-                                          commenter
-                                    </button>
-                              </div>
-                        </div>
-                  </form>
+                                          commenter{' '}
+                                    </button>{' '}
+                              </div>{' '}
+                        </div>{' '}
+                  </form>{' '}
             </div>
       );
 };

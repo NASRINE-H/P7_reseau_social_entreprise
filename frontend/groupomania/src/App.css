@@ -17,18 +17,21 @@ form input {
     width: 100%;
     box-sizing: border-box;
     font-size: 30px;
-    border: 2px solid #808080;
+    border: 3px solid #FFD7D7;
+    box-shadow: 1px 1px 1px #FFD7D7;
     border-radius: 4px;
     outline: none;
 }
 
 form [type="submit"] {
-    width: 100%;
+    width: 50%;
+    font-size: large;
     box-sizing: border-box;
     margin-top: 20px;
-    background-color: #d1515a;
-    color: white;
-    border-color: #b9323b;
+    background-color: #FFD7D7;
+    box-shadow: 2px 2px 2px #FFD7D7;
+    color: black;
+    border-color: #FFD7D7;
 }
 
 .logo {
@@ -81,4 +84,51 @@ form label {
     display: flex;
     justify-content: center;
     width: 200px;
+    height: 200px;
+}
+
+.post-Page {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 500px;
+    border: 2px solid black;
+    margin: 50px;
+}
+
+#title {
+    font-size: 30px;
+    font-weight: 200;
+}
+
+#post-user {
+    font-size: 30px;
+    font-weight: 200;
+}
+
+#content {
+    font-size: 30px;
+    font-weight: 200;
+}
+
+button {
+    margin-top: 20px;
+}
+
+#comment-content {
+    width: 20px;
+}
+
+.logout {
+    margin-left: 100px;
+    padding-top: 1px;
+    padding-left: 10px;
+    max-width: 970px;
+    height: 30px;
+    background-color: #FFD7D7;
+    border: solid #FFD7D7;
+}
+
+.input-post {
+    margin-bottom: 20px;
 }

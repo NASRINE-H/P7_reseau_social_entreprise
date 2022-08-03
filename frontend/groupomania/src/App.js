@@ -11,12 +11,12 @@ const App = () => {
             <div className="content">
                   <BrowserRouter>
                         <Routes>
-                              <Route path="/" element={<Login />} />{' '}
-                              {/*path = "*" fonctionne si jamais l'url ne corespond a rien */}{' '}
-                              <Route path="*" element={<Login />} />{' '}
-                              <Route path="/Home" element={<Home />} />{' '}
-                        </Routes>{' '}
-                  </BrowserRouter>{' '}
+                              <Route path="/" element={<Login />} />
+                              {/*path = "*" fonctionne si jamais l'url ne corespond a rien */}
+                              <Route path="*" element={<Login />} />
+                              <Route path="/Home" element={<Home />} />
+                        </Routes>
+                  </BrowserRouter>
             </div>
       );
 };

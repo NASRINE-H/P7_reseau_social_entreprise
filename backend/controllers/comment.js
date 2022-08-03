@@ -1,6 +1,7 @@
 const Comment = require('../models/comment');
-const jwt = require('jsonwebtoken');
-const comment = require('../models/comment');
+
+
+const User = require('../models/user');
 
 exports.getAllComment = (req, res) => {
     let postIdi = req.params.id;
@@ -39,15 +40,25 @@ exports.createComment = (req, res, next) => {
     });
     newComment.save()
         .then(() => {
-            res.status(201).json({
-                message: 'comment créé',
-                    comment: newComment
-            });
+            Comment.findOne({
+                    where: {
+                        id: newComment.id
+                    },
+                    include: User,
+                    attributes: ["username"]
+                })
+                .then((comment) => {
+                    res.status(201).json({
+                        message: 'comment créé',
+                        comment: comment
+                    });
+                })
+
         })
         .catch((error) => {
             res.status(400).json({
                 message: 'comment save a retourné une erreur',
-                    error: error
+                error: error
             });
         });
 };

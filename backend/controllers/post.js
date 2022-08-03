@@ -95,10 +95,35 @@ exports.createPost = (req, res, next) => {
     // Enregistrer dans la BDD
     newPost.save()
         .then(() => {
-            res.status(201).json({
-                message: 'Post créé',
-                post: newPost
-            });
+            Post.findOne({
+                    include: [{
+                        model: User,
+                        attributes: [
+                            "username"
+                        ]
+                    }, {
+                        model: Comment,
+                        include: [{
+                            model: User,
+                            attributes: [
+                                "username"
+                            ]
+                        }]
+                    }],
+                    order: [
+                        ["createdAt", "DESC"]
+                    ],
+                    where: {
+                        id: newPost.id
+                    }
+                })
+                .then((post) => {
+                    res.status(201).json({
+                        message: 'Post créé',
+                        post: post
+                    });
+                })
+
         })
         .catch((error) => {
             res.status(400).json({

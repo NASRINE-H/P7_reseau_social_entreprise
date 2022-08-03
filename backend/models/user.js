@@ -1,5 +1,11 @@
-const { DataTypes, Models, Sequelize } = require('sequelize');
-const { bdd } = require('./index');
+const {
+    DataTypes,
+    Models,
+    Sequelize
+} = require('sequelize');
+const {
+    bdd
+} = require('./index');
 
 module.exports = bdd.define("user", {
     username: {

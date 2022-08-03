@@ -26,10 +26,11 @@ const Comment = ({ comment, deleteComment }) => {
 
       return (
             <div>
+                  <button onClick={deleteCmnt}> X </button>
                   <p>
-                        User: "{comment.userId}" commented: "{comment.content}"
+                        User: "{comment.user.username}" commented: "
+                        {comment.content}"{' '}
                   </p>
-                  <button onClick={deleteCmnt}>X</button>
             </div>
       );
 };
