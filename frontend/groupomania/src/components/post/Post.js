@@ -84,14 +84,20 @@ const Post = ({ post, deletePost, updatePost }) => {
       return (
             <div className="post-Page">
                   {mode === 'printMode' && (
-                        <div>
-                              <h1 id="title"> Titre: {post.titre} </h1>
+                        <div id="post-div">
                               <h2 id="post-user">
-                                    postId: {post.id}, userName:
+                                    {/* postId: {post.id}, */}
                                     {post.user.username}
                               </h2>
+                              <h2 id="title"> Titre: {post.titre} </h2>
                               <p id="content"> content: {post.content} </p>
-                              <img id="postImg" src={post.attachement} alt="" />
+                              {post.attachement && (
+                                    <img
+                                          id="postImg"
+                                          src={post.attachement}
+                                          alt=""
+                                    />
+                              )}
                               {(user.userId === post.userId ||
                                     user.isAdmin) && (
                                     <div>
@@ -112,8 +118,12 @@ const Post = ({ post, deletePost, updatePost }) => {
                         </div>
                   )}
                   {mode === 'editMode' && (
-                        <div>
-                              <h1>
+                        <div id="post-div">
+                              <h2 id="post-user">
+                                    {/* postId: {post.id}, */}
+                                    {post.user.username}
+                              </h2>
+                              <h2 id="title">
                                     Titre:
                                     <input
                                           id="post-titre-edit"
@@ -121,13 +131,8 @@ const Post = ({ post, deletePost, updatePost }) => {
                                           defaultValue={post.titre} /// il faut ajouter un onChange
                                           required
                                     />
-                              </h1>
-
-                              <h2 id="post-user">
-                                    postId: {post.id}, userName:
-                                    {post.user.username}
                               </h2>
-                              <p>
+                              <p id="content">
                                     content:
                                     <input
                                           id="post-content-edit"
@@ -137,29 +142,24 @@ const Post = ({ post, deletePost, updatePost }) => {
                                     />
                               </p>
                               <img id="postImg" src={post.attachement} alt="" />
-                              <button onClick={delPost}>supprimer</button>
-
-                              <button onClick={activePrint}>Annuler</button>
-                              <input
-                                    type="file"
-                                    name="modifier l'image"
-                                    onChange={changeFile}
-                              />
-                              <button onClick={editPost}>Sauvegarder</button>
-                        </div>
-                  )}
-                  {mode === 'errorMode' && (
-                        <div>
-                              <h1 id="title"> Titre: {post.titre} </h1>
-                              <h2 id="post-user">
-                                    postId: {post.id}, userName:
-                                    {post.user.username}
-                              </h2>
-                              <p id="content"> content: {post.content} </p>
-                              <img id="postImg" src={post.attachement} alt="" />
-
-                              <button disabled={true}>supprimer</button>
-                              <button disabled={true}>modifier</button>
+                              <div>
+                                    <button onClick={delPost}>
+                                          {' '}
+                                          supprimer{' '}
+                                    </button>
+                                    <button onClick={activePrint}>
+                                          Annuler
+                                    </button>
+                                    <input
+                                          type="file"
+                                          name="modifier l'image"
+                                          onChange={changeFile}
+                                    />
+                                    <button onClick={editPost}>
+                                          {' '}
+                                          Sauvegarder{' '}
+                                    </button>
+                              </div>
                         </div>
                   )}
             </div>

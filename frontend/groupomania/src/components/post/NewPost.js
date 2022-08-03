@@ -38,6 +38,7 @@ const NewPost = ({ addPost }) => {
                   .then((data) => {
                         console.log('request succes, Response:', data);
                         addPost(data.post);
+                        setFileName();
                   })
 
                   .catch((error) => {
@@ -65,8 +66,11 @@ const NewPost = ({ addPost }) => {
                                     name="content"
                                     required
                               />
+                        </div>{' '}
+                        <div>
+                              {' '}
+                              <input type="file" onChange={saveFile} />
                         </div>
-                        <input type="file" onChange={saveFile} />{' '}
                         <div className="input-post">
                               <button
                                     type="submit"

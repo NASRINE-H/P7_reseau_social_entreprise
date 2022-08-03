@@ -33,7 +33,9 @@ const LoginForm = () => {
                   .then((data) => {
                         console.log('request succes, Response:', data);
                         localStorage.setItem('user', JSON.stringify(data));
-                        navigate('/Home', { replace: true });
+                        navigate('/Home', {
+                              replace: true,
+                        });
                   })
 
                   .catch((error) => {
@@ -71,83 +73,93 @@ const LoginForm = () => {
 
       return (
             <div className="login-page">
+                  {' '}
                   {mode === 'login' && (
                         <div className="login">
-                              <h1> Login </h1>
+                              <h1>
+                                    {' '}
+                                    bienvenue sur le reseau sociale groupomania{' '}
+                              </h1>{' '}
                               <div className="Loginform">
                                     <form>
                                           <div className="input-container">
-                                                <label>email </label>
+                                                <label> email </label>{' '}
                                                 <input
                                                       id="login-email"
                                                       type="text"
                                                       name="email"
                                                       required
                                                 />
-                                          </div>
+                                          </div>{' '}
                                           <div className="input-container">
-                                                <label>Password </label>
+                                                <label> Password </label>{' '}
                                                 <input
                                                       id="login-pass"
                                                       type="password"
                                                       name="pass"
                                                       required
                                                 />
-                                          </div>
-                                          <div className="button-container">
-                                                <button onClick={login}>
-                                                      login
-                                                </button>
-                                          </div>
-                                    </form>
-                              </div>
-                              <button onClick={activeSignup}>S'inscrire</button>
+                                          </div>{' '}
+                                    </form>{' '}
+                              </div>{' '}
+                              <div className="button-container">
+                                    <button onClick={login}>
+                                          se connecter{' '}
+                                    </button>{' '}
+                              </div>{' '}
+                              <button onClick={activeSignup}>
+                                    {' '}
+                                    S 'inscrire
+                              </button>{' '}
                         </div>
-                  )}
+                  )}{' '}
                   {mode === 'signup' && (
                         <div className="signup">
-                              <h1> Signup </h1>
+                              <h1>
+                                    {' '}
+                                    bienvenue sur le reseau socilae groupomania{' '}
+                              </h1>{' '}
                               <div className="Signupform">
                                     <form>
                                           <div className="input-container">
-                                                <label>username </label>
+                                                <label> username </label>{' '}
                                                 <input
                                                       id="signup-username"
                                                       type="text"
                                                       name="uname"
                                                       required
                                                 />
-                                          </div>
+                                          </div>{' '}
                                           <div className="input-container">
-                                                <label>email </label>
+                                                <label> email </label>{' '}
                                                 <input
                                                       id="signup-email"
                                                       type="text"
                                                       name="email"
                                                       required
                                                 />
-                                          </div>
+                                          </div>{' '}
                                           <div className="input-container">
-                                                <label>Password </label>
+                                                <label> Password </label>{' '}
                                                 <input
                                                       id="signup-pass"
                                                       type="password"
                                                       name="pass"
                                                       required
                                                 />
-                                          </div>
-                                          <div className="button-container">
-                                                <button onClick={signup}>
-                                                      signup
-                                                </button>
-                                          </div>
-                                    </form>
-                              </div>
+                                          </div>{' '}
+                                    </form>{' '}
+                              </div>{' '}
+                              <div className="button-container">
+                                    <button id="button-conx" onClick={signup}>
+                                          s'inscrire{' '}
+                                    </button>{' '}
+                              </div>{' '}
                               <button onClick={activeLogin}>
-                                    Se connecter
-                              </button>
+                                    Se connecter{' '}
+                              </button>{' '}
                         </div>
-                  )}
+                  )}{' '}
             </div>
       );
 };
