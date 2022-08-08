@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from './Logo';
+
 const User = () => {
       let navigate = useNavigate();
       const [mode, setMode] = useState('printMode');
@@ -68,6 +69,7 @@ const User = () => {
 
             //catch Err
       };
+
       return (
             <div>
                   <Logo />

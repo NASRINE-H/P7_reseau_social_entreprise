@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+//import { validEmail, validPassword } from './regex.js';
 
 const LoginForm = () => {
       const [mode, setMode] = useState('login');
@@ -10,6 +11,23 @@ const LoginForm = () => {
       const activeLogin = () => {
             setMode('login');
       };
+      /* const validEmail = new RegExp(
+            '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
+      );
+      const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$');
+
+      const [email, setEmail] = useState('');
+      const [password, setPassword] = useState('');
+      const [emailErr, setEmailErr] = useState(false);
+      const [pwdError, setPwdError] = useState(false);
+      const validate = () => {
+            if (!validEmail.test(email)) {
+                  setEmailErr(true);
+            }
+            if (!validPassword.test(password)) {
+                  setPwdError(true);
+            }
+      };*/
 
       const login = (e) => {
             e.preventDefault();
@@ -105,11 +123,18 @@ const LoginForm = () => {
                                     </form>
                               </div>
                               <div className="button-container">
-                                    <button onClick={login}>
+                                    <button
+                                          className="btn-loginsignup"
+                                          onClick={login}
+                                    >
                                           se connecter
                                     </button>
                               </div>
-                              <button onClick={activeSignup}>
+
+                              <button
+                                    className="btn-loginsignup"
+                                    onClick={activeSignup}
+                              >
                                     S 'inscrire
                               </button>
                         </div>
@@ -136,6 +161,11 @@ const LoginForm = () => {
                                                       id="signup-email"
                                                       type="text"
                                                       name="email"
+                                                      // value={email}
+                                                      // onChange={(e) =>
+                                                      //       setEmail(
+                                                      //             e.target.value
+                                                      //       )}
                                                       required
                                                 />
                                           </div>
@@ -145,17 +175,33 @@ const LoginForm = () => {
                                                       id="signup-pass"
                                                       type="password"
                                                       name="pass"
+                                                      // value={password}
+                                                      // onChange={(e) =>
+                                                      //       setPassword(
+                                                      //             e.target.value
+                                                      //       )
+                                                      // }
                                                       required
                                                 />
                                           </div>
                                     </form>
                               </div>
                               <div className="button-container">
-                                    <button id="button-conx" onClick={signup}>
+                                    <button
+                                          id="btn-loginsignup"
+                                          onClick={signup}
+                                    >
                                           s'inscrire
+                                          {/* {emailErr && <p>Your email is invalid</p>}
+                                    {pwdError && (
+                                          <p>Your password is invalid</p>
+                                    )} */}
                                     </button>
                               </div>
-                              <button onClick={activeLogin}>
+                              <button
+                                    className="btn-loginsignup"
+                                    onClick={activeLogin}
+                              >
                                     Se connecter
                               </button>
                         </div>

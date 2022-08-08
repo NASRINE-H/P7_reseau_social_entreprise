@@ -15,10 +15,10 @@ const Logo = () => {
             });
       };
       /* const NavHome = () => {
-            navigate('/', {
-                  replace: true,
-            });
-      };*/
+          navigate('/', {
+                replace: true,
+          });
+    };*/
       return (
             <div className="logo">
                   <img
@@ -27,18 +27,18 @@ const Logo = () => {
                         className="group-logo"
                   />
                   {/* <button className="LogoButton" name="home" onClick={NavHome}>
-                        home
-                  </button> */}
+                                    home
+                              </button> */}{' '}
                   <button className="LogoButton" name="logout" onClick={logout}>
-                        Logout
-                  </button>
+                        Se déconnecter{' '}
+                  </button>{' '}
                   <button
                         className="LogoButton"
                         name="profil"
                         onClick={NavProfile}
                   >
-                        Profile
-                  </button>
+                        Profile{' '}
+                  </button>{' '}
             </div>
       );
 };
