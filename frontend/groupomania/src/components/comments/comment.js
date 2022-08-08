@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Comment = ({ comment, deleteComment }) => {
+      useEffect(() => {}, []);
       //pour supprimer le commentaire
       const deleteCmnt = (e) => {
             e.preventDefault();
@@ -27,10 +28,10 @@ const Comment = ({ comment, deleteComment }) => {
       return (
             <div>
                   <p>
-                        User: "{comment.user.username}" commented: "{' '}
-                        {comment.content}"{' '}
-                  </p>{' '}
-                  <button onClick={deleteCmnt}> supprimer </button>{' '}
+                        User: "{comment.user.username}" commented: "
+                        {comment.content}"
+                  </p>
+                  <button onClick={deleteCmnt}> supprimer </button>
             </div>
       );
 };

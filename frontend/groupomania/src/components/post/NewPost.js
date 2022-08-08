@@ -32,9 +32,17 @@ const NewPost = ({ addPost }) => {
 
             fetch('http://localhost:3000/api/post', options)
                   .then((response) => {
-                        return response.json();
+                        if (
+                              response.status === 200 ||
+                              response.status === 201
+                        ) {
+                              return response.json();
+                        }
+                        throw new Error(
+                              'Something went wrong:',
+                              response.json()
+                        );
                   })
-
                   .then((data) => {
                         console.log('request succes, Response:', data);
                         addPost(data.post);
@@ -50,25 +58,24 @@ const NewPost = ({ addPost }) => {
             <div className="creat-post">
                   <form className="form">
                         <div className="input-post">
-                              <label> Titre </label>{' '}
+                              <label> Titre </label>
                               <input
                                     id="post-titre"
                                     type="text"
                                     name="titre"
                                     required
                               />
-                        </div>{' '}
+                        </div>
                         <div className="input-post">
-                              <label> Content </label>{' '}
+                              <label> Content </label>
                               <input
                                     id="post-content"
                                     type="text"
                                     name="content"
                                     required
                               />
-                        </div>{' '}
+                        </div>
                         <div>
-                              {' '}
                               <input type="file" onChange={saveFile} />
                         </div>
                         <div className="input-post">
@@ -77,10 +84,10 @@ const NewPost = ({ addPost }) => {
                                     className="btn-create"
                                     onClick={CreateNewPost}
                               >
-                                    créer un post{' '}
-                              </button>{' '}
-                        </div>{' '}
-                  </form>{' '}
+                                    créer un post
+                              </button>
+                        </div>
+                  </form>
             </div>
       );
 };

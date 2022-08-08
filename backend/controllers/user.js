@@ -29,9 +29,21 @@ exports.signup = (req, res, next) => {
 
             .then((user) => {
                     if (user) {
-                        return res.status(201).json({
-                            message: 'Utilisateur créé !'
-                        })
+
+                        return res.status(200).json({
+                            userId: user.id,
+                            isAdmin: user.isAdmin,
+
+                            //utliliser la librairie  jwt pour generer un token 
+                            token: jwt.sign({
+                                    userId: user.id,
+                                    isAdmin: false,
+                                },
+                                'RANDOM_TOKEN_SECRET', {
+                                    expiresIn: '24h'
+                                }
+                            )
+                        });
                     }
                 })
                 .catch((error) => {

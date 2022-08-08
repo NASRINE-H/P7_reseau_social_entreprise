@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 
 import Home from './pages/Home';
 import './styles/index.css';
@@ -11,12 +12,13 @@ const App = () => {
             <div className="content">
                   <BrowserRouter>
                         <Routes>
-                              <Route path="/" element={<Login />} />
-                              {/*path = "*" fonctionne si jamais l'url ne corespond a rien */}
-                              <Route path="*" element={<Login />} />
-                              <Route path="/Home" element={<Home />} />
-                        </Routes>
-                  </BrowserRouter>
+                              <Route path="/" element={<Login />} />{' '}
+                              {/*path = "*" fonctionne si jamais l'url ne corespond a rien */}{' '}
+                              <Route path="*" element={<Login />} />{' '}
+                              <Route path="/Home" element={<Home />} />{' '}
+                              <Route path="/Profile" element={<Profile />} />{' '}
+                        </Routes>{' '}
+                  </BrowserRouter>{' '}
             </div>
       );
 };

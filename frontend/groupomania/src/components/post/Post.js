@@ -25,14 +25,20 @@ const Post = ({ post, deletePost, updatePost }) => {
                   headers: {
                         Authorization: 'bearer ' + user.token,
                   },
-            }).then((result) => {
-                  if (result.status === 200 || result.status === 201) {
+            })
+                  .then((response) => {
+                        if (response.ok) {
+                              return response.json();
+                        }
+                        throw new Error('Something went wrong');
+                  })
+                  .then(() => {
                         deletePost(post.id);
                         console.log('supprimer avec succes');
-                  } else {
-                        setMode('errorMode');
-                  }
-            });
+                  })
+                  .catch((error) => {
+                        console.log('delete post request failed:', error);
+                  });
       };
       //permet de changer le state sur changement du fichier image
       const changeFile = (e) => {
@@ -83,21 +89,23 @@ const Post = ({ post, deletePost, updatePost }) => {
 
       return (
             <div className="post-Page">
+                  {' '}
                   {mode === 'printMode' && (
                         <div id="post-div">
                               <h2 id="post-user">
+                                    {' '}
                                     {/* postId: {post.id}, */}
                                     {post.user.username}
-                              </h2>
-                              <h2 id="title"> Titre: {post.titre} </h2>
-                              <p id="content"> content: {post.content} </p>
+                              </h2>{' '}
+                              <h2 id="title"> Titre: {post.titre} </h2>{' '}
+                              <p id="content"> content: {post.content} </p>{' '}
                               {post.attachement && (
                                     <img
                                           id="postImg"
                                           src={post.attachement}
                                           alt=""
                                     />
-                              )}
+                              )}{' '}
                               {(user.userId === post.userId ||
                                     user.isAdmin) && (
                                     <div>
@@ -105,24 +113,25 @@ const Post = ({ post, deletePost, updatePost }) => {
                                                 id="supprimer"
                                                 onClick={delPost}
                                           >
-                                                supprimer
-                                          </button>
+                                                supprimer{' '}
+                                          </button>{' '}
                                           <button
                                                 id="modifier"
                                                 onClick={activeEdit}
                                           >
-                                                modifier
-                                          </button>
+                                                modifier{' '}
+                                          </button>{' '}
                                     </div>
-                              )}
+                              )}{' '}
                         </div>
-                  )}
+                  )}{' '}
                   {mode === 'editMode' && (
                         <div id="post-div">
                               <h2 id="post-user">
-                                    {/* postId: {post.id}, */}
-                                    {post.user.username}
-                              </h2>
+                                    {' '}
+                                    {/* postId: {post.id}, */}{' '}
+                                    {post.user.username}{' '}
+                              </h2>{' '}
                               <h2 id="title">
                                     Titre:
                                     <input
@@ -131,7 +140,7 @@ const Post = ({ post, deletePost, updatePost }) => {
                                           defaultValue={post.titre} /// il faut ajouter un onChange
                                           required
                                     />
-                              </h2>
+                              </h2>{' '}
                               <p id="content">
                                     content:
                                     <input
@@ -140,28 +149,28 @@ const Post = ({ post, deletePost, updatePost }) => {
                                           defaultValue={post.content}
                                           required
                                     />
-                              </p>
+                              </p>{' '}
                               <img id="postImg" src={post.attachement} alt="" />
                               <div>
                                     <button onClick={delPost}>
                                           {' '}
                                           supprimer{' '}
-                                    </button>
+                                    </button>{' '}
                                     <button onClick={activePrint}>
-                                          Annuler
-                                    </button>
+                                          Annuler{' '}
+                                    </button>{' '}
                                     <input
                                           type="file"
                                           name="modifier l'image"
                                           onChange={changeFile}
-                                    />
+                                    />{' '}
                                     <button onClick={editPost}>
                                           {' '}
                                           Sauvegarder{' '}
-                                    </button>
-                              </div>
+                                    </button>{' '}
+                              </div>{' '}
                         </div>
-                  )}
+                  )}{' '}
             </div>
       );
       // };

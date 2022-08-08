@@ -13,10 +13,12 @@ const Home = () => {
                   },
             })
                   .then((response) => {
-                        return response.json();
+                        if (response.ok) {
+                              return response.json();
+                        }
+                        throw new Error('Something went wrong');
                   })
                   .then((data) => {
-                        // on appelle setPost pour mettre data dans la state 'postState'
                         setAllPostState(data);
                   })
                   .catch((error) => {

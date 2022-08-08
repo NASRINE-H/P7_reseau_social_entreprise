@@ -26,20 +26,19 @@ const LoginForm = () => {
                   body: JSON.stringify(user),
             })
                   .then((response) => {
-                        console.log('Response:', response);
-                        return response.json();
+                        if (response.ok) {
+                              return response.json();
+                        }
+                        throw new Error('Something went wrong');
                   })
-
                   .then((data) => {
-                        console.log('request succes, Response:', data);
                         localStorage.setItem('user', JSON.stringify(data));
                         navigate('/Home', {
                               replace: true,
                         });
                   })
-
                   .catch((error) => {
-                        console.log('request failed:', error);
+                        console.log('login request failed:', error);
                   });
       };
 
@@ -58,108 +57,109 @@ const LoginForm = () => {
                   body: JSON.stringify(user),
             })
                   .then((response) => {
-                        console.log('Response:', response);
-                        return response.json();
+                        if (response.ok) {
+                              return response.json();
+                        }
+                        throw new Error('Something went wrong');
                   })
-
                   .then((data) => {
-                        console.log('request succes, Response:', data);
+                        console.log('Signup request succes, Response:', data);
+                        localStorage.setItem('user', JSON.stringify(data));
+                        navigate('/Home', {
+                              replace: true,
+                        });
                   })
 
                   .catch((error) => {
-                        console.log('request failed:', error);
+                        console.log('Signup request failed:', error);
                   });
       };
 
       return (
             <div className="login-page">
-                  {' '}
                   {mode === 'login' && (
                         <div className="login">
                               <h1>
-                                    {' '}
-                                    bienvenue sur le reseau sociale groupomania{' '}
-                              </h1>{' '}
+                                    bienvenue sur le reseau sociale groupomania
+                              </h1>
                               <div className="Loginform">
                                     <form>
                                           <div className="input-container">
-                                                <label> email </label>{' '}
+                                                <label> email </label>
                                                 <input
                                                       id="login-email"
                                                       type="text"
                                                       name="email"
                                                       required
                                                 />
-                                          </div>{' '}
+                                          </div>
                                           <div className="input-container">
-                                                <label> Password </label>{' '}
+                                                <label> Password </label>
                                                 <input
                                                       id="login-pass"
                                                       type="password"
                                                       name="pass"
                                                       required
                                                 />
-                                          </div>{' '}
-                                    </form>{' '}
-                              </div>{' '}
+                                          </div>
+                                    </form>
+                              </div>
                               <div className="button-container">
                                     <button onClick={login}>
-                                          se connecter{' '}
-                                    </button>{' '}
-                              </div>{' '}
+                                          se connecter
+                                    </button>
+                              </div>
                               <button onClick={activeSignup}>
-                                    {' '}
                                     S 'inscrire
-                              </button>{' '}
+                              </button>
                         </div>
-                  )}{' '}
+                  )}
                   {mode === 'signup' && (
                         <div className="signup">
                               <h1>
-                                    {' '}
-                                    bienvenue sur le reseau socilae groupomania{' '}
-                              </h1>{' '}
+                                    bienvenue sur le reseau socilae groupomania
+                              </h1>
                               <div className="Signupform">
                                     <form>
                                           <div className="input-container">
-                                                <label> username </label>{' '}
+                                                <label> username </label>
                                                 <input
                                                       id="signup-username"
                                                       type="text"
                                                       name="uname"
                                                       required
                                                 />
-                                          </div>{' '}
+                                          </div>
                                           <div className="input-container">
-                                                <label> email </label>{' '}
+                                                <label> email </label>
                                                 <input
                                                       id="signup-email"
                                                       type="text"
                                                       name="email"
                                                       required
                                                 />
-                                          </div>{' '}
+                                          </div>
                                           <div className="input-container">
-                                                <label> Password </label>{' '}
+                                                <label> Password </label>
                                                 <input
                                                       id="signup-pass"
                                                       type="password"
                                                       name="pass"
                                                       required
                                                 />
-                                          </div>{' '}
-                                    </form>{' '}
-                              </div>{' '}
+                                          </div>
+                                    </form>
+                              </div>
                               <div className="button-container">
                                     <button id="button-conx" onClick={signup}>
-                                          s'inscrire{' '}
-                                    </button>{' '}
-                              </div>{' '}
+                                          s'inscrire
+                                    </button>
+                              </div>
                               <button onClick={activeLogin}>
-                                    Se connecter{' '}
-                              </button>{' '}
+                                    Se connecter
+                              </button>
                         </div>
-                  )}{' '}
+                  )}
             </div>
       );
 };

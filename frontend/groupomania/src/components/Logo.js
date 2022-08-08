@@ -9,11 +9,35 @@ const Logo = () => {
                   replace: true,
             });
       };
+      const NavProfile = () => {
+            navigate('/Profile', {
+                  replace: true,
+            });
+      };
+      /* const NavHome = () => {
+            navigate('/', {
+                  replace: true,
+            });
+      };*/
       return (
             <div className="logo">
-                  <img src="./logo-black.svg" alt="logo groupomania" />
-                  <button className="logout" name="logout" onClick={logout}>
+                  <img
+                        src="./logo-black.svg"
+                        alt="logo groupomania"
+                        className="group-logo"
+                  />
+                  {/* <button className="LogoButton" name="home" onClick={NavHome}>
+                        home
+                  </button> */}
+                  <button className="LogoButton" name="logout" onClick={logout}>
                         Logout
+                  </button>
+                  <button
+                        className="LogoButton"
+                        name="profil"
+                        onClick={NavProfile}
+                  >
+                        Profile
                   </button>
             </div>
       );

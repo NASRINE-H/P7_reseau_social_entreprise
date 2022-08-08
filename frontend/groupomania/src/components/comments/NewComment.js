@@ -18,9 +18,12 @@ const NewComment = ({ postid, addComment }) => {
                   body: JSON.stringify(comment),
             })
                   .then((response) => {
-                        return response.json();
+                        if (response.ok) {
+                              console.log('comment request succes');
+                              return response.json();
+                        }
+                        throw new Error('Something went wrong');
                   })
-
                   .then((data) => {
                         console.log('request succes, Response Data: ', data);
                         addComment(data.comment);
@@ -33,7 +36,7 @@ const NewComment = ({ postid, addComment }) => {
             <div className="creat-comment">
                   <form className="form">
                         <div className="input-comment">
-                              <label> commentaire: </label>{' '}
+                              <label> commentaire: </label>
                               <input
                                     id={'comment-content' + postid}
                                     type="text"
@@ -46,11 +49,11 @@ const NewComment = ({ postid, addComment }) => {
                                           className="btn-comment"
                                           onClick={createNewComment}
                                     >
-                                          commenter{' '}
-                                    </button>{' '}
-                              </div>{' '}
-                        </div>{' '}
-                  </form>{' '}
+                                          commenter
+                                    </button>
+                              </div>
+                        </div>
+                  </form>
             </div>
       );
 };

@@ -6,19 +6,25 @@ const ShowAllComment = ({ commentData, postid, addComment }) => {
       useEffect(() => {
             setCommentList(commentData);
       }, [commentData]);
-      //pour eviter le rechargement de la page quand on fait supprimer d'aun post
 
       const deleteComment = (id) => {
             setCommentList(commentList.filter((Cmnt) => Cmnt.id !== id));
       };
 
+      const addNewComment = (cmnt) => {
+            console.log(commentData);
+            setCommentList(commentData, ...cmnt);
+            console.log(commentData);
+            addComment(cmnt);
+            console.log(commentData);
+      };
       return (
             <div>
                   <NewComment
                         key={`NewComment-${postid}`}
                         postid={postid}
-                        addComment={addComment}
-                  />{' '}
+                        addComment={addNewComment}
+                  />
                   {commentList?.map((comment) => {
                         if (comment.id)
                               return (
@@ -27,11 +33,11 @@ const ShowAllComment = ({ commentData, postid, addComment }) => {
                                                 key={`Comment-${comment.id}`}
                                                 comment={comment}
                                                 deleteComment={deleteComment}
-                                          />{' '}
+                                          />
                                     </div>
                               );
                         else return null;
-                  })}{' '}
+                  })}
             </div>
       );
 };
