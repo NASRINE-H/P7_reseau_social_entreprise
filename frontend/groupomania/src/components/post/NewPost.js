@@ -4,6 +4,30 @@ const NewPost = ({ addPost }) => {
       const [file, setFile] = useState();
       const [fileName, setFileName] = useState('');
 
+      // let inputs = document.querySelectorAll('.inputfile');
+      // Array.prototype.forEach.call(inputs, function (input) {
+      //       let label = input.nextElementSibling,
+      //             labelVal = label.innerHTML;
+
+      //       input.addEventListener('change', function (e) {
+      //             let fileName = '';
+      //             if (this.files && this.files.length > 1)
+      //                   fileName = (
+      //                         this.getAttribute('data-multiple-caption') || ''
+      //                   ).replace('{count}', this.files.length);
+
+      //             if (fileName)
+      //                   label.querySelector('span').innerHTML = fileName;
+      //             else label.innerHTML = labelVal;
+      //       });
+      //       input.addEventListener('focus', function () {
+      //             input.classList.add('has-focus');
+      //       });
+      //       input.addEventListener('blur', function () {
+      //             input.classList.remove('has-focus');
+      //       });
+      // });
+
       const saveFile = (e) => {
             setFile(e.target.files[0]);
             setFileName(e.target.files[0].name);
@@ -36,6 +60,11 @@ const NewPost = ({ addPost }) => {
                               response.status === 200 ||
                               response.status === 201
                         ) {
+                              //vider le champs
+                              document.querySelector('#post-content').value =
+                                    '';
+                              document.querySelector('#post-titre').value = '';
+                              document.querySelector('#file').value = '';
                               return response.json();
                         }
                         throw new Error(
@@ -47,6 +76,7 @@ const NewPost = ({ addPost }) => {
                         console.log('request succes, Response:', data);
                         addPost(data.post);
                         setFileName();
+                        setFile();
                   })
 
                   .catch((error) => {
@@ -58,36 +88,45 @@ const NewPost = ({ addPost }) => {
             <div className="creat-post">
                   <form className="form">
                         <div className="input-post">
-                              <label> Titre </label>
+                              <label> Titre </label>{' '}
                               <input
                                     id="post-titre"
                                     type="text"
                                     name="titre"
                                     required
                               />
-                        </div>
+                        </div>{' '}
                         <div className="input-post">
-                              <label> Content </label>
+                              <label> Content </label>{' '}
                               <input
                                     id="post-content"
                                     type="text"
                                     name="content"
                                     required
                               />
-                        </div>
+                        </div>{' '}
                         <div>
-                              <input type="file" onChange={saveFile} />
-                        </div>
-                        <div className="input-post">
+                              <label for="file">Choose a file</label>
+                              <input
+                                    type="file"
+                                    name="file"
+                                    id="file"
+                                    class="inputfile"
+                                    // data-multiple-caption="{count} files selected"
+                                    // multiple
+                                    onChange={saveFile}
+                              />
+                        </div>{' '}
+                        <div>
                               <button
                                     type="submit"
                                     className="btn-create"
                                     onClick={CreateNewPost}
                               >
-                                    créer un post
-                              </button>
-                        </div>
-                  </form>
+                                    créer un post{' '}
+                              </button>{' '}
+                        </div>{' '}
+                  </form>{' '}
             </div>
       );
 };

@@ -3,6 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 
 const User = () => {
+      let user = JSON.parse(localStorage.getItem('user'));
+
+      fetch('http://localhost:3000/api/auth/' + user.userId, {})
+            .then((response) => {
+                  if (response.ok) {
+                        console.log('uSER TROUVE');
+                        return response.json();
+                  }
+                  throw new Error('Something went wrong');
+            })
+            .then((data) => {
+                  console.log('request succes, Response Data: ', data);
+                  document.querySelector('#signup-username').value =
+                        data.username;
+                  document.querySelector('#signup-email').value = data.email;
+            })
+            .catch((error) => {
+                  console.log('request failed:', error);
+            }); //
+
+      //
+
       let navigate = useNavigate();
       const [mode, setMode] = useState('printMode');
       //permet d'activer le mode modifier
@@ -74,95 +96,96 @@ const User = () => {
             <div>
                   <Logo />
                   <button className="Button-home" name="home" onClick={NavHome}>
-                        home
-                  </button>
-                  <h1> voici votre profile </h1>
+                        home{' '}
+                  </button>{' '}
+                  <h1> voici votre profile </h1>{' '}
                   {mode === 'printMode' && (
                         <div className="profile">
                               <div className="profile-form">
                                     <form>
                                           <div className="input-container">
-                                                <label> username </label>
+                                                <label> username </label>{' '}
                                                 <input
                                                       id="signup-username"
                                                       type="text"
                                                       name="uname"
+                                                      value={'signup-email'}
                                                       required
                                                 />
-                                          </div>
+                                          </div>{' '}
                                           <div className="input-container">
-                                                <label> email </label>
+                                                <label> email </label>{' '}
                                                 <input
                                                       id="signup-email"
                                                       type="text"
                                                       name="email"
                                                       required
                                                 />
-                                          </div>
-                                    </form>
-                              </div>
+                                          </div>{' '}
+                                    </form>{' '}
+                              </div>{' '}
                               <div className="button-container">
                                     <button onClick={activeEdit}>
-                                          modifier
-                                    </button>
-                              </div>
+                                          modifier{' '}
+                                    </button>{' '}
+                              </div>{' '}
                               <div>
                                     <button onClick={deleteUser}>
-                                          supprimer
-                                    </button>
-                              </div>
+                                          supprimer{' '}
+                                    </button>{' '}
+                              </div>{' '}
                         </div>
-                  )}
+                  )}{' '}
                   {mode === 'editMode' && (
                         <div className="profile">
                               <div className="profile-form">
                                     <form>
                                           <div className="input-container">
-                                                <label> username </label>
+                                                <label> username </label>{' '}
                                                 <input
                                                       id="signup-username"
                                                       type="text"
                                                       name="uname"
                                                       required
                                                 />
-                                          </div>
+                                          </div>{' '}
                                           <div className="input-container">
-                                                <label> email </label>
+                                                <label> email </label>{' '}
                                                 <input
                                                       id="signup-email"
                                                       type="text"
                                                       name="email"
                                                       required
                                                 />
-                                          </div>
+                                          </div>{' '}
                                           <div className="input-container">
-                                                <label> Password </label>
+                                                <label> Password </label>{' '}
                                                 <input
                                                       id="signup-pass"
                                                       type="password"
                                                       name="pass"
                                                       required
                                                 />
-                                          </div>
-                                    </form>
-                              </div>
+                                          </div>{' '}
+                                    </form>{' '}
+                              </div>{' '}
                               <div className="button-container">
                                     <button onClick={activePrint}>
-                                          Annuler
-                                    </button>
-                              </div>
+                                          Annuler{' '}
+                                    </button>{' '}
+                              </div>{' '}
                               <div className="button-container">
                                     <button onClick={editProfile}>
-                                          Sauvegarder
-                                    </button>
-                              </div>
+                                          Sauvegarder{' '}
+                                    </button>{' '}
+                              </div>{' '}
                               <div>
                                     <button onClick={deleteUser}>
-                                          supprimer
-                                    </button>
-                              </div>
+                                          supprimer{' '}
+                                    </button>{' '}
+                              </div>{' '}
                         </div>
-                  )}
+                  )}{' '}
             </div>
       );
 };

@@ -20,6 +20,7 @@ const NewComment = ({ postid, addComment }) => {
                   .then((response) => {
                         if (response.ok) {
                               console.log('comment request succes');
+                              document.querySelector('#btn-comment');
                               return response.json();
                         }
                         throw new Error('Something went wrong');
@@ -45,7 +46,7 @@ const NewComment = ({ postid, addComment }) => {
                               <div className="input-comment">
                                     <button
                                           type="submit"
-                                          className="btn-comment"
+                                          id="btn-comment"
                                           onClick={createNewComment}
                                     >
                                           commenter{' '}

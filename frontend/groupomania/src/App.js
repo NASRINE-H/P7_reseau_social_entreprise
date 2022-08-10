@@ -8,17 +8,24 @@ import './styles/index.css';
 import './App.css';
 
 const App = () => {
+      let userConnected = localStorage.getItem('user');
+      console.log(userConnected);
       return (
             <div className="content">
                   <BrowserRouter>
                         <Routes>
-                              <Route path="/" element={<Login />} />{' '}
-                              {/*path = "*" fonctionne si jamais l'url ne corespond a rien */}{' '}
-                              <Route path="*" element={<Login />} />{' '}
-                              <Route path="/Home" element={<Home />} />{' '}
-                              <Route path="/Profile" element={<Profile />} />{' '}
-                        </Routes>{' '}
-                  </BrowserRouter>{' '}
+                              {!userConnected && (
+                                    <Route path="/" element={<Login />} />
+                              )}
+                              ||
+                              {userConnected && (
+                                    <Route path="/" element={<Home />} />
+                              )}
+                              <Route path="*" element={<Login />} />
+                              <Route path="/Home" element={<Home />} />
+                              <Route path="/Profile" element={<Profile />} />
+                        </Routes>
+                  </BrowserRouter>
             </div>
       );
 };
