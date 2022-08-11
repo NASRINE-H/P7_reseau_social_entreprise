@@ -9,7 +9,6 @@ import './App.css';
 
 const App = () => {
       let userConnected = localStorage.getItem('user');
-      console.log(userConnected);
       return (
             <div className="content">
                   <BrowserRouter>

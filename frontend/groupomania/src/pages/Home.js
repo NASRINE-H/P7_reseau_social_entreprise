@@ -26,9 +26,9 @@ const Home = () => {
                   });
       }, []);
       return (
-            <div>
-                  <Logo />
-                  <AllPost AllPostData={AllPostState} />
+            <div className="home">
+                  <Logo State="On" />
+                  <AllPost AllPostData={AllPostState} />{' '}
             </div>
       );
 };

@@ -5,8 +5,7 @@ import LoginForm from '../components/loginSignup/LoginForm';
 const Login = () => {
       return (
             <div>
-                  <Logo />
-
+                  <Logo State="Off" />
                   <LoginForm />
             </div>
       );

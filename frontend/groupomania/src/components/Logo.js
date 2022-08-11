@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Logo = () => {
+const Logo = (State) => {
       let navigate = useNavigate();
-      const logout = (e) => {
+      const [currentState, setcurrentState] = useState(State);
+      const logout = () => {
             localStorage.removeItem('user');
+            activeState();
             navigate('/', {
                   replace: true,
             });
@@ -14,11 +16,12 @@ const Logo = () => {
                   replace: true,
             });
       };
-      /* const NavHome = () => {
-          navigate('/', {
-                replace: true,
-          });
-    };*/
+      const activeState = () => {
+            if (localStorage.getItem('user')) {
+                  setcurrentState('On');
+                  NavProfile();
+            } else setcurrentState('Off');
+      };
       return (
             <div className="logo">
                   <img
@@ -26,19 +29,22 @@ const Logo = () => {
                         alt="logo groupomania"
                         className="group-logo"
                   />
-                  {/* <button className="LogoButton" name="home" onClick={NavHome}>
-                                    home
-                              </button> */}{' '}
-                  <button className="LogoButton" name="logout" onClick={logout}>
-                        Se déconnecter{' '}
-                  </button>{' '}
+                  <button
+                        className="LogoButton"
+                        name="logout"
+                        onClick={logout}
+                        disabled={currentState === 'Off'}
+                  >
+                        Se déconnecter
+                  </button>
                   <button
                         className="LogoButton"
                         name="profil"
-                        onClick={NavProfile}
+                        onClick={activeState}
+                        disabled={currentState === 'Off'}
                   >
-                        Profile{' '}
-                  </button>{' '}
+                        Profile
+                  </button>
             </div>
       );
 };

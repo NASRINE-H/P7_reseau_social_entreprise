@@ -4,6 +4,8 @@
 //  utilise l'algorithme bcrypt pour hasher le mot de passe 
 const bcrypt = require('bcrypt');
 
+require('dotenv').config()
+
 
 //Les JSON web tokens sont des tokens encodés qui peuvent être utilisés pour l'autorisation.
 
@@ -39,7 +41,7 @@ exports.signup = (req, res, next) => {
                                     userId: user.id,
                                     isAdmin: false,
                                 },
-                                'RANDOM_TOKEN_SECRET', {
+                                process.env.TOKEN_KEY, {
                                     expiresIn: '24h'
                                 }
                             )
@@ -98,7 +100,7 @@ exports.login = (req, res, next) => {
 
 
                             },
-                            'RANDOM_TOKEN_SECRET', {
+                            process.env.TOKEN_KEY, {
                                 expiresIn: '24h'
                             }
                         )

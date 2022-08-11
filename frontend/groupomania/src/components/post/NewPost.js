@@ -1,36 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const NewPost = ({ addPost }) => {
-      const [file, setFile] = useState();
-      const [fileName, setFileName] = useState('');
+      const [selectedFile, setSelectedFile] = useState();
+      const [preview, setPreview] = useState();
 
-      // let inputs = document.querySelectorAll('.inputfile');
-      // Array.prototype.forEach.call(inputs, function (input) {
-      //       let label = input.nextElementSibling,
-      //             labelVal = label.innerHTML;
+      // create a preview as a side effect, whenever selected file is changed
+      useEffect(() => {
+            if (!selectedFile) {
+                  setPreview(undefined);
+                  return;
+            }
 
-      //       input.addEventListener('change', function (e) {
-      //             let fileName = '';
-      //             if (this.files && this.files.length > 1)
-      //                   fileName = (
-      //                         this.getAttribute('data-multiple-caption') || ''
-      //                   ).replace('{count}', this.files.length);
+            const objectUrl = URL.createObjectURL(selectedFile);
+            setPreview(objectUrl);
 
-      //             if (fileName)
-      //                   label.querySelector('span').innerHTML = fileName;
-      //             else label.innerHTML = labelVal;
-      //       });
-      //       input.addEventListener('focus', function () {
-      //             input.classList.add('has-focus');
-      //       });
-      //       input.addEventListener('blur', function () {
-      //             input.classList.remove('has-focus');
-      //       });
-      // });
+            // free memory when ever this component is unmounted
+            return () => URL.revokeObjectURL(objectUrl);
+      }, [selectedFile]);
 
-      const saveFile = (e) => {
-            setFile(e.target.files[0]);
-            setFileName(e.target.files[0].name);
+      const onSelectFile = (e) => {
+            if (!e.target.files || e.target.files.length === 0) {
+                  setSelectedFile(undefined);
+                  return;
+            }
+
+            // I've kept this example simple by using the first image instead of multiple
+            setSelectedFile(e.target.files[0]);
       };
 
       const CreateNewPost = (e) => {
@@ -42,7 +37,7 @@ const NewPost = ({ addPost }) => {
 
             const body = new FormData();
             body.append('post', JSON.stringify(post));
-            body.append('image', file);
+            body.append('image', selectedFile);
 
             const options = {
                   method: 'POST',
@@ -75,8 +70,7 @@ const NewPost = ({ addPost }) => {
                   .then((data) => {
                         console.log('request succes, Response:', data);
                         addPost(data.post);
-                        setFileName();
-                        setFile();
+                        setSelectedFile(undefined);
                   })
 
                   .catch((error) => {
@@ -84,49 +78,94 @@ const NewPost = ({ addPost }) => {
                   });
       };
 
+      const clearPreview = (e) => {
+            setSelectedFile(undefined);
+            onSelectFile(e);
+      };
       return (
             <div className="creat-post">
                   <form className="form">
                         <div className="input-post">
-                              <label> Titre </label>{' '}
+                              <label> Titre </label>
                               <input
                                     id="post-titre"
                                     type="text"
                                     name="titre"
                                     required
                               />
-                        </div>{' '}
+                        </div>
                         <div className="input-post">
-                              <label> Content </label>{' '}
+                              <label> Content </label>
                               <input
                                     id="post-content"
                                     type="text"
                                     name="content"
                                     required
                               />
-                        </div>{' '}
-                        <div>
-                              <label for="file">Choose a file</label>
+                        </div>
+                        <div id="fileButtonDiv">
+                              <label htmlFor="file" id="fileButton">
+                                    inserer une image
+                              </label>
                               <input
                                     type="file"
                                     name="file"
                                     id="file"
-                                    class="inputfile"
+                                    className="inputfile"
                                     // data-multiple-caption="{count} files selected"
                                     // multiple
-                                    onChange={saveFile}
+                                    onChange={onSelectFile}
                               />
-                        </div>{' '}
-                        <div>
-                              <button
-                                    type="submit"
-                                    className="btn-create"
-                                    onClick={CreateNewPost}
-                              >
-                                    créer un post{' '}
-                              </button>{' '}
-                        </div>{' '}
-                  </form>{' '}
+                        </div>
+                        {selectedFile && (
+                              <div id="post-div">
+                                    <h1>Le post va être posté comme ça:</h1>
+                                    <h2 id="post-user">Votre username</h2>
+                                    <h2 id="title">
+                                          {
+                                                document.getElementById(
+                                                      'post-titre'
+                                                ).value
+                                          }
+                                    </h2>
+                                    <p id="content">
+                                          {
+                                                document.getElementById(
+                                                      'post-content'
+                                                ).value
+                                          }
+                                    </p>
+                                    {selectedFile && (
+                                          <div>
+                                                <img
+                                                      src={preview}
+                                                      id="postImg"
+                                                />
+                                                <div>
+                                                      <button
+                                                            type="submit"
+                                                            className="btn-create"
+                                                            onClick={
+                                                                  clearPreview
+                                                            }
+                                                      >
+                                                            annuler
+                                                      </button>
+                                                      <button
+                                                            type="submit"
+                                                            className="btn-create"
+                                                            onClick={
+                                                                  CreateNewPost
+                                                            }
+                                                      >
+                                                            poster
+                                                      </button>
+                                                </div>
+                                          </div>
+                                    )}
+                              </div>
+                        )}
+                  </form>
             </div>
       );
 };

@@ -2,6 +2,7 @@ const {
     Sequelize
 } = require('sequelize');
 
+require('dotenv').config();
 
 const bdd = new Sequelize(
     'Groupomania',

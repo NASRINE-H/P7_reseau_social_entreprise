@@ -1,7 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900');
+/*@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900');*/
+
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;500;700');
 body {
-    font-family: 'Lato', sans-serif;
+    /* font-family: 'Lato', sans-serif; */
+    font-family: 'Figtree', sans-serif;
     margin-bottom: 100px;
+    width: 100%;
 }
 
 .App {
@@ -32,6 +36,7 @@ form input {
 
 .inputfile {
     width: 0.1px;
+    border: 2px solid #FFD7D7;
     height: 0.1px;
     opacity: 0;
     overflow: hidden;
@@ -39,11 +44,21 @@ form input {
     z-index: -1;
 }
 
+#fileButton {
+    justify-content: center;
+    border: 2px solid #FFD7D7;
+    border-radius: 20px;
+    width: 100px;
+    height: 50px;
+    background-color: #FFD7D7;
+    margin-bottom: 10px;
+}
+
 .inputfile+label {
     font-size: 1.25em;
     font-weight: 700;
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: #FFD7D7;
     display: inline-block;
     cursor: pointer;
 }
@@ -78,10 +93,10 @@ form input {
 }
 
 form [type="submit"] {
-    width: 20%;
     font-size: medium;
     box-sizing: border-box;
     margin-top: 20px;
+    margin-bottom: 20px;
     background-color: #FFD7D7;
     box-shadow: 2px 2px 2px #FFD7D7;
     color: black;
@@ -90,19 +105,27 @@ form [type="submit"] {
 .logo {
     display: flex;
     justify-content: center;
+    margin-bottom: 70px;
+    margin-left: 10px;
 }
 
 .group-logo {
-    width: 200px;
-    left: 150px;
-    position: absolute;
-    z-index: 0
+    width: 100px;
+    left: 100px;
 }
 
-.content {
+.content,
+#fileButtonDiv {
     display: flex;
-    max-width: 1200px;
+    width: 100%;
     justify-content: center;
+    text-align: center;
+}
+
+.home {
+    width: 40%;
+    text-align: center;
+    margin: 0 auto;
 }
 
 form label {
@@ -141,10 +164,14 @@ form label {
     }
 }
 
+#title {
+    font-style: italic;
+    font-weight: bolder;
+}
+
 #postImg {
-    padding-left: 35%;
+    justify-content: center;
     width: 200px;
-    height: 200px;
 }
 
 .post-Page {
@@ -153,42 +180,73 @@ form label {
     width: 100%;
     height: 500px;
     border: 2px solid black;
-    margin: 50px;
+    margin-top: 10px;
+}
+
+#content {
+    font-size: 25px;
 }
 
 #title,
 #content {
     display: flex;
     justify-content: center;
-    font-size: 30px;
-    font-weight: 200;
 }
 
 #post-div {
     width: 100%;
     justify-content: center;
+    padding-top: 0px;
+    margin-bottom: 20px;
 }
 
 #post-user {
     display: flex;
     justify-content: center;
-    width: 95%;
-    font-size: 30px;
+    width: 99%;
+    font-size: 20px;
     margin-bottom: 50px;
     background-color: #FFD7D7;
     border: 2px solid #FFD7D7;
-    box-shadow: 5px 5px 5px #FFD7D7;
-    padding-left: 20px;
+    padding-top: 0px;
 }
 
 button {
     /*padding: 2px 2px 2px 5px;*/
     margin-top: 20px;
     background-color: #FFD7D7;
+    left: 100px;
     border: #FFD7D7;
     width: 100px;
     height: 40px;
     border-radius: 20px;
+}
+
+
+/*.input-cmnt {
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: lightgray;
+    padding: 0 5px 0 5px;
+}*/
+
+.user-cmnt {
+    display: flex;
+    justify-content: flex-start;
+    font-weight: bolder;
+}
+
+.cmnt {
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: lightgrey;
+}
+
+.cmnt-content {
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 5px;
+    padding-left: 15px;
 }
 
 h1 {
@@ -214,6 +272,10 @@ h1 {
     width: 100%;
 }
 
+.Button-home {
+    margin-left: 5px;
+}
+
 .LogoButton {
     margin-left: 15px;
     width: 100px;
@@ -233,6 +295,10 @@ h1 {
     width: 100%;
 }
 
+.input-comment {
+    margin-top: 20px;
+}
+
 
 /*@media screen and (max-widh:767px) {
     .LogoButton {
@@ -248,18 +314,21 @@ h1 {
     }
 }*/
 
-@media only screen and (min-width: 360px) {
+
+/*@media only screen and (min-width: 360px) {
     body {
         font-size: 54%;
     }
     form input {
         width: 50%;
     }
-    .group-logo {
+    /*.group-logo {
         width: 75px;
         left: 50px;
-    }
-    h1 {
+    }*/
+
+
+/* h1 {
         font-size: 5px;
         font-weight: 50;
     }
@@ -282,7 +351,9 @@ h1 {
     }
     button {
         /*padding: 2px 2px 2px 5px;*/
-        margin-top: 5px;
+
+
+/* margin-top: 5px;
         width: 50px;
         height: 10px;
     }
@@ -327,7 +398,7 @@ h1 {
     form input {
         width: 80%;
     }
-    .group-logo {
+     .group-logo {
         width: 100px;
         left: 75px;
     }
@@ -354,7 +425,9 @@ h1 {
     }
     button {
         /*padding: 2px 2px 2px 5px;*/
-        margin-top: 10px;
+
+
+/* margin-top: 10px;
         width: 70px;
         height: 20px;
     }
@@ -401,7 +474,7 @@ h1 {
     form input {
         width: 100%;
     }
-    .group-logo {
+     .group-logo {
         width: 200px;
         left: 150px;
     }
@@ -428,7 +501,9 @@ h1 {
     }
     button {
         /*padding: 2px 2px 2px 5px;*/
-        margin-top: 20px;
+
+
+/* margin-top: 20px;
         width: 100px;
         height: 40px;
     }
@@ -466,4 +541,4 @@ h1 {
         font-size: 15px;
         width: 100px;
     }
-}
+}*/

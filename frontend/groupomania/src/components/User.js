@@ -8,7 +8,6 @@ const User = () => {
       fetch('http://localhost:3000/api/auth/' + user.userId, {})
             .then((response) => {
                   if (response.ok) {
-                        console.log('uSER TROUVE');
                         return response.json();
                   }
                   throw new Error('Something went wrong');
@@ -28,13 +27,13 @@ const User = () => {
       let navigate = useNavigate();
       const [mode, setMode] = useState('printMode');
       //permet d'activer le mode modifier
-      const activeEdit = () => {
-            setMode('editMode');
-      };
+      // const activeEdit = () => {
+      //       setMode('editMode');
+      // };
       //permet d'activer le mode afficher du poste
-      const activePrint = () => {
-            setMode('printMode');
-      };
+      // const activePrint = () => {
+      //       setMode('printMode');
+      // };
 
       const logout = (e) => {
             localStorage.removeItem('user');
@@ -72,120 +71,124 @@ const User = () => {
                   });
       };
 
-      const editProfile = (e) => {
-            e.preventDefault();
+      // const editProfile = (e) => {
+      //       e.preventDefault();
 
-            let userEdit = {
-                  email: document.getElementById('signup-email').value,
-                  password: document.getElementById('signup-pass').value,
-                  username: document.getElementById('signup-username').value,
-            };
-            console.log(userEdit);
+      //       let userEdit = {
+      //             email: document.getElementById('signup-email').value,
+      //             password: document.getElementById('signup-pass').value,
+      //             username: document.getElementById('signup-username').value,
+      //       };
+      //       console.log(userEdit);
 
-            // Regex
+      //       // Regex
 
-            // fetch
+      //       // fetch
 
-            // then response OK
-            activePrint();
+      //       // then response OK
+      //       activePrint();
 
-            //catch Err
-      };
+      //       //catch Err
+      // };
 
       return (
             <div>
                   <Logo />
-                  <button className="Button-home" name="home" onClick={NavHome}>
-                        home{' '}
-                  </button>{' '}
-                  <h1> voici votre profile </h1>{' '}
+
+                  <h1> voici votre profile </h1>
                   {mode === 'printMode' && (
                         <div className="profile">
                               <div className="profile-form">
                                     <form>
                                           <div className="input-container">
-                                                <label> username </label>{' '}
+                                                <label> username </label>
                                                 <input
                                                       id="signup-username"
                                                       type="text"
                                                       name="uname"
-                                                      value={'signup-email'}
                                                       required
                                                 />
-                                          </div>{' '}
+                                          </div>
                                           <div className="input-container">
-                                                <label> email </label>{' '}
+                                                <label> email </label>
                                                 <input
                                                       id="signup-email"
                                                       type="text"
                                                       name="email"
                                                       required
                                                 />
-                                          </div>{' '}
-                                    </form>{' '}
-                              </div>{' '}
-                              <div className="button-container">
+                                          </div>
+                                    </form>
+                              </div>
+                              {/* <div className="button-container">
                                     <button onClick={activeEdit}>
-                                          modifier{' '}
-                                    </button>{' '}
-                              </div>{' '}
-                              <div>
+                                          modifier
+                                    </button>
+                              </div> */}
+                              <div className="btn-supp-home">
                                     <button onClick={deleteUser}>
-                                          supprimer{' '}
-                                    </button>{' '}
-                              </div>{' '}
+                                          supprimer
+                                    </button>
+                                    <button
+                                          className="Button-home"
+                                          name="home"
+                                          onClick={NavHome}
+                                    >
+                                          Home
+                                    </button>
+                              </div>
                         </div>
-                  )}{' '}
-                  {mode === 'editMode' && (
+                  )}
+                  {/* {mode === 'editMode' && (
                         <div className="profile">
                               <div className="profile-form">
                                     <form>
                                           <div className="input-container">
-                                                <label> username </label>{' '}
+                                                <label> username </label>
                                                 <input
                                                       id="signup-username"
                                                       type="text"
                                                       name="uname"
                                                       required
                                                 />
-                                          </div>{' '}
+                                          </div>
                                           <div className="input-container">
-                                                <label> email </label>{' '}
+                                                <label> email </label>
                                                 <input
                                                       id="signup-email"
                                                       type="text"
                                                       name="email"
                                                       required
                                                 />
-                                          </div>{' '}
+                                          </div>
                                           <div className="input-container">
-                                                <label> Password </label>{' '}
+                                                <label> Password </label>
                                                 <input
                                                       id="signup-pass"
                                                       type="password"
                                                       name="pass"
                                                       required
                                                 />
-                                          </div>{' '}
-                                    </form>{' '}
-                              </div>{' '}
+                                          </div>
+                                    </form>
+                              </div>
                               <div className="button-container">
                                     <button onClick={activePrint}>
-                                          Annuler{' '}
-                                    </button>{' '}
-                              </div>{' '}
+                                          Annuler
+                                    </button>
+                              </div>
                               <div className="button-container">
                                     <button onClick={editProfile}>
-                                          Sauvegarder{' '}
-                                    </button>{' '}
-                              </div>{' '}
+                                          Sauvegarder
+                                    </button>
+                              </div>
                               <div>
                                     <button onClick={deleteUser}>
-                                          supprimer{' '}
-                                    </button>{' '}
-                              </div>{' '}
+                                          supprimer
+                                    </button>
+                              </div>
                         </div>
-                  )}{' '}
+                  )} */}
             </div>
       );
 };

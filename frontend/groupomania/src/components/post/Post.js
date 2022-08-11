@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 // import { useParams, useEffect, useState } from 'react';
 const Post = ({ post, deletePost, updatePost }) => {
       const [mode, setMode] = useState('printMode');
       const [file, setFile] = useState();
       const [user, setUser] = useState({});
+      const [preview, setPreview] = useState(post.attachement);
+
       useEffect(() => {
             setUser(JSON.parse(localStorage.getItem('user')));
       }, []);
@@ -14,6 +18,7 @@ const Post = ({ post, deletePost, updatePost }) => {
       };
       //permet d'activer le mode afficher du poste
       const activePrint = () => {
+            setPreview(post.attachement);
             setMode('printMode');
       };
       //permet de faire la requete delete du poste
@@ -44,6 +49,16 @@ const Post = ({ post, deletePost, updatePost }) => {
       const changeFile = (e) => {
             e.preventDefault();
             setFile(e.target.files[0]);
+            if (!e.target.files[0]) {
+                  console.log('file empty!!!!');
+                  setPreview(post.attachement);
+                  return;
+            }
+
+            const objectUrl = URL.createObjectURL(e.target.files[0]);
+            console.log('setting preview: ', objectUrl);
+            setPreview(objectUrl);
+            return () => URL.revokeObjectURL(objectUrl);
       };
       //permet de faire la requete PUT pour modifier le poste
       const editPost = (e) => {
@@ -89,23 +104,21 @@ const Post = ({ post, deletePost, updatePost }) => {
 
       return (
             <div className="post-Page">
-                  {' '}
                   {mode === 'printMode' && (
                         <div id="post-div">
                               <h2 id="post-user">
-                                    {' '}
                                     {/* postId: {post.id}, */}
                                     {post.user.username}
-                              </h2>{' '}
-                              <h2 id="title"> Titre: {post.titre} </h2>{' '}
-                              <p id="content"> content: {post.content} </p>{' '}
+                              </h2>
+                              <h2 id="title"> {post.titre} </h2>
+                              <p id="content"> {post.content} </p>
                               {post.attachement && (
                                     <img
                                           id="postImg"
                                           src={post.attachement}
                                           alt=""
                                     />
-                              )}{' '}
+                              )}
                               {(user.userId === post.userId ||
                                     user.isAdmin) && (
                                     <div>
@@ -113,25 +126,24 @@ const Post = ({ post, deletePost, updatePost }) => {
                                                 id="supprimer"
                                                 onClick={delPost}
                                           >
-                                                supprimer{' '}
-                                          </button>{' '}
+                                                supprimer
+                                          </button>
                                           <button
                                                 id="modifier"
                                                 onClick={activeEdit}
                                           >
-                                                modifier{' '}
-                                          </button>{' '}
+                                                modifier
+                                          </button>
                                     </div>
-                              )}{' '}
+                              )}
                         </div>
-                  )}{' '}
+                  )}
                   {mode === 'editMode' && (
                         <div id="post-div">
                               <h2 id="post-user">
-                                    {' '}
-                                    {/* postId: {post.id}, */}{' '}
-                                    {post.user.username}{' '}
-                              </h2>{' '}
+                                    {/* postId: {post.id}, */}
+                                    {post.user.username}
+                              </h2>
                               <h2 id="title">
                                     Titre:
                                     <input
@@ -140,37 +152,46 @@ const Post = ({ post, deletePost, updatePost }) => {
                                           defaultValue={post.titre} /// il faut ajouter un onChange
                                           required
                                     />
-                              </h2>{' '}
+                              </h2>
                               <p id="content">
-                                    content:
+                                    Contenu:
                                     <input
                                           id="post-content-edit"
                                           type="text"
                                           defaultValue={post.content}
                                           required
                                     />
-                              </p>{' '}
-                              <img id="postImg" src={post.attachement} alt="" />
+                              </p>
+                              <img id="postImg" src={preview} alt="" />
                               <div>
-                                    <button onClick={delPost}>
-                                          {' '}
-                                          supprimer{' '}
-                                    </button>{' '}
+                                    <button onClick={delPost}>supprimer</button>
                                     <button onClick={activePrint}>
-                                          Annuler{' '}
-                                    </button>{' '}
+                                          Annuler
+                                    </button>
+
                                     <input
+                                          accept="image/*"
+                                          id="icon-button-file"
                                           type="file"
-                                          name="modifier l'image"
                                           onChange={changeFile}
-                                    />{' '}
+                                          style={{ display: 'none' }}
+                                    />
+                                    <label htmlFor="icon-button-file">
+                                          <IconButton
+                                                color="primary"
+                                                aria-label="upload picture"
+                                                component="span"
+                                          >
+                                                <PhotoCamera />
+                                          </IconButton>
+                                    </label>
+
                                     <button onClick={editPost}>
-                                          {' '}
-                                          Sauvegarder{' '}
-                                    </button>{' '}
-                              </div>{' '}
+                                          Sauvegarder
+                                    </button>
+                              </div>
                         </div>
-                  )}{' '}
+                  )}
             </div>
       );
       // };

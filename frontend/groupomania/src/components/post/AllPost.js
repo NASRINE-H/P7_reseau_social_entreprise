@@ -29,8 +29,8 @@ const AllPost = ({ AllPostData }) => {
       }; //pour supprimer le post
 
       return (
-            <div>
-                  <NewPost addPost={addPost} />
+            <div className="allPost">
+                  <NewPost addPost={addPost} />{' '}
                   {postList?.map((post) => {
                         if (post.id)
                               return (
@@ -40,17 +40,17 @@ const AllPost = ({ AllPostData }) => {
                                                 key={`post-${post.id}`}
                                                 post={post}
                                                 updatePost={updatePost}
-                                          />
+                                          />{' '}
                                           <ShowAllComment
                                                 commentData={post.comments}
                                                 key={`AllCommentFor-${post.id}`}
                                                 postid={post.id}
                                                 addComment={addComment}
-                                          />
+                                          />{' '}
                                     </div>
                               );
                         else return null;
-                  })}
+                  })}{' '}
             </div>
       );
 };
