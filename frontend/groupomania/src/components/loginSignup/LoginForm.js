@@ -11,23 +11,39 @@ const LoginForm = () => {
       const activeLogin = () => {
             setMode('login');
       };
-      /* const validEmail = new RegExp(
-            '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
-      );
-      const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$');
 
       const [email, setEmail] = useState('');
-      const [password, setPassword] = useState('');
-      const [emailErr, setEmailErr] = useState(false);
-      const [pwdError, setPwdError] = useState(false);
-      const validate = () => {
-            if (!validEmail.test(email)) {
-                  setEmailErr(true);
+      const [message, setMessage] = useState('');
+      const emailValidation = () => {
+            const regex = /[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]/g;
+            if (regex.test(email)) {
+                  setMessage('email is valid');
+            } else if (!regex.test(email) && email !== '') {
+                  setMessage('email is not valid');
+            } else {
+                  setMessage('');
             }
-            if (!validPassword.test(password)) {
-                  setPwdError(true);
-            }
-      };*/
+      };
+      const handleOnChange = (e) => {
+            setEmail(e.target.value);
+      };
+      /* const validEmail = new RegExp(
+          '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
+    );
+    const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$');
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [emailErr, setEmailErr] = useState(false);
+    const [pwdError, setPwdError] = useState(false);
+    const validate = () => {
+          if (!validEmail.test(email)) {
+                setEmailErr(true);
+          }
+          if (!validPassword.test(password)) {
+                setPwdError(true);
+          }
+    };*/
 
       const login = (e) => {
             e.preventDefault();
@@ -95,72 +111,78 @@ const LoginForm = () => {
 
       return (
             <div className="login-page">
+                  {' '}
                   {mode === 'login' && (
                         <div className="login">
                               <h1>
-                                    bienvenue sur le reseau sociale groupomania
-                              </h1>
+                                    bienvenue sur le reseau sociale groupomania{' '}
+                              </h1>{' '}
                               <div className="Loginform">
                                     <form>
                                           <div className="input-container">
-                                                <label> email </label>
+                                                <label> email </label>{' '}
                                                 <input
                                                       id="login-email"
                                                       type="text"
                                                       name="email"
                                                       required
                                                 />
-                                          </div>
+                                          </div>{' '}
                                           <div className="input-container">
-                                                <label> Password </label>
+                                                <label> Password </label>{' '}
                                                 <input
                                                       id="login-pass"
                                                       type="password"
                                                       name="pass"
                                                       required
                                                 />
-                                          </div>
-                                    </form>
-                              </div>
+                                          </div>{' '}
+                                    </form>{' '}
+                              </div>{' '}
                               <div className="button-container">
                                     <button
                                           className="btn-loginsignup"
                                           onClick={login}
                                     >
-                                          se connecter
-                                    </button>
+                                          se connecter{' '}
+                                    </button>{' '}
                               </div>
-
                               <button
                                     className="btn-loginsignup"
                                     onClick={activeSignup}
                               >
-                                    S 'inscrire
-                              </button>
+                                    S 'inscrire{' '}
+                              </button>{' '}
                         </div>
-                  )}
+                  )}{' '}
                   {mode === 'signup' && (
                         <div className="signup">
                               <h1>
-                                    bienvenue sur le reseau socilae groupomania
-                              </h1>
+                                    bienvenue sur le reseau socilae groupomania{' '}
+                              </h1>{' '}
                               <div className="Signupform">
                                     <form>
                                           <div className="input-container">
-                                                <label> username </label>
+                                                <label> username </label>{' '}
                                                 <input
                                                       id="signup-username"
                                                       type="text"
                                                       name="uname"
                                                       required
                                                 />
-                                          </div>
+                                          </div>{' '}
                                           <div className="input-container">
-                                                <label> email </label>
+                                                <label htmlFor="">
+                                                      {' '}
+                                                      email{' '}
+                                                </label>{' '}
                                                 <input
                                                       id="signup-email"
-                                                      type="text"
+                                                      type="email"
                                                       name="email"
+                                                      placeholder="email"
+                                                      value={email}
+                                                      onChange={handleOnChange}
                                                       // value={email}
                                                       // onChange={(e) =>
                                                       //       setEmail(
@@ -168,9 +190,15 @@ const LoginForm = () => {
                                                       //       )}
                                                       required
                                                 />
-                                          </div>
+                                                <button
+                                                      onClick={emailValidation}
+                                                >
+                                                      Check
+                                                </button>
+                                                <p>{message}</p>
+                                          </div>{' '}
                                           <div className="input-container">
-                                                <label> Password </label>
+                                                <label> Password </label>{' '}
                                                 <input
                                                       id="signup-pass"
                                                       type="password"
@@ -183,29 +211,29 @@ const LoginForm = () => {
                                                       // }
                                                       required
                                                 />
-                                          </div>
-                                    </form>
-                              </div>
+                                          </div>{' '}
+                                    </form>{' '}
+                              </div>{' '}
                               <div className="button-container">
                                     <button
                                           id="btn-loginsignup"
                                           onClick={signup}
                                     >
-                                          s'inscrire
+                                          s 'inscrire{' '}
                                           {/* {emailErr && <p>Your email is invalid</p>}
-                                    {pwdError && (
-                                          <p>Your password is invalid</p>
-                                    )} */}
-                                    </button>
-                              </div>
+                                                            {pwdError && (
+                                                                  <p>Your password is invalid</p>
+                                                            )} */}{' '}
+                                    </button>{' '}
+                              </div>{' '}
                               <button
                                     className="btn-loginsignup"
                                     onClick={activeLogin}
                               >
-                                    Se connecter
-                              </button>
+                                    Se connecter{' '}
+                              </button>{' '}
                         </div>
-                  )}
+                  )}{' '}
             </div>
       );
 };

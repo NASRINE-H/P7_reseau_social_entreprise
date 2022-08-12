@@ -542,3 +542,10 @@ h1 {
         width: 100px;
     }
 }*/
+
+@media screen and (max-width:1499) {
+    .home {
+        width: 90%;
+        font-size: 10px;
+    }
+}

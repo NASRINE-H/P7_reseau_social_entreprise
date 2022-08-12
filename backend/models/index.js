@@ -5,9 +5,9 @@ const {
 require('dotenv').config();
 
 const bdd = new Sequelize(
-    'Groupomania',
-    'root',
-    'Nesrine@ines4421', {
+    process.env.BDD_NAME,
+    process.env.BDD_USERNAME,
+    process.env.BDD_PASSWORD, {
         host: 'localhost',
         dialect: 'mysql',
     });
