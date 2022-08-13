@@ -116,7 +116,7 @@ const Post = ({ post, deletePost, updatePost }) => {
                                     <img
                                           id="postImg"
                                           src={post.attachement}
-                                          alt=""
+                                          alt={post.attachement}
                                     />
                               )}
                               {(user.userId === post.userId ||
@@ -124,12 +124,14 @@ const Post = ({ post, deletePost, updatePost }) => {
                                     <div>
                                           <button
                                                 id="supprimer"
+                                                type="button"
                                                 onClick={delPost}
                                           >
                                                 supprimer
                                           </button>
                                           <button
                                                 id="modifier"
+                                                type="button"
                                                 onClick={activeEdit}
                                           >
                                                 modifier
@@ -164,7 +166,9 @@ const Post = ({ post, deletePost, updatePost }) => {
                               </p>
                               <img id="postImg" src={preview} alt="" />
                               <div>
-                                    <button onClick={delPost}>supprimer</button>
+                                    <button type="button" onClick={delPost}>
+                                          supprimer
+                                    </button>
                                     <button onClick={activePrint}>
                                           Annuler
                                     </button>
@@ -186,7 +190,7 @@ const Post = ({ post, deletePost, updatePost }) => {
                                           </IconButton>
                                     </label>
 
-                                    <button onClick={editPost}>
+                                    <button type="button" onClick={editPost}>
                                           Sauvegarder
                                     </button>
                               </div>

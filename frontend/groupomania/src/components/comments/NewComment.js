@@ -37,15 +37,17 @@ const NewComment = ({ postid, addComment }) => {
             <div className="creat-comment">
                   <form className="form">
                         <div className="input-comment">
-                              <input
-                                    id={'comment-content' + postid}
-                                    type="text"
-                                    name="content"
-                                    required
-                              />
+                              <label htmlFor="comment-content" id="label-cmnt">
+                                    <input
+                                          id={'comment-content' + postid}
+                                          type="text"
+                                          name="content"
+                                          required
+                                    />
+                              </label>{' '}
                               <div className="input-comment">
                                     <button
-                                          type="submit"
+                                          type="button"
                                           id="btn-comment"
                                           onClick={createNewComment}
                                     >

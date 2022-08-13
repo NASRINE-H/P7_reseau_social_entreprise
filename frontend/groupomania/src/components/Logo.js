@@ -30,21 +30,23 @@ const Logo = (State) => {
                         className="group-logo"
                   />
                   <button
-                        className="LogoButton"
+                        className="LogoButton1"
                         name="logout"
+                        type="button"
                         onClick={logout}
                         disabled={currentState === 'Off'}
                   >
-                        Se déconnecter
-                  </button>
+                        Se déconnecter{' '}
+                  </button>{' '}
                   <button
-                        className="LogoButton"
+                        className="LogoButton2"
                         name="profil"
+                        type="button"
                         onClick={activeState}
                         disabled={currentState === 'Off'}
                   >
-                        Profile
-                  </button>
+                        Profile{' '}
+                  </button>{' '}
             </div>
       );
 };

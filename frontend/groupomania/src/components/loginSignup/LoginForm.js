@@ -120,27 +120,34 @@ const LoginForm = () => {
                               <div className="Loginform">
                                     <form>
                                           <div className="input-container">
-                                                <label> email </label>{' '}
-                                                <input
-                                                      id="login-email"
-                                                      type="text"
-                                                      name="email"
-                                                      required
-                                                />
+                                                <label>
+                                                      {' '}
+                                                      email{' '}
+                                                      <input
+                                                            id="login-email"
+                                                            type="email"
+                                                            name="email"
+                                                            required
+                                                      />
+                                                </label>
                                           </div>{' '}
                                           <div className="input-container">
-                                                <label> Password </label>{' '}
-                                                <input
-                                                      id="login-pass"
-                                                      type="password"
-                                                      name="pass"
-                                                      required
-                                                />
+                                                <label>
+                                                      {' '}
+                                                      Password{' '}
+                                                      <input
+                                                            id="login-pass"
+                                                            type="password"
+                                                            name="pass"
+                                                            required
+                                                      />
+                                                </label>
                                           </div>{' '}
                                     </form>{' '}
                               </div>{' '}
                               <div className="button-container">
                                     <button
+                                          type="submit"
                                           className="btn-loginsignup"
                                           onClick={login}
                                     >
@@ -148,7 +155,7 @@ const LoginForm = () => {
                                     </button>{' '}
                               </div>
                               <button
-                                    className="btn-loginsignup"
+                                    className="btn-loginsignup1"
                                     onClick={activeSignup}
                               >
                                     S 'inscrire{' '}
@@ -163,59 +170,66 @@ const LoginForm = () => {
                               <div className="Signupform">
                                     <form>
                                           <div className="input-container">
-                                                <label> username </label>{' '}
-                                                <input
-                                                      id="signup-username"
-                                                      type="text"
-                                                      name="uname"
-                                                      required
-                                                />
+                                                <label>
+                                                      {' '}
+                                                      username{' '}
+                                                      <input
+                                                            id="signup-username"
+                                                            type="text"
+                                                            name="uname"
+                                                            required
+                                                      />
+                                                </label>
                                           </div>{' '}
                                           <div className="input-container">
-                                                <label htmlFor="">
+                                                <label>
                                                       {' '}
                                                       email{' '}
-                                                </label>{' '}
-                                                <input
-                                                      id="signup-email"
-                                                      type="email"
-                                                      name="email"
-                                                      placeholder="email"
-                                                      value={email}
-                                                      onChange={handleOnChange}
-                                                      // value={email}
-                                                      // onChange={(e) =>
-                                                      //       setEmail(
-                                                      //             e.target.value
-                                                      //       )}
-                                                      required
-                                                />
+                                                      <input
+                                                            id="signup-email"
+                                                            type="email"
+                                                            name="email"
+                                                            value={email}
+                                                            onChange={
+                                                                  handleOnChange
+                                                            }
+                                                            // value={email}
+                                                            // onChange={(e) =>
+                                                            //       setEmail(
+                                                            //             e.target.value
+                                                            //       )}
+                                                            required
+                                                      />
+                                                </label>
                                                 <button
+                                                      type="button"
                                                       onClick={emailValidation}
-                                                >
-                                                      Check
-                                                </button>
+                                                ></button>
                                                 <p>{message}</p>
                                           </div>{' '}
                                           <div className="input-container">
-                                                <label> Password </label>{' '}
-                                                <input
-                                                      id="signup-pass"
-                                                      type="password"
-                                                      name="pass"
-                                                      // value={password}
-                                                      // onChange={(e) =>
-                                                      //       setPassword(
-                                                      //             e.target.value
-                                                      //       )
-                                                      // }
-                                                      required
-                                                />
+                                                <label>
+                                                      {' '}
+                                                      Password{' '}
+                                                      <input
+                                                            id="signup-pass"
+                                                            type="password"
+                                                            name="pass"
+                                                            // value={password}
+                                                            // onChange={(e) =>
+                                                            //       setPassword(
+                                                            //             e.target.value
+                                                            //       )
+                                                            // }
+                                                            required
+                                                      />
+                                                </label>
                                           </div>{' '}
                                     </form>{' '}
                               </div>{' '}
                               <div className="button-container">
                                     <button
+                                          type="submit"
                                           id="btn-loginsignup"
                                           onClick={signup}
                                     >
@@ -227,13 +241,13 @@ const LoginForm = () => {
                                     </button>{' '}
                               </div>{' '}
                               <button
-                                    className="btn-loginsignup"
+                                    className="btn-loginsignup1"
                                     onClick={activeLogin}
                               >
                                     Se connecter{' '}
                               </button>{' '}
                         </div>
-                  )}{' '}
+                  )}
             </div>
       );
 };

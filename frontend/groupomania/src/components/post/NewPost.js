@@ -86,41 +86,47 @@ const NewPost = ({ addPost }) => {
             <div className="creat-post">
                   <form className="form">
                         <div className="input-post">
-                              <label> Titre </label>
-                              <input
-                                    id="post-titre"
-                                    type="text"
-                                    name="titre"
-                                    required
-                              />
+                              <label id="label-post">
+                                    {' '}
+                                    Titre
+                                    <input
+                                          id="post-titre"
+                                          type="text"
+                                          name="titre"
+                                          required
+                                    />
+                              </label>
                         </div>
                         <div className="input-post">
-                              <label> Content </label>
-                              <input
-                                    id="post-content"
-                                    type="text"
-                                    name="content"
-                                    required
-                              />
+                              <label id="label-post">
+                                    {' '}
+                                    Content
+                                    <input
+                                          id="post-content"
+                                          type="text"
+                                          name="content"
+                                          required
+                                    />
+                              </label>
                         </div>
                         <div id="fileButtonDiv">
                               <label htmlFor="file" id="fileButton">
                                     inserer une image
+                                    <input
+                                          type="file"
+                                          name="file"
+                                          id="file"
+                                          className="inputfile"
+                                          // data-multiple-caption="{count} files selected"
+                                          // multiple
+                                          onChange={onSelectFile}
+                                    />
                               </label>
-                              <input
-                                    type="file"
-                                    name="file"
-                                    id="file"
-                                    className="inputfile"
-                                    // data-multiple-caption="{count} files selected"
-                                    // multiple
-                                    onChange={onSelectFile}
-                              />
                         </div>
                         {selectedFile && (
                               <div id="post-div">
                                     <h1>Le post va être posté comme ça:</h1>
-                                    <h2 id="post-user">Votre username</h2>
+
                                     <h2 id="title">
                                           {
                                                 document.getElementById(
@@ -139,11 +145,12 @@ const NewPost = ({ addPost }) => {
                                           <div>
                                                 <img
                                                       src={preview}
+                                                      alt={selectedFile.name}
                                                       id="postImg"
                                                 />
                                                 <div>
                                                       <button
-                                                            type="submit"
+                                                            type="button"
                                                             className="btn-create"
                                                             onClick={
                                                                   clearPreview
@@ -152,7 +159,7 @@ const NewPost = ({ addPost }) => {
                                                             annuler
                                                       </button>
                                                       <button
-                                                            type="submit"
+                                                            type="button"
                                                             className="btn-create"
                                                             onClick={
                                                                   CreateNewPost

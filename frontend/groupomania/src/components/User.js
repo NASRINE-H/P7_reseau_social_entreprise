@@ -94,101 +94,107 @@ const User = () => {
       return (
             <div>
                   <Logo />
-
-                  <h1> voici votre profile </h1>
+                  <h1> voici votre profile </h1>{' '}
                   {mode === 'printMode' && (
                         <div className="profile">
                               <div className="profile-form">
                                     <form>
                                           <div className="input-container">
-                                                <label> username </label>
-                                                <input
-                                                      id="signup-username"
-                                                      type="text"
-                                                      name="uname"
-                                                      required
-                                                />
-                                          </div>
+                                                <label>
+                                                      {' '}
+                                                      username{' '}
+                                                      <input
+                                                            id="signup-username"
+                                                            type="text"
+                                                            name="uname"
+                                                            required
+                                                      />
+                                                </label>{' '}
+                                          </div>{' '}
                                           <div className="input-container">
-                                                <label> email </label>
-                                                <input
-                                                      id="signup-email"
-                                                      type="text"
-                                                      name="email"
-                                                      required
-                                                />
-                                          </div>
-                                    </form>
-                              </div>
+                                                <label>
+                                                      {' '}
+                                                      email{' '}
+                                                      <input
+                                                            id="signup-email"
+                                                            type="text"
+                                                            name="email"
+                                                            required
+                                                      />
+                                                </label>{' '}
+                                          </div>{' '}
+                                    </form>{' '}
+                              </div>{' '}
                               {/* <div className="button-container">
-                                    <button onClick={activeEdit}>
-                                          modifier
-                                    </button>
-                              </div> */}
+                                                        <button onClick={activeEdit}>
+                                                              modifier
+                                                        </button>
+                                                  </div> */}{' '}
                               <div className="btn-supp-home">
-                                    <button onClick={deleteUser}>
-                                          supprimer
-                                    </button>
+                                    <button type="button" onClick={deleteUser}>
+                                          supprimer{' '}
+                                    </button>{' '}
                                     <button
                                           className="Button-home"
                                           name="home"
+                                          type="button"
                                           onClick={NavHome}
                                     >
-                                          Home
-                                    </button>
-                              </div>
+                                          Home{' '}
+                                    </button>{' '}
+                              </div>{' '}
                         </div>
-                  )}
+                  )}{' '}
                   {/* {mode === 'editMode' && (
-                        <div className="profile">
-                              <div className="profile-form">
-                                    <form>
-                                          <div className="input-container">
-                                                <label> username </label>
-                                                <input
-                                                      id="signup-username"
-                                                      type="text"
-                                                      name="uname"
-                                                      required
-                                                />
+                                    <div className="profile">
+                                          <div className="profile-form">
+                                                <form>
+                                                      <div className="input-container">
+                                                            <label> username </label>
+                                                            <input
+                                                                  id="signup-username"
+                                                                  type="text"
+                                                                  name="uname"
+                                                                  required
+                                                            />
+                                                      </div>
+                                                      <div className="input-container">
+                                                            <label> email </label>
+                                                            <input
+                                                                  id="signup-email"
+                                                                  type="text"
+                                                                  name="email"
+                                                                  required
+                                                            />
+                                                      </div>
+                                                      <div className="input-container">
+                                                            <label> Password </label>
+                                                            <input
+                                                                  id="signup-pass"
+                                                                  type="password"
+                                                                  name="pass"
+                                                                  required
+                                                            />
+                                                      </div>
+                                                </form>
                                           </div>
-                                          <div className="input-container">
-                                                <label> email </label>
-                                                <input
-                                                      id="signup-email"
-                                                      type="text"
-                                                      name="email"
-                                                      required
-                                                />
+                                          <div className="button-container">
+                                                <button onClick={activePrint}>
+                                                      Annuler
+                                                </button>
                                           </div>
-                                          <div className="input-container">
-                                                <label> Password </label>
-                                                <input
-                                                      id="signup-pass"
-                                                      type="password"
-                                                      name="pass"
-                                                      required
-                                                />
+                                          <div className="button-container">
+                                                <button onClick={editProfile}>
+                                                      Sauvegarder
+                                                </button>
                                           </div>
-                                    </form>
-                              </div>
-                              <div className="button-container">
-                                    <button onClick={activePrint}>
-                                          Annuler
-                                    </button>
-                              </div>
-                              <div className="button-container">
-                                    <button onClick={editProfile}>
-                                          Sauvegarder
-                                    </button>
-                              </div>
-                              <div>
-                                    <button onClick={deleteUser}>
-                                          supprimer
-                                    </button>
-                              </div>
-                        </div>
-                  )} */}
+                                          <div>
+                                                <button onClick={deleteUser}>
+                                                      supprimer
+                                                </button>
+                                          </div>
+                                    </div>
+                              )} */}{' '}
             </div>
       );
 };
