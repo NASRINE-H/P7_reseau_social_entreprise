@@ -118,7 +118,7 @@ const LoginForm = () => {
                                     bienvenue sur le reseau sociale groupomania{' '}
                               </h1>{' '}
                               <div className="Loginform">
-                                    <form>
+                                    <form className="form-container">
                                           <div className="input-container">
                                                 <label>
                                                       {' '}

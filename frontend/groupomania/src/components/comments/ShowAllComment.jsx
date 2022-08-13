@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import NewComment from '../comments/NewComment';
+import NewComment from './NewComment';
 import Comment from './Comment';
 const ShowAllComment = ({ commentData, postid, addComment }) => {
       const [commentList, setCommentList] = useState([]);
@@ -24,7 +24,7 @@ const ShowAllComment = ({ commentData, postid, addComment }) => {
                         key={`NewComment-${postid}`}
                         postid={postid}
                         addComment={addNewComment}
-                  />
+                  />{' '}
                   {commentList?.map((comment) => {
                         if (comment.id)
                               return (
@@ -33,11 +33,11 @@ const ShowAllComment = ({ commentData, postid, addComment }) => {
                                                 key={`Comment-${comment.id}`}
                                                 comment={comment}
                                                 deleteComment={deleteComment}
-                                          />
+                                          />{' '}
                                     </div>
                               );
                         else return null;
-                  })}
+                  })}{' '}
             </div>
       );
 };

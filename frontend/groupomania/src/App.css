@@ -209,9 +209,20 @@ form label {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 500px;
+    height: 800px;
     border: 2px solid black;
     margin-top: 10px;
+}
+
+#supprimer,
+#modifier {
+    margin-top: 20px;
+    background-color: #FFD7D7;
+    left: 100px;
+    border: #FFD7D7;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
 }
 
 #title,
@@ -291,7 +302,7 @@ form label {
     display: flex;
     justify-content: flex-start;
     padding-bottom: 5px;
-    padding-left: 15px;
+    /*padding-left: 15px;*/
     font-size: 25px;
 }
 
@@ -370,250 +381,6 @@ h1 {
     padding-left: 20px;
 }
 
-
-/*@media screen and (max-widh:767px) {
-    .LogoButton {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 100vh;
-        padding: 2rem;
-    }
-}*/
-
-
-/*@media only screen and (min-width: 360px) {
-    body {
-        font-size: 54%;
-    }
-    form input {
-        width: 50%;
-    }
-    /*.group-logo {
-        width: 75px;
-        left: 50px;
-    }*/
-
-
-/* h1 {
-        font-size: 5px;
-        font-weight: 50;
-    }
-    .post-Page {
-        width: 50%;
-        height: 300px;
-        margin: 25px;
-    }
-    .content {
-        font-size: 10px;
-    }
-    #title,
-    #content {
-        font-size: 10px;
-    }
-    #postImg {
-        padding-left: 17%;
-        width: 75px;
-        height: 75px;
-    }
-    button {
-        /*padding: 2px 2px 2px 5px;*/
-
-
-/* margin-top: 5px;
-        width: 50px;
-        height: 10px;
-    }
-    #comment-content {
-        width: 10px;
-    }
-    .LogoButton {
-        margin-left: 5px;
-        width: 50px;
-        height: 20px;
-        font-size: 5px;
-    }
-    .input-post {
-        margin-bottom: 5px;
-        width: 50%;
-    }
-    form [type="submit"] {
-        width: 10%;
-        font-size: x-small;
-        margin-top: 5px;
-    }
-    .Loginform,
-    .Signupform,
-    .profile-form {
-        width: 50%;
-    }
-    .input-container {
-        font-weight: 50;
-        font-size: 10px;
-        width: 100%;
-    }
-    .btn-loginsignup {
-        font-size: 5px;
-        width: 50px;
-    }
-}
-
-@media only screen and (min-width: 500px) {
-    body {
-        font-size: 80%;
-    }
-    form input {
-        width: 80%;
-    }
-     .group-logo {
-        width: 100px;
-        left: 75px;
-    }
-    h1 {
-        font-size: 10px;
-        font-weight: 50;
-    }
-    .post-Page {
-        width: 75%;
-        height: 400px;
-        margin: 35px;
-    }
-    .content {
-        font-size: 20px;
-    }
-    #title,
-    #content {
-        font-size: 20px;
-    }
-    #postImg {
-        padding-left: 25%;
-        width: 130px;
-        height: 130px;
-    }
-    button {
-        /*padding: 2px 2px 2px 5px;*/
-
-
-/* margin-top: 10px;
-        width: 70px;
-        height: 20px;
-    }
-    #comment-content {
-        width: 15px;
-    }
-    .LogoButton {
-        margin-left: 10px;
-        width: 75px;
-        height: 30px;
-        font-size: 10px;
-    }
-    .input-post {
-        margin-bottom: 10px;
-        width: 75%;
-    }
-    form [type="submit"] {
-        width: 15%;
-        font-size: small;
-        margin-top: 10px;
-    }
-    .Loginform,
-    .Signupform,
-    .profile-form {
-        border: 2px solid #FFD7D7;
-        background-color: #FFD7D7;
-        width: 75%;
-    }
-    .input-container {
-        font-weight: 50;
-        font-size: 15px;
-        width: 100%;
-    }
-    .btn-loginsignup {
-        font-size: 10px;
-        width: 75px;
-    }
-}
-
-@media only screen and (min-width: 760px) {
-    body {
-        font-size: 100%;
-    }
-    form input {
-        width: 100%;
-    }
-     .group-logo {
-        width: 200px;
-        left: 150px;
-    }
-    h1 {
-        font-size: 20px;
-        font-weight: 50;
-    }
-    .post-Page {
-        width: 100%;
-        height: 500px;
-        margin: 50px;
-    }
-    .content {
-        font-size: 30px;
-    }
-    #title,
-    #content {
-        font-size: 30px;
-    }
-    #postImg {
-        padding-left: 35%;
-        width: 200px;
-        height: 200px;
-    }
-    button {
-        /*padding: 2px 2px 2px 5px;*/
-
-
-/* margin-top: 20px;
-        width: 100px;
-        height: 40px;
-    }
-    #comment-content {
-        width: 20px;
-    }
-    .LogoButton {
-        margin-left: 15px;
-        width: 100px;
-        height: 40px;
-        font-size: 15px;
-    }
-    .input-post {
-        margin-bottom: 20px;
-        width: 100%;
-    }
-    form [type="submit"] {
-        width: 20%;
-        font-size: large;
-        margin-top: 20px;
-    }
-    .Loginform,
-    .Signupform,
-    .profile-form {
-        border: 2px solid #FFD7D7;
-        background-color: #FFD7D7;
-        width: 100%;
-    }
-    .input-container {
-        font-weight: 50;
-        font-size: 20px;
-        width: 100%;
-    }
-    .btn-loginsignup {
-        font-size: 15px;
-        width: 100px;
-    }
-}*/
-
 @media screen and (max-width:980px) {
     .home {
         width: 45%;
@@ -643,8 +410,14 @@ h1 {
         display: flex;
         justify-content: center;
         width: 80%;
-        height: 300px;
+        height: 400px;
         margin-top: 10px;
+    }
+    #supprimer,
+    #modifier {
+        width: 65px;
+        height: 30px;
+        font-size: 10px;
     }
     .input-post {
         margin-bottom: 10px;
@@ -692,8 +465,8 @@ h1 {
     .cmnt-content {
         font-size: 20px;
         width: 100%;
-        display: flex;
-        flex-wrap: wrap;
+        /* display: flex;
+        flex-wrap: wrap;*/
     }
     #sup-cmnt {
         width: 100px;
@@ -738,7 +511,7 @@ h1 {
     }
     .post-Page {
         width: 100%;
-        height: 200px;
+        height: 300px;
         margin-top: 7px;
     }
     .input-post {
@@ -788,9 +561,9 @@ h1 {
         font-size: 10px;
         width: 100%;
     }
-    p .cmnt-content {
+    /*p .cmnt-content {
         white-space: normal
-    }
+    }*/
     #sup-cmnt {
         width: 80px;
         height: 30px;

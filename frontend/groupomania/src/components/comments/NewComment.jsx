@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const NewComment = ({ postid, addComment }) => {
+      //const [comment, setComment] = useState();
       const createNewComment = (e) => {
             e.preventDefault();
             let comment = {
@@ -21,6 +22,8 @@ const NewComment = ({ postid, addComment }) => {
                         if (response.ok) {
                               console.log('comment request succes');
                               document.querySelector('#btn-comment');
+                              //   document.querySelector('#comment-content').value =
+                              //         '';
                               return response.json();
                         }
                         throw new Error('Something went wrong');

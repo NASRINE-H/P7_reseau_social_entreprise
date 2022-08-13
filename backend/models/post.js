@@ -18,7 +18,7 @@ module.exports = bdd.define("post", {
         },
 
         content: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false
 
         },
