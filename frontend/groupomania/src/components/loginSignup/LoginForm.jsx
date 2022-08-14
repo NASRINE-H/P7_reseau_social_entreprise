@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 //import { validEmail, validPassword } from './regex.js';
 
-const LoginForm = () => {
+const LoginForm = (props) => {
       const [mode, setMode] = useState('login');
+
       let navigate = useNavigate();
       const activeSignup = () => {
             setMode('signup');
@@ -45,6 +46,7 @@ const LoginForm = () => {
           }
     };*/
 
+      // loger un utilisateur existant
       const login = (e) => {
             e.preventDefault();
             let user = {
@@ -70,12 +72,14 @@ const LoginForm = () => {
                         navigate('/Home', {
                               replace: true,
                         });
+                        props.setState('On');
                   })
                   .catch((error) => {
                         console.log('login request failed:', error);
                   });
       };
 
+      // Créer un nouvel utilisateur
       const signup = (e) => {
             e.preventDefault();
             let user = {
@@ -102,6 +106,7 @@ const LoginForm = () => {
                         navigate('/Home', {
                               replace: true,
                         });
+                        props.setState('On');
                   })
 
                   .catch((error) => {
@@ -111,30 +116,29 @@ const LoginForm = () => {
 
       return (
             <div className="login-page">
-                  {' '}
                   {mode === 'login' && (
                         <div className="login">
                               <h1>
-                                    bienvenue sur le reseau sociale groupomania{' '}
-                              </h1>{' '}
+                                    bienvenue sur le reseau sociale groupomania
+                              </h1>
                               <div className="Loginform">
                                     <form className="form-container">
                                           <div className="input-container">
-                                                <label>
+                                                <label className="label-email">
                                                       {' '}
-                                                      email{' '}
+                                                      email
                                                       <input
                                                             id="login-email"
-                                                            type="email"
+                                                            type="text"
                                                             name="email"
                                                             required
                                                       />
                                                 </label>
-                                          </div>{' '}
+                                          </div>
                                           <div className="input-container">
-                                                <label>
+                                                <label className="label-password">
                                                       {' '}
-                                                      Password{' '}
+                                                      Password
                                                       <input
                                                             id="login-pass"
                                                             type="password"
@@ -142,37 +146,35 @@ const LoginForm = () => {
                                                             required
                                                       />
                                                 </label>
-                                          </div>{' '}
-                                    </form>{' '}
-                              </div>{' '}
+                                          </div>
+                                    </form>
+                              </div>
                               <div className="button-container">
                                     <button
                                           type="submit"
                                           className="btn-loginsignup"
                                           onClick={login}
                                     >
-                                          se connecter{' '}
-                                    </button>{' '}
+                                          se connecter
+                                    </button>
                               </div>
                               <button
                                     className="btn-loginsignup1"
                                     onClick={activeSignup}
                               >
-                                    S 'inscrire{' '}
-                              </button>{' '}
+                                    S 'inscrire
+                              </button>
                         </div>
-                  )}{' '}
+                  )}
                   {mode === 'signup' && (
                         <div className="signup">
-                              <h1>
-                                    bienvenue sur le reseau socilae groupomania{' '}
-                              </h1>{' '}
+                              <h1>Bienvenue sur le reseau Groupomania</h1>
                               <div className="Signupform">
                                     <form>
                                           <div className="input-container">
-                                                <label>
+                                                <label className="label-username">
                                                       {' '}
-                                                      username{' '}
+                                                      username
                                                       <input
                                                             id="signup-username"
                                                             type="text"
@@ -180,15 +182,18 @@ const LoginForm = () => {
                                                             required
                                                       />
                                                 </label>
-                                          </div>{' '}
+                                          </div>
                                           <div className="input-container">
-                                                <label>
-                                                      {' '}
-                                                      email{' '}
+                                                <label
+                                                      className="label-email"
+                                                      htmlFor=""
+                                                >
+                                                      email
                                                       <input
                                                             id="signup-email"
                                                             type="email"
                                                             name="email"
+                                                            placeholder="email"
                                                             value={email}
                                                             onChange={
                                                                   handleOnChange
@@ -206,11 +211,11 @@ const LoginForm = () => {
                                                       onClick={emailValidation}
                                                 ></button>
                                                 <p>{message}</p>
-                                          </div>{' '}
+                                          </div>
                                           <div className="input-container">
-                                                <label>
+                                                <label className="label-password">
                                                       {' '}
-                                                      Password{' '}
+                                                      Password
                                                       <input
                                                             id="signup-pass"
                                                             type="password"
@@ -224,28 +229,28 @@ const LoginForm = () => {
                                                             required
                                                       />
                                                 </label>
-                                          </div>{' '}
-                                    </form>{' '}
-                              </div>{' '}
+                                          </div>
+                                    </form>
+                              </div>
                               <div className="button-container">
                                     <button
                                           type="submit"
-                                          id="btn-loginsignup"
+                                          className="btn-loginsignup"
                                           onClick={signup}
                                     >
-                                          s 'inscrire{' '}
+                                          s 'inscrire
                                           {/* {emailErr && <p>Your email is invalid</p>}
                                                             {pwdError && (
                                                                   <p>Your password is invalid</p>
-                                                            )} */}{' '}
-                                    </button>{' '}
-                              </div>{' '}
+                                                            )} */}
+                                    </button>
+                              </div>
                               <button
                                     className="btn-loginsignup1"
                                     onClick={activeLogin}
                               >
-                                    Se connecter{' '}
-                              </button>{' '}
+                                    Se connecter
+                              </button>
                         </div>
                   )}
             </div>

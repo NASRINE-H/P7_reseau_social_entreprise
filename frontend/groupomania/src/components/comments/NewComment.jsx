@@ -4,12 +4,16 @@ const NewComment = ({ postid, addComment }) => {
       //const [comment, setComment] = useState();
       const createNewComment = (e) => {
             e.preventDefault();
+            let content= document.getElementById('comment-content' + postid)
+                        .value;
+            if(content !=='') {           
             let comment = {
                   content: document.getElementById('comment-content' + postid)
                         .value,
             };
 
             let user = JSON.parse(localStorage.getItem('user'));
+            
             fetch('http://localhost:3000/api/comment/' + postid, {
                   method: 'POST',
                   headers: {
@@ -20,7 +24,6 @@ const NewComment = ({ postid, addComment }) => {
             })
                   .then((response) => {
                         if (response.ok) {
-                              console.log('comment request succes');
                               document.querySelector('#btn-comment');
                               //   document.querySelector('#comment-content').value =
                               //         '';
@@ -29,13 +32,19 @@ const NewComment = ({ postid, addComment }) => {
                         throw new Error('Something went wrong');
                   })
                   .then((data) => {
-                        console.log('request succes, Response Data: ', data);
-                        addComment(data.comment);
+                       addComment(data.comment);
+                       document.getElementById('comment-content' + postid).value='';
                   })
                   .catch((error) => {
                         console.log('request failed:', error);
                   });
-      };
+      }
+      else
+      {     
+            console.log("contenu vide");
+
+      }
+};
       return (
             <div className="creat-comment">
                   <form className="form">
@@ -54,11 +63,11 @@ const NewComment = ({ postid, addComment }) => {
                                           id="btn-comment"
                                           onClick={createNewComment}
                                     >
-                                          commenter{' '}
-                                    </button>{' '}
-                              </div>{' '}
-                        </div>{' '}
-                  </form>{' '}
+                                          commenter
+                                    </button>
+                              </div>
+                        </div>
+                  </form>
             </div>
       );
 };

@@ -35,6 +35,7 @@ exports.signup = (req, res, next) => {
                         return res.status(200).json({
                             userId: user.id,
                             isAdmin: user.isAdmin,
+                            username: user.username,
 
                             //utliliser la librairie  jwt pour generer un token 
                             token: jwt.sign({
@@ -92,6 +93,7 @@ exports.login = (req, res, next) => {
                     res.status(200).json({
                         userId: user.id,
                         isAdmin: user.isAdmin,
+                        username: user.username,
 
                         //utliliser la librairie  jwt pour generer un token 
                         token: jwt.sign({

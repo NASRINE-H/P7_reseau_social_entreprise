@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import AllPost from '../components/post/AllPost';
 import Logo from '../components/Logo';
 
-const Home = () => {
+const Home = (props) => {
       const [AllPostState, setAllPostState] = useState([0]);
       useEffect(() => {
             let user = JSON.parse(localStorage.getItem('user'));
-            //afficher tous les post
             fetch('http://localhost:3000/api/post', {
                   headers: {
                         Authorization: 'bearer ' + user.token,
@@ -27,8 +26,8 @@ const Home = () => {
       }, []);
       return (
             <div className="home">
-                  <Logo State="On" />
-                  <AllPost AllPostData={AllPostState} />{' '}
+                  <Logo state={props.state} setState={props.setState}  />
+                  <AllPost AllPostData={AllPostState} />
             </div>
       );
 };

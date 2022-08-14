@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import PhotoDelete from '@material-ui/icons/Delete';
+import PhotoUndo from '@material-ui/icons/Undo';
+import PhotoApply from '@material-ui/icons/Done';
+import PhotoEdit from '@material-ui/icons/Edit';
+import ShowAllComment from '../comments/ShowAllComment';
 
 // import { useParams, useEffect, useState } from 'react';
 const Post = ({ post, deletePost, updatePost }) => {
+      const [postCommentList, setCommentList] = useState([]);
       const [mode, setMode] = useState('printMode');
       const [file, setFile] = useState();
       const [user, setUser] = useState({});
@@ -11,7 +17,8 @@ const Post = ({ post, deletePost, updatePost }) => {
 
       useEffect(() => {
             setUser(JSON.parse(localStorage.getItem('user')));
-      }, []);
+            setCommentList(post.comments);
+      }, [post]);
       //permet d'activer le mode modifier
       const activeEdit = () => {
             setMode('editMode');
@@ -39,7 +46,6 @@ const Post = ({ post, deletePost, updatePost }) => {
                   })
                   .then(() => {
                         deletePost(post.id);
-                        console.log('supprimer avec succes');
                   })
                   .catch((error) => {
                         console.log('delete post request failed:', error);
@@ -56,7 +62,6 @@ const Post = ({ post, deletePost, updatePost }) => {
             }
 
             const objectUrl = URL.createObjectURL(e.target.files[0]);
-            console.log('setting preview: ', objectUrl);
             setPreview(objectUrl);
             return () => URL.revokeObjectURL(objectUrl);
       };
@@ -83,16 +88,11 @@ const Post = ({ post, deletePost, updatePost }) => {
             })
                   .then((result) => {
                         if (result.status === 403) {
-                              console.log('setting error mode');
-                              setMode('errorMode');
+                              console.log('Not Authorized!! Error 403');
                         } else return result.json();
                   })
                   .then((data) => {
                         if (data.post) {
-                              console.log(
-                                    'modifié avec succes, nouveau post:',
-                                    data.post
-                              );
                               updatePost(data.post);
                               setMode('printMode');
                         }
@@ -102,100 +102,161 @@ const Post = ({ post, deletePost, updatePost }) => {
                   });
       };
 
+      const addComment = (comment) => {
+            setCommentList([comment, ...postCommentList]);
+            setMode('printMode');
+      }; //pour supprimer le post
+
+      const deleteComment = (id) => {
+            setCommentList(postCommentList.filter((Cmnt) => Cmnt.id !== id));
+            setMode('printMode');
+      };
+
       return (
-            <div className="post-Page">
-                  {mode === 'printMode' && (
-                        <div id="post-div">
-                              <h2 id="post-user">
-                                    {/* postId: {post.id}, */}
-                                    {post.user.username}
-                              </h2>
-                              <h2 id="title"> {post.titre} </h2>
-                              <p id="content"> {post.content} </p>
-                              {post.attachement && (
-                                    <img
-                                          id="postImg"
-                                          src={post.attachement}
-                                          alt={post.attachement}
-                                    />
-                              )}
-                              {(user.userId === post.userId ||
-                                    user.isAdmin) && (
-                                    <div>
-                                          <button
-                                                id="supprimer"
-                                                type="button"
-                                                onClick={delPost}
-                                          >
-                                                supprimer
-                                          </button>
-                                          <button
-                                                id="modifier"
-                                                type="button"
-                                                onClick={activeEdit}
-                                          >
-                                                modifier
-                                          </button>
-                                    </div>
-                              )}
-                        </div>
-                  )}
-                  {mode === 'editMode' && (
-                        <div id="post-div">
-                              <h2 id="post-user">
-                                    {/* postId: {post.id}, */}
-                                    {post.user.username}
-                              </h2>
-                              <h2 id="title">
-                                    Titre:
-                                    <input
-                                          id="post-titre-edit"
-                                          type="text"
-                                          defaultValue={post.titre} /// il faut ajouter un onChange
-                                          required
-                                    />
-                              </h2>
-                              <p id="content">
-                                    Contenu:
-                                    <input
-                                          id="post-content-edit"
-                                          type="text"
-                                          defaultValue={post.content}
-                                          required
-                                    />
-                              </p>
-                              <img id="postImg" src={preview} alt="" />
-                              <div>
-                                    <button type="button" onClick={delPost}>
-                                          supprimer
-                                    </button>
-                                    <button onClick={activePrint}>
-                                          Annuler
-                                    </button>
-
-                                    <input
-                                          accept="image/*"
-                                          id="icon-button-file"
-                                          type="file"
-                                          onChange={changeFile}
-                                          style={{ display: 'none' }}
-                                    />
-                                    <label htmlFor="icon-button-file">
-                                          <IconButton
-                                                color="primary"
-                                                aria-label="upload picture"
-                                                component="span"
-                                          >
-                                                <PhotoCamera />
-                                          </IconButton>
-                                    </label>
-
-                                    <button type="button" onClick={editPost}>
-                                          Sauvegarder
-                                    </button>
+            <div>
+                  <div className="post-Page">
+                        {mode === 'printMode' && (
+                              <div id="post-div">
+                                    <h2 id="post-user">
+                                          {/* postId: {post.id}, */}
+                                          {post.user.username}
+                                    </h2>
+                                    <h2 id="title"> {post.titre} </h2>
+                                    <p id="content"> {post.content} </p>
+                                    {post.attachement && (
+                                          <img
+                                                id="postImg"
+                                                src={post.attachement}
+                                                alt=""
+                                          />
+                                    )}
+                                    {(user.userId === post.userId ||
+                                          user.isAdmin) && (
+                                          <div className="btn-suppmodif">
+                                                <button
+                                                      id="supprimer"
+                                                      type="button"
+                                                      onClick={delPost}
+                                                >
+                                                      supprimer
+                                                </button>
+                                                <button
+                                                      id="modifier"
+                                                      type="button"
+                                                      onClick={activeEdit}
+                                                >
+                                                      modifier
+                                                </button>
+                                                {/* <label htmlFor="icon-delete">
+                                                      <IconButton
+                                                            color="primary"
+                                                            aria-label="delete post"
+                                                            component="span"
+                                                            id="supprimer"
+                                                            onClick={delPost}
+                                                      >
+                                                            <PhotoDelete />
+                                                      </IconButton>
+                                                </label>
+                                                <label htmlFor="icon-undo">
+                                                      <IconButton
+                                                            color="primary"
+                                                            aria-label="undo update"
+                                                            component="span"
+                                                            id="modifier"
+                                                            onClick={activeEdit}
+                                                      >
+                                                            <PhotoEdit />
+                                                      </IconButton>
+                                                </label> */}
+                                          </div>
+                                    )}
                               </div>
-                        </div>
-                  )}
+                        )}
+                        {mode === 'editMode' && (
+                              <div id="post-div">
+                                    <h2 id="post-user">
+                                          {/* postId: {post.id}, */}
+                                          {post.user.username}
+                                    </h2>
+                                    <h2 id="title1">
+                                          Titre:
+                                          <input
+                                                id="post-titre-edit"
+                                                type="text"
+                                                defaultValue={post.titre} /// il faut ajouter un onChange
+                                                required
+                                          />
+                                    </h2>
+                                    <p id="content1">
+                                          Contenu:
+                                          <input
+                                                id="post-content-edit"
+                                                type="text"
+                                                defaultValue={post.content}
+                                                required
+                                          />
+                                    </p>
+                                    <img id="postImg" src={preview} alt="" />
+                                    <div>
+                                          <label htmlFor="icon-delete">
+                                                <IconButton
+                                                      color="primary"
+                                                      aria-label="delete post"
+                                                      component="span"
+                                                      onClick={delPost}
+                                                >
+                                                      <PhotoDelete />
+                                                </IconButton>
+                                          </label>
+                                          <label htmlFor="icon-undo">
+                                                <IconButton
+                                                      color="primary"
+                                                      aria-label="undo update"
+                                                      component="span"
+                                                      onClick={activePrint}
+                                                >
+                                                      <PhotoUndo />
+                                                </IconButton>
+                                          </label>
+
+                                          <input
+                                                accept="image/*"
+                                                id="icon-button-file"
+                                                type="file"
+                                                onChange={changeFile}
+                                                style={{ display: 'none' }}
+                                          />
+                                          <label htmlFor="icon-button-file">
+                                                <IconButton
+                                                      color="primary"
+                                                      aria-label="upload picture"
+                                                      component="span"
+                                                >
+                                                      <PhotoCamera />
+                                                </IconButton>
+                                          </label>
+                                          <label htmlFor="icon-apply">
+                                                <IconButton
+                                                      color="primary"
+                                                      aria-label="apply edits"
+                                                      component="span"
+                                                      onClick={editPost}
+                                                >
+                                                      <PhotoApply />
+                                                </IconButton>
+                                          </label>
+                                    </div>
+                              </div>
+                        )}
+                  </div>
+                  <ShowAllComment
+                        commentData={postCommentList}
+                        key={`AllCommentFor-${post.id}`}
+                        postid={post.id}
+                        addComment={addComment}
+                        deleteComment={deleteComment}
+                  />
             </div>
       );
       // };

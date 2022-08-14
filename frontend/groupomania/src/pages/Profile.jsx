@@ -1,9 +1,11 @@
 import React from 'react';
 import User from '../components/User';
+import Logo from '../components/Logo';
 
-const Profile = () => {
+const Profile = (props) => {
       return (
-            <div>
+            <div className="container-user">
+                  <Logo state={props.state} setState={props.setState} />
                   <User />
             </div>
       );

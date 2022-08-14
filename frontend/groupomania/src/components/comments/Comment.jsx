@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoDelete from '@material-ui/icons/Delete';
 
 const Comment = ({ comment, deleteComment }) => {
-      useEffect(() => {}, []);
+      const [username, setUserName] = useState('Undef');
+      const [currentUser, setUser] = useState({});
+      useEffect(() => {
+            let usr = JSON.parse(localStorage.getItem('user'))
+            setUser(usr);
+            if (comment.user)
+                  setUserName(comment.user.username);
+            else 
+                  setUserName(usr.username);
+            
+      }, [comment]);
+
       //pour supprimer le commentaire
       const deleteCmnt = (e) => {
             e.preventDefault();
@@ -15,9 +28,6 @@ const Comment = ({ comment, deleteComment }) => {
                   .then((result) => {
                         if (result.status === 200 || result.status === 201) {
                               deleteComment(comment.id);
-                              console.log(
-                                    'commentaire a été supprimé avec succes'
-                              );
                         }
                   })
                   .catch((error) => {
@@ -26,18 +36,27 @@ const Comment = ({ comment, deleteComment }) => {
       };
 
       return (
-            <div>
-                  <div className="cmnt">
-                        <p className="user-cmnt">
-                              {comment.user.username}: <br></br>
-                        </p>
+            <div className="cmnt">
+                  <h1 className="user-cmnt">
+                  {username}:
+                  </h1>
 
-                        <p className="cmnt-content">{comment.content}</p>
-                  </div>{' '}
-                  <button type="button" id="sup-cmnt" onClick={deleteCmnt}>
-                        {' '}
-                        supprimer{' '}
-                  </button>{' '}
+                  <p className="cmnt-content">{comment.content}</p>
+                  {(currentUser.userId === comment.userId ||
+                        currentUser.isAdmin) && (
+                              
+                                    <label htmlFor="icon-delete">
+                                          <IconButton
+                                                color="primary"
+                                                aria-label="upload picture"
+                                                component="span"
+                                                onClick={deleteCmnt}>
+                                                <PhotoDelete />
+                                          </IconButton>
+                                    </label>
+                              
+                        )}
+
             </div>
       );
 };

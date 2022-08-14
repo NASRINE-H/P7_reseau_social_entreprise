@@ -4,67 +4,125 @@
 body {
     /* font-family: 'Lato', sans-serif; */
     font-family: 'Figtree', sans-serif;
-    margin-bottom: 100px;
     width: 100%;
-}
-
-.home {
-    width: 50%;
-    text-align: center;
-    margin: 0 auto;
-}
-
-.logo {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 70px;
-    margin-left: 10px;
-}
-
-.group-logo {
-    width: 150px;
-    left: 100px;
-}
-
-.LogoButton1 {
-    margin-left: 15px;
-    width: 100px;
-    height: 40px;
-    font-size: 15px;
-    background-color: #FFD7D7;
-    border: solid #FFD7D7;
-    margin-top: 20px;
-    left: 100px;
-    border-radius: 20px;
-}
-
-.LogoButton2 {
-    margin-left: 15px;
-    width: 100px;
-    height: 40px;
-    font-size: 15px;
-    background-color: #FFD7D7;
-    border: solid #FFD7D7;
-    margin-top: 20px;
-    left: 100px;
-    border-radius: 20px;
 }
 
 .App {
     text-align: center;
-    /*font-family: 'Lato', sans-serif;*/
+    font-family: 'Figtree', sans-serif;
+    ;
 }
 
-.App-logo {
+.home {
+    width: 50%;
+    margin: auto;
+    margin-bottom: 10%;
+}
+
+.content-login {
+    width: 50%;
+}
+
+.logo {
+    width: 100%;
+    margin-top: 5%;
+}
+
+.group-logo {
+    width: 50%;
+}
+
+.div-btn {
+    width: 100%;
+}
+
+.btn-loginsignup {
+    width: 20%;
+    height: 50px;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    font-size: 18px;
+    background-color: #FFD7D7;
+    border: solid #FFD7D7;
+    border-radius: 20px;
+}
+
+.btn-loginsignup1 {
+    width: 20%;
+    height: 50px;
+    background-color: #FFD7D7;
+    border: solid #FFD7D7;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.label-email,
+.label-password,
+.label-username {
+    font-size: 20px;
+}
+
+#login-email,
+#login-pass {
+    width: 100%;
+    padding-left: 2%;
+    font-size: 20px;
+}
+
+.Loginform,
+.Signupform,
+.profile-form {
+    border: 2px solid #FFD7D7;
+    background-color: #FFD7D7;
+    width: 100%;
+}
+
+
+/* -----------------page home ------------------*/
+
+.LogoButton1 {
+    width: 30%;
+    height: 60px;
+    margin-left: 5%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-size: 19px;
+    background-color: #FFD7D7;
+    border: solid #FFD7D7;
+    border-radius: 20px;
+}
+
+.allPost {
+    width: 100%;
+}
+
+.input-post {
+    width: 100%;
+}
+
+#label-post {
+    font-size: 30px;
+}
+
+#post-titre,
+#post-content {
+    font-size: 20px;
+    padding-left: 3%;
+    height: 50px;
+}
+
+
+/*.App-logo {
     height: 40vmin;
     pointer-events: none;
-}
+}*/
 
-.navigation {
+
+/*.navigation {
     font-size: 30px;
     flex-wrap: wrap;
     color: aquamarine;
-}
+}*/
 
 form input {
     width: 100%;
@@ -88,68 +146,220 @@ form input {
 
 #fileButton {
     justify-content: center;
+    margin-top: 5%;
     border: 2px solid #FFD7D7;
     border-radius: 20px;
-    width: 100px;
+    width: 20%;
     height: 50px;
+    font-size: 20px;
     background-color: #FFD7D7;
-    margin-bottom: 10px;
 }
 
-.inputfile+label {
+.btn-poster {
+    margin-top: 5%;
+    border: 2px solid #FFD7D7;
+    border-radius: 20px;
+    width: 20%;
+    height: 40px;
+    margin-bottom: 5%;
+    font-size: 20px;
+    background-color: #FFD7D7;
+}
+
+.post-Page {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#post-user {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 25px;
+    font-style: italic;
+    background-color: #FFD7D7;
+    border: 2px solid #FFD7D7;
+}
+
+#title {
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+#content {
+    font-size: 25px;
+}
+
+.btn-suppmodif {
+    width: 100%;
+    margin-top: 5%;
+}
+
+#supprimer,
+#modifier {
+    background-color: #FFD7D7;
+    border: #FFD7D7;
+    width: 20%;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 20px;
+    margin-left: 3%;
+}
+
+.creat-comment {
+    width: 100%;
+}
+
+#label-cmnt {
+    width: 100%;
+    height: 50px;
+    margin-top: 5%;
+}
+
+#btn-comment {
+    background-color: #FFD7D7;
+    border: #FFD7D7;
+    width: 20%;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 20px;
+    margin-top: 3%;
+}
+
+.cmnt {
+    width: 100%;
+    border: 2px solid black;
+    /*padding-left: 10px;*/
+    border-radius: 20px;
+    background-color: whitesmoke;
+    margin-top: 3%;
+    padding-left: 5%;
+}
+
+.user-cmnt {
+    display: flex;
+    justify-content: flex-start;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.cmnt-content {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 25px;
+}
+
+#post-titre-edit,
+#post-content-edit {
+    width: 50%;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding-left: 5%;
+}
+
+#title1,
+#content1 {
+    font-size: 20px;
+}
+
+#postImg {
+    justify-content: center;
+    width: 40%;
+}
+
+
+/*-------------- page profile ----------------*/
+
+.container-user {
+    width: 50%;
+}
+
+.user-profil {
+    width: 100%;
+}
+
+.profil-form {
+    width: 100%;
+}
+
+.input-container {
+    width: 100%;
+    font-size: 20px;
+}
+
+#signup-username,
+#signup-email {
+    width: 100%;
+    height: 50px;
+    font-size: 25px;
+    padding-left: 3%;
+}
+
+.btn-supp-home {
+    width: 100%;
+}
+
+
+/*.inputfile+label {
     font-size: 1.25em;
     font-weight: 700;
     color: black;
     background-color: #FFD7D7;
     display: inline-block;
     cursor: pointer;
-}
+}*/
 
-.inputfile:focus+label,
+
+/*.inputfile:focus+label,
 .inputfile+label:hover {
     background-color: red;
-}
+}*/
 
-.inputfile:focus+label {
+
+/*.inputfile:focus+label {
     outline: 1px dotted #000;
     outline: -webkit-focus-ring-color auto 5px;
-}
+}*/
 
-.js .inputfile {
+
+/*.js .inputfile {
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
     overflow: hidden;
     position: absolute;
     z-index: -1;
-}
+}*/
 
-.no-js .inputfile+label {
+
+/*.no-js .inputfile+label {
     display: none;
-}
+}*/
 
-.inputfile:focus+label,
+
+/*.inputfile:focus+label,
 .inputfile.has-focus+label {
     outline: 1px dotted #000;
     outline: -webkit-focus-ring-color auto 5px;
-}
+}*/
 
-form [type="submit"] {
+
+/*form [type="submit"] {
     font-size: medium;
     box-sizing: border-box;
-    margin-top: 20px;
-    margin-bottom: 20px;
     background-color: #FFD7D7;
     box-shadow: 2px 2px 2px #FFD7D7;
     color: black;
-}
+}*/
 
 .content,
 #fileButtonDiv {
     display: flex;
-    width: 100%;
     justify-content: center;
     text-align: center;
+    width: 100%;
 }
 
 form label {
@@ -175,83 +385,20 @@ form label {
     color: white;
 }*/
 
-.App-link {
-    color: #61dafb;
-}
 
-@keyframes App-logo-spin {
+/*.App-link {
+    color: #61dafb;
+}*/
+
+
+/*@keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
     }
     to {
         transform: rotate(360deg);
     }
-}
-
-#title {
-    font-weight: bolder;
-}
-
-#content {
-    font-size: 25px;
-}
-
-#postImg {
-    justify-content: center;
-    width: 200px;
-}
-
-#label-cmnt {
-    width: 100%;
-}
-
-.post-Page {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 800px;
-    border: 2px solid black;
-    margin-top: 10px;
-}
-
-#supprimer,
-#modifier {
-    margin-top: 20px;
-    background-color: #FFD7D7;
-    left: 100px;
-    border: #FFD7D7;
-    width: 100px;
-    height: 40px;
-    border-radius: 20px;
-}
-
-#title,
-#content {
-    display: flex;
-    justify-content: center;
-}
-
-#post-div {
-    width: 100%;
-    justify-content: center;
-    padding-top: 0px;
-    margin-bottom: 20px;
-}
-
-#post-user {
-    display: flex;
-    justify-content: center;
-    width: 99%;
-    font-size: 25px;
-    margin-bottom: 50px;
-    background-color: #FFD7D7;
-    border: 2px solid #FFD7D7;
-    padding-top: 0px;
-}
-
-#label-post {
-    font-size: 25px;
-}
+}*/
 
 
 /* button {
@@ -273,145 +420,171 @@ form label {
     padding: 0 5px 0 5px;
 }*/
 
-.user-cmnt {
-    display: flex;
-    justify-content: flex-start;
-    font-weight: bolder;
-    font-size: 25px;
-}
 
-.cmnt {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 2px solid black;
-    /*padding-left: 10px;*/
-    border-radius: 20px;
-    background-color: whitesmoke
-}
+/*#post-div {
+    width: 100%;
+    justify-content: center;
+    padding-top: 0px;
+}*/
 
-#sup-cmnt {
+
+/*#sup-cmnt {
     width: 100px;
     height: 40px;
     font-size: 15px;
     background-color: #FFD7D7;
     border: solid #FFD7D7;
     border-radius: 20px;
-}
-
-.cmnt-content {
-    display: flex;
-    justify-content: flex-start;
-    padding-bottom: 5px;
-    /*padding-left: 15px;*/
-    font-size: 25px;
-}
+}*/
 
 h1 {
     font-size: 20px;
     font-weight: 50;
 }
 
-#comment-content {
-    width: 20px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-#btn-comment {
-    align-items: center;
-    width: 100px;
-    height: 30px;
-    font-size: 15px;
-    background-color: #FFD7D7;
-    border: solid #FFD7D7;
-    border-radius: 20px;
-}
-
-.Loginform,
-.Signupform,
-.profile-form {
-    border: 2px solid #FFD7D7;
-    background-color: #FFD7D7;
-    width: 100%;
-}
-
-.input-container {
-    font-weight: 50;
-    font-size: 20px;
-    width: 100%;
-}
-
-.Button-home {
-    margin-left: 5px;
-}
-
-.btn-loginsignup {
-    font-size: 15px;
-    width: 100px;
-    height: 40px;
-    margin-top: 10px;
-    background-color: #FFD7D7;
-    border: solid #FFD7D7;
-    padding-left: 5px;
-    border-radius: 20px;
-}
-
-.btn-loginsignup1 {
-    font-size: 15px;
-    width: 100px;
-    height: 40px;
-    margin-top: 10px;
-    background-color: #FFD7D7;
-    border: solid #FFD7D7;
-    padding-left: 5px;
-    border-radius: 20px;
-}
-
-.input-post {
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-.input-comment {
-    margin-top: 20px;
-}
-
-#login-email,
-#login-pass {
-    padding-left: 20px;
-}
-
-@media screen and (max-width:980px) {
+@media screen and (max-width:1150px) {
     .home {
-        width: 45%;
-    }
-    .logo {
-        width: 35%;
-        margin-left: 80px;
+        width: 80%;
     }
     .group-logo {
-        width: 100px;
+        width: 30%;
+        margin: auto;
+    }
+    .div-btn {
+        width: 100%;
     }
     .LogoButton1 {
-        margin-left: 15px;
-        width: 75px;
+        width: 20%;
+        height: 50px;
+        font-size: 19px;
+    }
+    #fileButtonDiv {
+        width: 100%;
+    }
+    #fileButton {
+        width: 15%;
+        height: 50px;
+        font-size: 19px;
+    }
+    .btn-poster {
+        width: 15%;
+        font-size: 19px;
+    }
+    #label-post {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width:981px) {
+    .content {
+        width: 100%;
+    }
+    .content-login {
+        width: 60%;
+    }
+    .logo {
+        width: 40%;
+        margin: auto;
+        margin-top: 10%;
+    }
+    .group-logo {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    h1 {
+        font-size: 17px;
+    }
+    .btn-loginsignup,
+    .btn-loginsignup1 {
+        width: 27%;
+        height: 40px;
+        font-size: 15px;
+    }
+    .label-email,
+    .label-password,
+    .label-username {
+        font-size: 17px;
+    }
+    #login-email,
+    #login-pass {
+        width: 100%;
+        font-size: 17px;
+    }
+    /*---------- page home------------------- */
+    .home {
+        width: 85%;
+    }
+    .group-logo {
+        width: 60%;
+        margin: auto;
+    }
+    .div-btn {
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    .LogoButton1 {
+        width: 45%;
+        height: 55px;
+        font-size: 12.5px;
+    }
+    #label-post {
+        font-size: 18px;
+    }
+    #btn-comment {
+        width: 23%;
+        height: 50px;
+        font-size: 17px;
+    }
+    #fileButtonDiv {
+        width: 100%;
+    }
+    #fileButton {
+        width: 17%;
+        height: 50px;
+        font-size: 18px;
+    }
+    .btn-poster {
+        width: 17%;
+        font-size: 18px;
+    }
+    #post-user {
+        font-size: 18px;
+    }
+    #title,
+    #content {
+        font-size: 18px;
+    }
+    .btn-suppmodif {
+        width: 100%;
+    }
+    #supprimer,
+    #modifier {
+        width: 20%;
+        font-size: 17px;
+    }
+    .user-cmnt,
+    .cmnt-content {
+        font-size: 20px;
+    }
+    .cmnt {
+        width: 100%;
+    }
+    /* .LogoButton1 {
+        width: 40%;
         height: 30px;
-        font-size: 10px;
+        font-size: 8px;
     }
     .LogoButton2 {
-        margin-left: 15px;
-        width: 100px;
+        width: 40%;
         height: 30px;
-        padding-left: 20px;
-        padding-right: 20px;
-        font-size: 10px;
-    }
-    .post-Page {
+        font-size: 8px;
+    }*/
+    /* .post-Page {
         display: flex;
         justify-content: center;
         width: 80%;
         height: 400px;
-        margin-top: 10px;
     }
     #supprimer,
     #modifier {
@@ -420,22 +593,19 @@ h1 {
         font-size: 10px;
     }
     .input-post {
-        margin-bottom: 10px;
         width: 80%;
     }
     #fileButton {
+        justify-content: center;
         width: 70px;
         height: 30px;
-        margin-bottom: 5px;
         font-size: 10px;
-        margin-right: 80px;
     }
     #post-user {
         display: flex;
         justify-content: center;
         width: 98.5%;
         font-size: 18px;
-        margin-bottom: 50px;
     }
     #label-post {
         font-size: 15px;
@@ -454,7 +624,6 @@ h1 {
         width: 65px;
         height: 30px;
         font-size: 10px;
-        margin-right: 50px;
     }
     .cmnt {
         width: 80%;
@@ -465,28 +634,173 @@ h1 {
     .cmnt-content {
         font-size: 20px;
         width: 100%;
-        /* display: flex;
-        flex-wrap: wrap;*/
+         display: flex;
+        flex-wrap: wrap;
     }
     #sup-cmnt {
         width: 100px;
         height: 30px;
         font-size: 15px;
-        margin-right: 50px;
+    } */
+}
+
+@media screen and (max-width:631px) {
+    .content {
+        width: 100%;
+    }
+    .content-login {
+        width: 75%;
+    }
+    h1 {
+        font-size: 15px;
+    }
+    .btn-loginsignup,
+    .btn-loginsignup1 {
+        width: 30%;
+        height: 40px;
+        font-size: 13px;
+    }
+    .Loginform {
+        width: 100%;
+    }
+    .input-container {
+        width: 100%;
+    }
+    .label-email,
+    .label-password,
+    .label-username {
+        font-size: 15px;
+    }
+    #login-email,
+    #login-pass {
+        width: 100%;
+        font-size: 15px;
+    }
+    #btn-comment {
+        width: 30%;
+        height: 50px;
+        font-size: 15px;
+    }
+    /* ------------page home --------------*/
+    .home {
+        width: 90%;
+    }
+    .content {
+        width: 100%;
+    }
+    .div-btn {
+        width: 100%;
+    }
+    .group-logo {
+        width: 80%;
+    }
+    .div-btn {
+        width: 100%;
+    }
+    .LogoButton1 {
+        width: 50%;
+        height: 50px;
+        font-size: 13px;
+    }
+    #fileButton {
+        width: 20%;
+        height: 40px;
+        font-size: 15px;
+    }
+    .btn-poster {
+        font-size: 15px;
+        width: 20%;
+    }
+    .cmnt {
+        width: 97%;
     }
 }
 
-@media screen and (max-width:550px) {
-    .Loginform {
+@media screen and (max-width:500px) {
+    .content {
+        width: 100%;
+    }
+    .content-login {
+        width: 90%;
+    }
+    .logo {
+        width: 40%;
+        margin-top: 10%;
+    }
+    .group-logo {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    h1 {
+        font-size: 15px;
+    }
+    .btn-loginsignup,
+    .btn-loginsignup1 {
+        width: 40%;
+        height: 35px;
+        font-size: 13px;
+    }
+    .label-email,
+    .label-password,
+    .label-username {
+        font-size: 15px;
+    }
+    #login-email,
+    #login-pass {
+        width: 100%;
+        font-size: 15px;
+    }
+    /* --------------page home -----------------------------*/
+    .home {
+        width: 95%;
+    }
+    .group-logo {
+        width: 80%;
+    }
+    .div-btn {
+        width: 100%;
+    }
+    .LogoButton1 {
+        width: 60%;
+        height: 50px;
+        font-size: 13px;
+    }
+    .btn-poster {
+        font-size: 13px;
+        width: 18%;
+    }
+    #fileButton {
+        width: 20%;
+        height: 40px;
+        font-size: 13px;
+    }
+    #label-post {
+        font-size: 16px;
+    }
+    #supprimer,
+    #modifier {
+        width: 20%;
+        font-size: 15px;
+    }
+    #btn-comment {
+        width: 23%;
+        height: 50px;
+        font-size: 13px;
+    }
+    .cmnt {
+        width: 95%;
+    }
+    /* .Loginform {
         width: 80%;
     }
     h1 {
         font-size: 15px;
-        margin-right: 100px;
     }
     #login-email {
         width: 100%;
     }
+    .content {}
     .home {
         width: 40%;
     }
@@ -494,7 +808,18 @@ h1 {
         width: 15%;
     }
     .group-logo {
-        width: 75px;
+        width: 120px;
+    }
+    .btn-loginsignup {
+        display: flex;
+        justify-content: center;
+        font-size: 11px;
+    }
+    .btn-loginsignup1 {
+        display: flex;
+        justify-content: center;
+        font-size: 11px;
+        margin-top: 10px;
     }
     .LogoButton1 {
         margin-left: 15px;
@@ -523,7 +848,6 @@ h1 {
         height: 30px;
         margin-bottom: 5px;
         font-size: 10px;
-        margin-right: 20px;
     }
     #post-user {
         display: flex;
@@ -549,7 +873,6 @@ h1 {
         width: 70px;
         height: 30px;
         font-size: 10px;
-        margin-left: 50px;
     }
     .cmnt {
         width: 100%;
@@ -561,15 +884,105 @@ h1 {
         font-size: 10px;
         width: 100%;
     }
-    /*p .cmnt-content {
+    p .cmnt-content {
         white-space: normal
-    }*/
+    }
     #sup-cmnt {
         width: 80px;
         height: 30px;
         font-size: 10px;
-        margin-right: 20px;
-    }
+    }*/
 }
 
-@media screen and (max-width:550px) {}
+@media screen and (max-width:375px) {
+    .content {
+        width: 100%;
+    }
+    .content-login {
+        width: 95%;
+    }
+    .logo {
+        width: 100%;
+        margin: auto;
+        margin-top: 10%;
+    }
+    .group-logo {
+        width: 50%;
+    }
+    h1 {
+        font-size: 13px;
+    }
+    .btn-loginsignup,
+    .btn-loginsignup1 {
+        width: 50%;
+        height: 40px;
+        font-size: 11px;
+    }
+    .Loginform {
+        width: 100%;
+    }
+    .input-container {
+        width: 100%;
+    }
+    .label-email,
+    .label-password,
+    .label-username {
+        font-size: 13px;
+    }
+    #login-email,
+    #login-pass {
+        width: 100%;
+        font-size: 13px;
+    }
+    /*---------------- page home ------------------*/
+    .home {
+        width: 97%;
+    }
+    .group-logo {
+        width: 60%;
+    }
+    .div-btn {
+        width: 100%;
+    }
+    .LogoButton1 {
+        width: 40%;
+        height: 50px;
+        font-size: 11px;
+    }
+    .btn-poster {
+        font-size: 11px;
+        width: 30%;
+    }
+    #fileButton {
+        width: 30%;
+        height: 40px;
+        font-size: 11px;
+    }
+    #label-post {
+        font-size: 14px;
+    }
+    #post-user {
+        font-size: 14px;
+    }
+    #title,
+    #content {
+        font-size: 14px;
+    }
+    #supprimer,
+    #modifier {
+        width: 30%;
+        font-size: 13px;
+    }
+    #btn-comment {
+        width: 30%;
+        height: 50px;
+        font-size: 13px;
+    }
+    .user-cmnt,
+    .cmnt-content {
+        font-size: 14px;
+    }
+    .cmnt {
+        width: 92%;
+    }
+}

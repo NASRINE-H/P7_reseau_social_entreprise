@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import NewComment from './NewComment';
 import Comment from './Comment';
-const ShowAllComment = ({ commentData, postid, addComment }) => {
+const ShowAllComment = ({ commentData, postid, addComment, deleteComment }) => {
       const [commentList, setCommentList] = useState([]);
       useEffect(() => {
             setCommentList(commentData);
       }, [commentData]);
 
-      const deleteComment = (id) => {
+      const addNewComment = (cmnt) => {
+            addComment(cmnt);
+      };
+      const delComment = (id) => {
             setCommentList(commentList.filter((Cmnt) => Cmnt.id !== id));
+            deleteComment(id);
       };
 
-      const addNewComment = (cmnt) => {
-            console.log(commentData);
-            setCommentList(commentData, ...cmnt);
-            console.log(commentData);
-            addComment(cmnt);
-            console.log(commentData);
-      };
       return (
-            <div>
+            <div className="div-comment">
                   <NewComment
                         key={`NewComment-${postid}`}
                         postid={postid}
                         addComment={addNewComment}
-                  />{' '}
-                  {commentList?.map((comment) => {
+                  />
+                  {commentData?.map((comment) => {
                         if (comment.id)
                               return (
-                                    <div key={`commentdiv-${comment.id}`}>
+                                    <div
+                                          className="div-comment"
+                                          key={`commentdiv-${comment.id}`}
+                                    >
                                           <Comment
                                                 key={`Comment-${comment.id}`}
                                                 comment={comment}
-                                                deleteComment={deleteComment}
-                                          />{' '}
+                                                deleteComment={delComment}
+                                          />
                                     </div>
                               );
                         else return null;

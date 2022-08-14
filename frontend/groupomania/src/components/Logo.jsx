@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Logo = (State) => {
+const Logo = (props) => {
       let navigate = useNavigate();
-      const [currentState, setcurrentState] = useState(State);
       const logout = () => {
+            props.setState('Off');
             localStorage.removeItem('user');
-            activeState();
             navigate('/', {
                   replace: true,
             });
       };
-      const NavProfile = () => {
-            navigate('/Profile', {
-                  replace: true,
-            });
-      };
-      const activeState = () => {
+
+      const navProfile = () => {
             if (localStorage.getItem('user')) {
-                  setcurrentState('On');
-                  NavProfile();
-            } else setcurrentState('Off');
+                  navigate('/Profile', {
+                        replace: true,
+                  });
+            }
       };
       return (
             <div className="logo">
@@ -29,24 +25,24 @@ const Logo = (State) => {
                         alt="logo groupomania"
                         className="group-logo"
                   />
-                  <button
-                        className="LogoButton1"
-                        name="logout"
-                        type="button"
-                        onClick={logout}
-                        disabled={currentState === 'Off'}
-                  >
-                        Se déconnecter{' '}
-                  </button>{' '}
-                  <button
-                        className="LogoButton2"
-                        name="profil"
-                        type="button"
-                        onClick={activeState}
-                        disabled={currentState === 'Off'}
-                  >
-                        Profile{' '}
-                  </button>{' '}
+                  {props.state === 'On' && (
+                        <div className="div-btn">
+                              <button
+                                    className="LogoButton1"
+                                    name="logout"
+                                    onClick={logout}
+                              >
+                                    Se déconnecter
+                              </button>
+                              <button
+                                    className="LogoButton1"
+                                    name="profil"
+                                    onClick={navProfile}
+                              >
+                                    Profile
+                              </button>
+                        </div>
+                  )}
             </div>
       );
 };

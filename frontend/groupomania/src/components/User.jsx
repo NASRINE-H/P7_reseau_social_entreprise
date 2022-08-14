@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Logo from './Logo';
 
 const User = () => {
       let user = JSON.parse(localStorage.getItem('user'));
@@ -13,7 +12,6 @@ const User = () => {
                   throw new Error('Something went wrong');
             })
             .then((data) => {
-                  console.log('request succes, Response Data: ', data);
                   document.querySelector('#signup-username').value =
                         data.username;
                   document.querySelector('#signup-email').value = data.email;
@@ -25,15 +23,6 @@ const User = () => {
       //
 
       let navigate = useNavigate();
-      const [mode, setMode] = useState('printMode');
-      //permet d'activer le mode modifier
-      // const activeEdit = () => {
-      //       setMode('editMode');
-      // };
-      //permet d'activer le mode afficher du poste
-      // const activePrint = () => {
-      //       setMode('printMode');
-      // };
 
       const logout = (e) => {
             localStorage.removeItem('user');
@@ -59,7 +48,6 @@ const User = () => {
             })
                   .then((response) => {
                         if (response.ok) {
-                              console.log('profile supprimé avec succes');
                               logout();
                               return response.ok;
                         }
@@ -71,130 +59,54 @@ const User = () => {
                   });
       };
 
-      // const editProfile = (e) => {
-      //       e.preventDefault();
-
-      //       let userEdit = {
-      //             email: document.getElementById('signup-email').value,
-      //             password: document.getElementById('signup-pass').value,
-      //             username: document.getElementById('signup-username').value,
-      //       };
-      //       console.log(userEdit);
-
-      //       // Regex
-
-      //       // fetch
-
-      //       // then response OK
-      //       activePrint();
-
-      //       //catch Err
-      // };
-
       return (
-            <div>
-                  <Logo />
-                  <h1> voici votre profile </h1>{' '}
-                  {mode === 'printMode' && (
-                        <div className="profile">
-                              <div className="profile-form">
-                                    <form>
-                                          <div className="input-container">
-                                                <label>
-                                                      {' '}
-                                                      username{' '}
-                                                      <input
-                                                            id="signup-username"
-                                                            type="text"
-                                                            name="uname"
-                                                            required
-                                                      />
-                                                </label>{' '}
-                                          </div>{' '}
-                                          <div className="input-container">
-                                                <label>
-                                                      {' '}
-                                                      email{' '}
-                                                      <input
-                                                            id="signup-email"
-                                                            type="text"
-                                                            name="email"
-                                                            required
-                                                      />
-                                                </label>{' '}
-                                          </div>{' '}
-                                    </form>{' '}
-                              </div>{' '}
-                              {/* <div className="button-container">
-                                                        <button onClick={activeEdit}>
-                                                              modifier
-                                                        </button>
-                                                  </div> */}{' '}
-                              <div className="btn-supp-home">
-                                    <button type="button" onClick={deleteUser}>
-                                          supprimer{' '}
-                                    </button>{' '}
-                                    <button
-                                          className="Button-home"
-                                          name="home"
-                                          type="button"
-                                          onClick={NavHome}
-                                    >
-                                          Home{' '}
-                                    </button>{' '}
-                              </div>{' '}
-                        </div>
-                  )}{' '}
-                  {/* {mode === 'editMode' && (
-                                    <div className="profile">
-                                          <div className="profile-form">
-                                                <form>
-                                                      <div className="input-container">
-                                                            <label> username </label>
-                                                            <input
-                                                                  id="signup-username"
-                                                                  type="text"
-                                                                  name="uname"
-                                                                  required
-                                                            />
-                                                      </div>
-                                                      <div className="input-container">
-                                                            <label> email </label>
-                                                            <input
-                                                                  id="signup-email"
-                                                                  type="text"
-                                                                  name="email"
-                                                                  required
-                                                            />
-                                                      </div>
-                                                      <div className="input-container">
-                                                            <label> Password </label>
-                                                            <input
-                                                                  id="signup-pass"
-                                                                  type="password"
-                                                                  name="pass"
-                                                                  required
-                                                            />
-                                                      </div>
-                                                </form>
-                                          </div>
-                                          <div className="button-container">
-                                                <button onClick={activePrint}>
-                                                      Annuler
-                                                </button>
-                                          </div>
-                                          <div className="button-container">
-                                                <button onClick={editProfile}>
-                                                      Sauvegarder
-                                                </button>
-                                          </div>
-                                          <div>
-                                                <button onClick={deleteUser}>
-                                                      supprimer
-                                                </button>
-                                          </div>
+            <div className="user-profil">
+                  <h1> voici votre profile </h1>
+
+                  <div className="profile">
+                        <div className="profile-form">
+                              <form>
+                                    <div className="input-container">
+                                          <label> username </label>
+                                          <input
+                                                id="signup-username"
+                                                type="text"
+                                                name="uname"
+                                                required
+                                          />
                                     </div>
-                              )} */}{' '}
+                                    <div className="input-container">
+                                          <label> email </label>
+                                          <input
+                                                id="signup-email"
+                                                type="text"
+                                                name="email"
+                                                required
+                                          />
+                                    </div>
+                              </form>
+                        </div>
+                        {/* <div className="button-container">
+                                    <button onClick={activeEdit}>
+                                          modifier
+                                    </button>
+                              </div> */}
+                        <div className="btn-supp-home">
+                              <button
+                                    className="LogoButton1"
+                                    onClick={deleteUser}
+                              >
+                                    supprimer
+                              </button>
+                              <button
+                                    className="LogoButton1"
+                                    name="home"
+                                    onClick={NavHome}
+                              >
+                                    Home
+                              </button>
+                        </div>
+                  </div>
             </div>
       );
 };

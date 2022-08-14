@@ -35,47 +35,54 @@ const NewPost = ({ addPost }) => {
                   content: document.getElementById('post-content').value,
             };
 
-            const body = new FormData();
-            body.append('post', JSON.stringify(post));
-            body.append('image', selectedFile);
+            if (post.titre !== '') {
+                  const body = new FormData();
+                  body.append('post', JSON.stringify(post));
+                  body.append('image', selectedFile);
 
-            const options = {
-                  method: 'POST',
-                  body: body,
-                  headers: {
-                        Authorization:
-                              'bearer ' +
-                              JSON.parse(localStorage.getItem('user')).token,
-                  },
-            };
+                  const options = {
+                        method: 'POST',
+                        body: body,
+                        headers: {
+                              Authorization:
+                                    'bearer ' +
+                                    JSON.parse(localStorage.getItem('user'))
+                                          .token,
+                        },
+                  };
 
-            fetch('http://localhost:3000/api/post', options)
-                  .then((response) => {
-                        if (
-                              response.status === 200 ||
-                              response.status === 201
-                        ) {
-                              //vider le champs
-                              document.querySelector('#post-content').value =
-                                    '';
-                              document.querySelector('#post-titre').value = '';
-                              document.querySelector('#file').value = '';
-                              return response.json();
-                        }
-                        throw new Error(
-                              'Something went wrong:',
-                              response.json()
-                        );
-                  })
-                  .then((data) => {
-                        console.log('request succes, Response:', data);
-                        addPost(data.post);
-                        setSelectedFile(undefined);
-                  })
+                  fetch('http://localhost:3000/api/post', options)
+                        .then((response) => {
+                              if (
+                                    response.status === 200 ||
+                                    response.status === 201
+                              ) {
+                                    //vider le champs
+                                    document.querySelector(
+                                          '#post-content'
+                                    ).value = '';
+                                    document.querySelector(
+                                          '#post-titre'
+                                    ).value = '';
+                                    document.querySelector('#file').value = '';
+                                    return response.json();
+                              }
+                              throw new Error(
+                                    'Something went wrong:',
+                                    response.json()
+                              );
+                        })
+                        .then((data) => {
+                              addPost(data.post);
+                              setSelectedFile(undefined);
+                        })
 
-                  .catch((error) => {
-                        console.log('request failed:', error);
-                  });
+                        .catch((error) => {
+                              console.log('request failed:', error);
+                        });
+            } else {
+                  console.log('contenu vide');
+            }
       };
 
       const clearPreview = (e) => {
@@ -87,7 +94,6 @@ const NewPost = ({ addPost }) => {
                   <form className="form">
                         <div className="input-post">
                               <label id="label-post">
-                                    {' '}
                                     Titre
                                     <input
                                           id="post-titre"
@@ -99,7 +105,6 @@ const NewPost = ({ addPost }) => {
                         </div>
                         <div className="input-post">
                               <label id="label-post">
-                                    {' '}
                                     Content
                                     <input
                                           id="post-content"
@@ -123,6 +128,15 @@ const NewPost = ({ addPost }) => {
                                     />
                               </label>
                         </div>
+                        {!selectedFile && (
+                              <button
+                                    type="button"
+                                    className="btn-poster"
+                                    onClick={CreateNewPost}
+                              >
+                                    poster
+                              </button>
+                        )}
                         {selectedFile && (
                               <div id="post-div">
                                     <h1>Le post va être posté comme ça:</h1>
@@ -151,7 +165,7 @@ const NewPost = ({ addPost }) => {
                                                 <div>
                                                       <button
                                                             type="button"
-                                                            className="btn-create"
+                                                            className="LogoButton1"
                                                             onClick={
                                                                   clearPreview
                                                             }
@@ -160,7 +174,7 @@ const NewPost = ({ addPost }) => {
                                                       </button>
                                                       <button
                                                             type="button"
-                                                            className="btn-create"
+                                                            className="LogoButton1"
                                                             onClick={
                                                                   CreateNewPost
                                                             }

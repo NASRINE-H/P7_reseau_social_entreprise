@@ -43,9 +43,7 @@ exports.createComment = (req, res, next) => {
             Comment.findOne({
                     where: {
                         id: newComment.id
-                    },
-                    include: User,
-                    attributes: ["username"]
+                    }
                 })
                 .then((comment) => {
                     res.status(201).json({
