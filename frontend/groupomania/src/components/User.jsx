@@ -26,7 +26,7 @@ const User = () => {
 
       const logout = (e) => {
             localStorage.removeItem('user');
-            navigate('/', {
+            navigate('/signup', {
                   replace: true,
             });
       };

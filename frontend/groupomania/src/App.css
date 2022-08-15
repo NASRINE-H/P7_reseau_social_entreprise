@@ -234,20 +234,15 @@ form input {
     border-radius: 20px;
     background-color: whitesmoke;
     margin-top: 3%;
-    padding-left: 5%;
 }
 
-.user-cmnt {
+.user-cmnt,
+.cmnt-content {
     display: flex;
     justify-content: flex-start;
     font-weight: bolder;
     font-size: 25px;
-}
-
-.cmnt-content {
-    display: flex;
-    justify-content: flex-start;
-    font-size: 25px;
+    padding-left: 5%;
 }
 
 #post-titre-edit,
@@ -442,7 +437,10 @@ h1 {
     font-weight: 50;
 }
 
-@media screen and (max-width:1150px) {
+@media screen and (max-width:1151px) {
+    .content {
+        width: 100%;
+    }
     .home {
         width: 80%;
     }
@@ -473,6 +471,10 @@ h1 {
     #label-post {
         font-size: 25px;
     }
+    /*--------------page profile-------------*/
+    .container-user {
+        width: 70%;
+    }
 }
 
 @media screen and (max-width:981px) {
@@ -483,7 +485,7 @@ h1 {
         width: 60%;
     }
     .logo {
-        width: 40%;
+        width: 30%;
         margin: auto;
         margin-top: 10%;
     }
@@ -491,6 +493,14 @@ h1 {
         display: flex;
         justify-content: center;
         width: 100%;
+    }
+    .div-btn {
+        width: 100%;
+    }
+    .LogoButton1 {
+        width: 15%;
+        height: 50px;
+        font-size: 17px;
     }
     h1 {
         font-size: 17px;
@@ -513,7 +523,7 @@ h1 {
     }
     /*---------- page home------------------- */
     .home {
-        width: 85%;
+        width: 87%;
     }
     .group-logo {
         width: 60%;
@@ -524,9 +534,9 @@ h1 {
         margin-bottom: 5%;
     }
     .LogoButton1 {
-        width: 45%;
+        width: 60%;
         height: 55px;
-        font-size: 12.5px;
+        font-size: 13px;
     }
     #label-post {
         font-size: 18px;
@@ -570,78 +580,14 @@ h1 {
     .cmnt {
         width: 100%;
     }
-    /* .LogoButton1 {
-        width: 40%;
-        height: 30px;
-        font-size: 8px;
+    /*----------page profile----------*/
+    .container-user {
+        width: 75%;
     }
-    .LogoButton2 {
-        width: 40%;
-        height: 30px;
-        font-size: 8px;
-    }*/
-    /* .post-Page {
-        display: flex;
-        justify-content: center;
-        width: 80%;
-        height: 400px;
+    .btn-supp-home {
+        width: 30%;
+        margin: auto;
     }
-    #supprimer,
-    #modifier {
-        width: 65px;
-        height: 30px;
-        font-size: 10px;
-    }
-    .input-post {
-        width: 80%;
-    }
-    #fileButton {
-        justify-content: center;
-        width: 70px;
-        height: 30px;
-        font-size: 10px;
-    }
-    #post-user {
-        display: flex;
-        justify-content: center;
-        width: 98.5%;
-        font-size: 18px;
-    }
-    #label-post {
-        font-size: 15px;
-    }
-    #title,
-    #content {
-        font-size: 15px;
-    }
-    #postImg {
-        width: 100px;
-    }
-    #label-cmnt {
-        width: 80%;
-    }
-    #btn-comment {
-        width: 65px;
-        height: 30px;
-        font-size: 10px;
-    }
-    .cmnt {
-        width: 80%;
-    }
-    .user-cmnt {
-        font-size: 20px;
-    }
-    .cmnt-content {
-        font-size: 20px;
-        width: 100%;
-         display: flex;
-        flex-wrap: wrap;
-    }
-    #sup-cmnt {
-        width: 100px;
-        height: 30px;
-        font-size: 15px;
-    } */
 }
 
 @media screen and (max-width:631px) {
@@ -685,9 +631,6 @@ h1 {
     .home {
         width: 90%;
     }
-    .content {
-        width: 100%;
-    }
     .div-btn {
         width: 100%;
     }
@@ -698,7 +641,7 @@ h1 {
         width: 100%;
     }
     .LogoButton1 {
-        width: 50%;
+        width: 60%;
         height: 50px;
         font-size: 13px;
     }
@@ -713,6 +656,14 @@ h1 {
     }
     .cmnt {
         width: 97%;
+    }
+    /*--------------page profile -----------*/
+    .container-user {
+        width: 85%;
+    }
+    .btn-supp-home {
+        width: 45%;
+        margin: auto;
     }
 }
 
@@ -789,7 +740,7 @@ h1 {
         font-size: 13px;
     }
     .cmnt {
-        width: 95%;
+        width: 100%;
     }
     /* .Loginform {
         width: 80%;
@@ -945,7 +896,7 @@ h1 {
         width: 100%;
     }
     .LogoButton1 {
-        width: 40%;
+        width: 30%;
         height: 50px;
         font-size: 11px;
     }
@@ -983,6 +934,14 @@ h1 {
         font-size: 14px;
     }
     .cmnt {
-        width: 92%;
+        width: 100%;
+    }
+    /*---------------page profile----------*/
+    .container-user {
+        width: 90%;
+    }
+    .btn-supp-home {
+        width: 100%;
+        margin: auto;
     }
 }
