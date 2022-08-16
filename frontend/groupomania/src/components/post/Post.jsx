@@ -6,6 +6,8 @@ import PhotoUndo from '@material-ui/icons/Undo';
 import PhotoApply from '@material-ui/icons/Done';
 import PhotoEdit from '@material-ui/icons/Edit';
 import ShowAllComment from '../comments/ShowAllComment';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 // import { useParams, useEffect, useState } from 'react';
 const Post = ({ post, deletePost, updatePost }) => {
@@ -17,6 +19,8 @@ const Post = ({ post, deletePost, updatePost }) => {
 
       useEffect(() => {
             setUser(JSON.parse(localStorage.getItem('user')));
+            //            let datecreate = (post.createdAt);
+            //            console.log('post:' + datecreate);
             setCommentList(post.comments);
       }, [post]);
       //permet d'activer le mode modifier
@@ -28,10 +32,10 @@ const Post = ({ post, deletePost, updatePost }) => {
             setPreview(post.attachement);
             setMode('printMode');
       };
+
       //permet de faire la requete delete du poste
       const delPost = (e) => {
-            e.preventDefault();
-
+            // e.preventDefault();
             fetch('http://localhost:3000/api/post/' + post.id, {
                   method: 'DELETE',
                   headers: {
@@ -112,6 +116,30 @@ const Post = ({ post, deletePost, updatePost }) => {
             setMode('printMode');
       };
 
+      const submit = () => {
+            confirmAlert({
+                  customUI: ({ onClose }) => {
+                        return (
+                              <div className="custom-ui">
+                                    <h1>Vous êtes sure?</h1>
+                                    <p>
+                                          Voulez vous supprimer ce post
+                                          définitivement?
+                                    </p>
+                                    <button onClick={onClose}>Non</button>
+                                    <button
+                                          onClick={() => {
+                                                delPost();
+                                                onClose();
+                                          }}
+                                    >
+                                          Oui, supprimer!
+                                    </button>
+                              </div>
+                        );
+                  },
+            });
+      };
       return (
             <div>
                   <div className="post-Page">
@@ -119,7 +147,8 @@ const Post = ({ post, deletePost, updatePost }) => {
                               <div id="post-div">
                                     <h2 id="post-user">
                                           {/* postId: {post.id}, */}
-                                          {post.user.username}
+                                          {post.user.username} à{' '}
+                                          {post.createdAt}
                                     </h2>
                                     <h2 id="title"> {post.titre} </h2>
                                     <p id="content"> {post.content} </p>
@@ -136,10 +165,11 @@ const Post = ({ post, deletePost, updatePost }) => {
                                                 <button
                                                       id="supprimer"
                                                       type="button"
-                                                      onClick={delPost}
+                                                      onClick={submit}
                                                 >
                                                       supprimer
                                                 </button>
+
                                                 <button
                                                       id="modifier"
                                                       type="button"

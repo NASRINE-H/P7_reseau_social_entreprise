@@ -8,7 +8,7 @@ const bdd = new Sequelize(
     process.env.BDD_NAME,
     process.env.BDD_USERNAME,
     process.env.BDD_PASSWORD, {
-        host: 'localhost',
+        host: process.env.BDD_HOST,
         dialect: 'mysql',
     });
 /**

@@ -39,6 +39,7 @@
         "normalize-path": "^3.0.0",
         "normalize-url": "^4.5.1",
         "p-cancelable": "^1.1.0",
+        "password-validator": "^5.3.0",
         "picomatch": "^2.3.1",
         "prepend-http": "^2.0.0",
         "pupa": "^2.1.1",

@@ -26,7 +26,7 @@ module.exports = bdd.define("user", {
     isAdmin: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: true
     },
 }, {
     bdd,

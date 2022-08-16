@@ -13,21 +13,21 @@ const LoginForm = (props) => {
             setMode('login');
       };
 
-      const [email, setEmail] = useState('');
-      const [message, setMessage] = useState('');
-      const emailValidation = () => {
-            const regex = /[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]/g;
-            if (regex.test(email)) {
-                  setMessage('email is valid');
-            } else if (!regex.test(email) && email !== '') {
-                  setMessage('email is not valid');
-            } else {
-                  setMessage('');
-            }
-      };
-      const handleOnChange = (e) => {
-            setEmail(e.target.value);
-      };
+      // const [email, setEmail] = useState('');
+      // const [message, setMessage] = useState('');
+      // const emailValidation = () => {
+      //       const regex = /[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]/g;
+      //       if (regex.test(email)) {
+      //             setMessage('email is valid');
+      //       } else if (!regex.test(email) && email !== '') {
+      //             setMessage('email is not valid');
+      //       } else {
+      //             setMessage('');
+      //       }
+      // };
+      // const handleOnChange = (e) => {
+      //       setEmail(e.target.value);
+      // };
       /* const validEmail = new RegExp(
           '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
     );
@@ -119,14 +119,14 @@ const LoginForm = (props) => {
                   {mode === 'login' && (
                         <div className="login">
                               <h1>
-                                    bienvenue sur le reseau sociale groupomania
+                                    Bienvenue sur le réseau social Groupomania
                               </h1>
                               <div className="Loginform">
                                     <form className="form-container">
                                           <div className="input-container">
                                                 <label className="label-email">
                                                       {' '}
-                                                      email
+                                                      Email
                                                       <input
                                                             id="login-email"
                                                             type="text"
@@ -138,7 +138,7 @@ const LoginForm = (props) => {
                                           <div className="input-container">
                                                 <label className="label-password">
                                                       {' '}
-                                                      Password
+                                                      Mot de passe
                                                       <input
                                                             id="login-pass"
                                                             type="password"
@@ -155,26 +155,28 @@ const LoginForm = (props) => {
                                           className="btn-loginsignup"
                                           onClick={login}
                                     >
-                                          se connecter
+                                          Se connecter
                                     </button>
                               </div>
                               <button
                                     className="btn-loginsignup1"
                                     onClick={activeSignup}
                               >
-                                    S 'inscrire
+                                    S'inscrire
                               </button>
                         </div>
                   )}
                   {mode === 'signup' && (
                         <div className="signup">
-                              <h1>Bienvenue sur le reseau Groupomania</h1>
+                              <h1>
+                                    Bienvenue sur le réseau social Groupomania
+                              </h1>
                               <div className="Signupform">
                                     <form>
                                           <div className="input-container">
                                                 <label className="label-username">
                                                       {' '}
-                                                      username
+                                                      Utilisateur
                                                       <input
                                                             id="signup-username"
                                                             type="text"
@@ -188,16 +190,16 @@ const LoginForm = (props) => {
                                                       className="label-email"
                                                       htmlFor=""
                                                 >
-                                                      email
+                                                      Email
                                                       <input
                                                             id="signup-email"
                                                             type="email"
                                                             name="email"
-                                                            placeholder="email"
-                                                            value={email}
-                                                            onChange={
-                                                                  handleOnChange
-                                                            }
+                                                            // placeholder="email"
+                                                            // value={email}
+                                                            // onChange={
+                                                            //       handleOnChange
+                                                            // }
                                                             // value={email}
                                                             // onChange={(e) =>
                                                             //       setEmail(
@@ -206,16 +208,16 @@ const LoginForm = (props) => {
                                                             required
                                                       />
                                                 </label>
-                                                <button
+                                                {/* <button
                                                       type="button"
                                                       onClick={emailValidation}
                                                 ></button>
-                                                <p>{message}</p>
+                                                <p>{message}</p> */}
                                           </div>
                                           <div className="input-container">
                                                 <label className="label-password">
                                                       {' '}
-                                                      Password
+                                                      Mot de passe
                                                       <input
                                                             id="signup-pass"
                                                             type="password"
@@ -238,7 +240,7 @@ const LoginForm = (props) => {
                                           className="btn-loginsignup"
                                           onClick={signup}
                                     >
-                                          s 'inscrire
+                                          S'inscrire
                                           {/* {emailErr && <p>Your email is invalid</p>}
                                                             {pwdError && (
                                                                   <p>Your password is invalid</p>

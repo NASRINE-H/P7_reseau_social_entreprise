@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
 
 const User = () => {
       let user = JSON.parse(localStorage.getItem('user'));
@@ -38,7 +39,6 @@ const User = () => {
       };
 
       const deleteUser = (e) => {
-            e.preventDefault();
             let user = JSON.parse(localStorage.getItem('user'));
             fetch('http://localhost:3000/api/auth/' + user.userId, {
                   method: 'DELETE',
@@ -57,6 +57,30 @@ const User = () => {
                         console.log('request failed:', error);
                         logout();
                   });
+      };
+      const submit = () => {
+            confirmAlert({
+                  customUI: ({ onClose }) => {
+                        return (
+                              <div className="custom-ui">
+                                    <h1>Vous êtes sure?</h1>
+                                    <p>
+                                          Voulez vous supprimer votre profile
+                                          définitivement?
+                                    </p>
+                                    <button onClick={onClose}>Non</button>
+                                    <button
+                                          onClick={() => {
+                                                deleteUser();
+                                                onClose();
+                                          }}
+                                    >
+                                          Oui, supprimer!
+                                    </button>
+                              </div>
+                        );
+                  },
+            });
       };
 
       return (
@@ -92,10 +116,7 @@ const User = () => {
                                     </button>
                               </div> */}
                         <div className="btn-supp-home">
-                              <button
-                                    className="LogoButton1"
-                                    onClick={deleteUser}
-                              >
+                              <button className="LogoButton1" onClick={submit}>
                                     supprimer
                               </button>
                               <button

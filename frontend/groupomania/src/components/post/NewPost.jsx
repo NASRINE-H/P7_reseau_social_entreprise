@@ -114,6 +114,7 @@ const NewPost = ({ addPost }) => {
                                     />
                               </label>
                         </div>
+
                         <div id="fileButtonDiv">
                               <label htmlFor="file" id="fileButton">
                                     inserer une image
@@ -165,7 +166,7 @@ const NewPost = ({ addPost }) => {
                                                 <div>
                                                       <button
                                                             type="button"
-                                                            className="LogoButton1"
+                                                            className="LogoButton2"
                                                             onClick={
                                                                   clearPreview
                                                             }
@@ -174,7 +175,7 @@ const NewPost = ({ addPost }) => {
                                                       </button>
                                                       <button
                                                             type="button"
-                                                            className="LogoButton1"
+                                                            className="LogoButton2"
                                                             onClick={
                                                                   CreateNewPost
                                                             }

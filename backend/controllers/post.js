@@ -83,6 +83,7 @@ exports.createPost = (req, res, next) => {
         userId: req.auth.userId, // est ce que cet id est celui de l'utilisateur ou celui du post     
         titre: PostObject.titre,
         content: PostObject.content,
+
     });
     // afficher dans la console pour debeug
     console.log("fonction create");
@@ -247,7 +248,8 @@ exports.deletePost = (req, res) => {
                 }
             })
             .then((post) => {
-                // le post a été trouvé avec son ID
+                console.log("user:", req.auth.isAdmin)
+                    // le post a été trouvé avec son ID
                 const postUserId = post.userId;
                 if (req.auth.userId == postUserId ||
                     req.auth.isAdmin

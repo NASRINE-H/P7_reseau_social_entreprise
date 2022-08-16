@@ -40,7 +40,7 @@ exports.signup = (req, res, next) => {
                             //utliliser la librairie  jwt pour generer un token 
                             token: jwt.sign({
                                     userId: user.id,
-                                    isAdmin: false,
+                                    isAdmin: user.isAdmin,
                                 },
                                 process.env.TOKEN_KEY, {
                                     expiresIn: '24h'

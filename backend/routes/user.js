@@ -6,12 +6,14 @@ const router = express.Router();
 
 const userCtrl = require('../controllers/user');
 const auth = require('../middleware/auth');
+const Password = require('../middleware/Password');
+
 
 //const Password = require('../middleware/Password');
 
 
 // pour créer un nouveau copmte
-router.post('/signup', userCtrl.signup);
+router.post('/signup', Password, userCtrl.signup);
 // se connecter 
 router.post('/login', userCtrl.login);
 //recupérer un utilisateur
