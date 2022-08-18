@@ -1,50 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const NewComment = ({ postid, addComment }) => {
       //const [comment, setComment] = useState();
+
+      //pour créer un commentaire
       const createNewComment = (e) => {
             e.preventDefault();
-            let content= document.getElementById('comment-content' + postid)
-                        .value;
-            if(content !=='') {           
-            let comment = {
-                  content: document.getElementById('comment-content' + postid)
-                        .value,
-            };
+            let content = document.getElementById(
+                  'comment-content' + postid
+            ).value;
+            if (content !== '') {
+                  let comment = {
+                        content: document.getElementById(
+                              'comment-content' + postid
+                        ).value,
+                  };
 
-            let user = JSON.parse(localStorage.getItem('user'));
-            
-            fetch('http://localhost:3000/api/comment/' + postid, {
-                  method: 'POST',
-                  headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: 'bearer ' + user.token,
-                  },
-                  body: JSON.stringify(comment),
-            })
-                  .then((response) => {
-                        if (response.ok) {
-                              document.querySelector('#btn-comment');
-                              //   document.querySelector('#comment-content').value =
-                              //         '';
-                              return response.json();
-                        }
-                        throw new Error('Something went wrong');
-                  })
-                  .then((data) => {
-                       addComment(data.comment);
-                       document.getElementById('comment-content' + postid).value='';
-                  })
-                  .catch((error) => {
-                        console.log('request failed:', error);
-                  });
-      }
-      else
-      {     
-            console.log("contenu vide");
+                  let user = JSON.parse(localStorage.getItem('user'));
 
-      }
-};
+                  fetch('http://localhost:3000/api/comment/' + postid, {
+                        method: 'POST',
+                        headers: {
+                              'Content-Type': 'application/json',
+                              Authorization: 'bearer ' + user.token,
+                        },
+                        body: JSON.stringify(comment),
+                  })
+                        .then((response) => {
+                              if (response.ok) {
+                                    document.querySelector('#btn-comment');
+                                    //   document.querySelector('#comment-content').value =
+                                    //         '';
+                                    return response.json();
+                              }
+                              throw new Error('Something went wrong');
+                        })
+                        .then((data) => {
+                              addComment(data.comment);
+                              document.getElementById(
+                                    'comment-content' + postid
+                              ).value = '';
+                        })
+                        .catch((error) => {
+                              console.log('request failed:', error);
+                        });
+            } else {
+                  console.log('contenu vide');
+            }
+      };
       return (
             <div className="creat-comment">
                   <form className="form">
@@ -56,7 +59,7 @@ const NewComment = ({ postid, addComment }) => {
                                           name="content"
                                           required
                                     />
-                              </label>{' '}
+                              </label>
                               <div className="input-comment">
                                     <button
                                           type="button"

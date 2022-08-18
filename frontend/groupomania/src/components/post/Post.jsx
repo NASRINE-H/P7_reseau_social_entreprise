@@ -4,7 +4,6 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import PhotoDelete from '@material-ui/icons/Delete';
 import PhotoUndo from '@material-ui/icons/Undo';
 import PhotoApply from '@material-ui/icons/Done';
-import PhotoEdit from '@material-ui/icons/Edit';
 import ShowAllComment from '../comments/ShowAllComment';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
@@ -19,10 +18,11 @@ const Post = ({ post, deletePost, updatePost }) => {
 
       useEffect(() => {
             setUser(JSON.parse(localStorage.getItem('user')));
-            //            let datecreate = (post.createdAt);
-            //            console.log('post:' + datecreate);
             setCommentList(post.comments);
       }, [post]);
+      // useEffect(() => {
+      //       post.date = new Date(post.createdAt);
+      // }, [post]);
       //permet d'activer le mode modifier
       const activeEdit = () => {
             setMode('editMode');
@@ -147,18 +147,23 @@ const Post = ({ post, deletePost, updatePost }) => {
                               <div id="post-div">
                                     <h2 id="post-user">
                                           {/* postId: {post.id}, */}
-                                          {post.user.username} à{' '}
-                                          {post.createdAt}
+                                          {post.user.username} à
+                                          {/* {post.date.toLocaleDateString()} */}
+                                          {new Date(
+                                                post.createdAt
+                                          ).toLocaleString()}
                                     </h2>
                                     <h2 id="title"> {post.titre} </h2>
                                     <p id="content"> {post.content} </p>
-                                    {post.attachement && (
-                                          <img
-                                                id="postImg"
-                                                src={post.attachement}
-                                                alt=""
-                                          />
-                                    )}
+                                    <div id="ImgContainer">
+                                          {post.attachement && (
+                                                <img
+                                                      id="postImg"
+                                                      src={post.attachement}
+                                                      alt={post.attachement}
+                                                />
+                                          )}
+                                    </div>
                                     {(user.userId === post.userId ||
                                           user.isAdmin) && (
                                           <div className="btn-suppmodif">
@@ -177,28 +182,6 @@ const Post = ({ post, deletePost, updatePost }) => {
                                                 >
                                                       modifier
                                                 </button>
-                                                {/* <label htmlFor="icon-delete">
-                                                      <IconButton
-                                                            color="primary"
-                                                            aria-label="delete post"
-                                                            component="span"
-                                                            id="supprimer"
-                                                            onClick={delPost}
-                                                      >
-                                                            <PhotoDelete />
-                                                      </IconButton>
-                                                </label>
-                                                <label htmlFor="icon-undo">
-                                                      <IconButton
-                                                            color="primary"
-                                                            aria-label="undo update"
-                                                            component="span"
-                                                            id="modifier"
-                                                            onClick={activeEdit}
-                                                      >
-                                                            <PhotoEdit />
-                                                      </IconButton>
-                                                </label> */}
                                           </div>
                                     )}
                               </div>

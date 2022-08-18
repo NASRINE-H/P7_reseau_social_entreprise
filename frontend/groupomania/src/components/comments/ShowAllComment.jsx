@@ -37,7 +37,7 @@ const ShowAllComment = ({ commentData, postid, addComment, deleteComment }) => {
                                     </div>
                               );
                         else return null;
-                  })}{' '}
+                  })}
             </div>
       );
 };

@@ -3,50 +3,23 @@ import { useNavigate } from 'react-router-dom';
 //import { validEmail, validPassword } from './regex.js';
 
 const LoginForm = (props) => {
+      // Permet de switcher entre mode 'Login' et mode 'Signup'
       const [mode, setMode] = useState('login');
-
+      // Permet d'activer ou non un message d'erreur lors de la connection
+      const [formError, setFormError] = useState('200');
       let navigate = useNavigate();
+      // permet d'activer le mode Signup
       const activeSignup = () => {
             setMode('signup');
+            setFormError('200');
       };
+      // permet d'activer le mode login
       const activeLogin = () => {
             setMode('login');
+            setFormError('200');
       };
 
-      // const [email, setEmail] = useState('');
-      // const [message, setMessage] = useState('');
-      // const emailValidation = () => {
-      //       const regex = /[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]/g;
-      //       if (regex.test(email)) {
-      //             setMessage('email is valid');
-      //       } else if (!regex.test(email) && email !== '') {
-      //             setMessage('email is not valid');
-      //       } else {
-      //             setMessage('');
-      //       }
-      // };
-      // const handleOnChange = (e) => {
-      //       setEmail(e.target.value);
-      // };
-      /* const validEmail = new RegExp(
-          '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
-    );
-    const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$');
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [emailErr, setEmailErr] = useState(false);
-    const [pwdError, setPwdError] = useState(false);
-    const validate = () => {
-          if (!validEmail.test(email)) {
-                setEmailErr(true);
-          }
-          if (!validPassword.test(password)) {
-                setPwdError(true);
-          }
-    };*/
-
-      // loger un utilisateur existant
+      // Connecter un utilisateur existant
       const login = (e) => {
             e.preventDefault();
             let user = {
@@ -54,29 +27,51 @@ const LoginForm = (props) => {
                   password: document.getElementById('login-pass').value,
             };
 
-            fetch('http://localhost:3000/api/auth/login', {
-                  method: 'POST',
-                  headers: {
-                        'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(user),
-            })
-                  .then((response) => {
-                        if (response.ok) {
-                              return response.json();
-                        }
-                        throw new Error('Something went wrong');
+            if (user.email === '') {
+                  setFormError('403');
+                  console.log('403');
+            } else if (user.password === '') {
+                  setFormError('404');
+                  console.log('404');
+            } else {
+                  fetch('http://localhost:3000/api/auth/login', {
+                        method: 'POST',
+                        headers: {
+                              'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(user),
                   })
-                  .then((data) => {
-                        localStorage.setItem('user', JSON.stringify(data));
-                        navigate('/Home', {
-                              replace: true,
+                        .then((response) => {
+                              console.log(
+                                    'response.status ===' + response.status
+                              );
+                              if (response.ok) {
+                                    return response.json();
+                              } else if (response.status === 400)
+                                    setFormError('400');
+                              else if (response.status === 401)
+                                    setFormError('401');
+                              else if (response.status === 402)
+                                    setFormError('402');
+                              else if (response.status === 500)
+                                    setFormError('500');
+                              throw new Error('Something went wrong');
+                        })
+                        .then((data) => {
+                              localStorage.setItem(
+                                    'user',
+                                    JSON.stringify(data)
+                              );
+                              setFormError('200');
+                              navigate('/Home', {
+                                    replace: true,
+                              });
+                              props.setState('On');
+                        })
+                        .catch((error) => {
+                              console.log('login request failed:', error);
                         });
-                        props.setState('On');
-                  })
-                  .catch((error) => {
-                        console.log('login request failed:', error);
-                  });
+            }
       };
 
       // Créer un nouvel utilisateur
@@ -87,31 +82,57 @@ const LoginForm = (props) => {
                   password: document.getElementById('signup-pass').value,
                   username: document.getElementById('signup-username').value,
             };
-            fetch('http://localhost:3000/api/auth/signup', {
-                  method: 'POST',
-                  headers: {
-                        'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(user),
-            })
-                  .then((response) => {
-                        if (response.ok) {
-                              return response.json();
-                        }
-                        throw new Error('Something went wrong');
+            if (user.username === '') {
+                  setFormError('401');
+            } else if (user.email === '') {
+                  setFormError('403');
+            } else if (user.password === '') {
+                  setFormError('402');
+            } else {
+                  fetch('http://localhost:3000/api/auth/signup', {
+                        method: 'POST',
+                        headers: {
+                              'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(user),
                   })
-                  .then((data) => {
-                        console.log('Signup request succes, Response:', data);
-                        localStorage.setItem('user', JSON.stringify(data));
-                        navigate('/Home', {
-                              replace: true,
-                        });
-                        props.setState('On');
-                  })
+                        .then((response) => {
+                              if (response.ok) {
+                                    return response.json();
+                              } else if (response.status === 400)
+                                    setFormError('400');
+                              else if (response.status === 404)
+                                    setFormError('404');
+                              else if (response.status === 405)
+                                    setFormError('405');
+                              else if (response.status === 500)
+                                    setFormError('500');
+                              else if (response.status === 600)
+                                    setFormError('600');
+                              // else if (response.status === 500)
+                              //       setFormError('500');
+                              throw new Error('Something went wrong');
+                        })
+                        .then((data) => {
+                              console.log(
+                                    'Signup request succes, Response:',
+                                    data
+                              );
+                              localStorage.setItem(
+                                    'user',
+                                    JSON.stringify(data)
+                              );
+                              setFormError('200');
+                              navigate('/Home', {
+                                    replace: true,
+                              });
+                              props.setState('On');
+                        })
 
-                  .catch((error) => {
-                        console.log('Signup request failed:', error);
-                  });
+                        .catch((error) => {
+                              console.log('Signup request failed:', error);
+                        });
+            }
       };
 
       return (
@@ -125,7 +146,6 @@ const LoginForm = (props) => {
                                     <form className="form-container">
                                           <div className="input-container">
                                                 <label className="label-email">
-                                                      {' '}
                                                       Email
                                                       <input
                                                             id="login-email"
@@ -137,7 +157,6 @@ const LoginForm = (props) => {
                                           </div>
                                           <div className="input-container">
                                                 <label className="label-password">
-                                                      {' '}
                                                       Mot de passe
                                                       <input
                                                             id="login-pass"
@@ -147,6 +166,37 @@ const LoginForm = (props) => {
                                                       />
                                                 </label>
                                           </div>
+                                          {formError === '400' && (
+                                                <label className="textError">
+                                                      Vérifier que vous avez
+                                                      entré les bonnes valeurs
+                                                </label>
+                                          )}
+                                          {formError === '401' && (
+                                                <label className="textError">
+                                                      Utilisateur inconnu
+                                                </label>
+                                          )}
+                                          {formError === '402' && (
+                                                <label className="textError">
+                                                      Mot de passe incorrect
+                                                </label>
+                                          )}
+                                          {formError === '403' && (
+                                                <label className="textError">
+                                                      Email vide
+                                                </label>
+                                          )}
+                                          {formError === '404' && (
+                                                <label className="textError">
+                                                      Mot de passe vide
+                                                </label>
+                                          )}
+                                          {formError === '500' && (
+                                                <label className="textError">
+                                                      action non authorisée
+                                                </label>
+                                          )}
                                     </form>
                               </div>
                               <div className="button-container">
@@ -175,7 +225,6 @@ const LoginForm = (props) => {
                                     <form>
                                           <div className="input-container">
                                                 <label className="label-username">
-                                                      {' '}
                                                       Utilisateur
                                                       <input
                                                             id="signup-username"
@@ -195,43 +244,67 @@ const LoginForm = (props) => {
                                                             id="signup-email"
                                                             type="email"
                                                             name="email"
-                                                            // placeholder="email"
-                                                            // value={email}
-                                                            // onChange={
-                                                            //       handleOnChange
-                                                            // }
-                                                            // value={email}
-                                                            // onChange={(e) =>
-                                                            //       setEmail(
-                                                            //             e.target.value
-                                                            //       )}
                                                             required
                                                       />
                                                 </label>
-                                                {/* <button
-                                                      type="button"
-                                                      onClick={emailValidation}
-                                                ></button>
-                                                <p>{message}</p> */}
                                           </div>
                                           <div className="input-container">
                                                 <label className="label-password">
-                                                      {' '}
                                                       Mot de passe
                                                       <input
                                                             id="signup-pass"
                                                             type="password"
                                                             name="pass"
-                                                            // value={password}
-                                                            // onChange={(e) =>
-                                                            //       setPassword(
-                                                            //             e.target.value
-                                                            //       )
-                                                            // }
                                                             required
                                                       />
                                                 </label>
                                           </div>
+                                          {formError === '400' && (
+                                                <label className="textError">
+                                                      Vérifier que votre mot de
+                                                      passe contient:
+                                                      <p>
+                                                            <br />
+                                                            minimum 8 caractères
+                                                            <br />
+                                                            Au moins une lettre
+                                                            magiscule
+                                                            <br />
+                                                            Au moins une lettre
+                                                            miniscule
+                                                            <br />
+                                                            ne contient pas
+                                                            d'espace
+                                                      </p>
+                                                </label>
+                                          )}
+                                          {formError === '401' && (
+                                                <label className="textError">
+                                                      Utilisateur vide
+                                                </label>
+                                          )}
+                                          {formError === '402' && (
+                                                <label className="textError">
+                                                      Mot de passe vide
+                                                </label>
+                                          )}
+                                          {formError === '403' && (
+                                                <label className="textError">
+                                                      Email vide
+                                                </label>
+                                          )}
+                                          {(formError === '404' ||
+                                                formError === '405') && (
+                                                <label className="textError">
+                                                      Email déjà existant
+                                                </label>
+                                          )}
+                                          {(formError === '500' ||
+                                                formError === '600') && (
+                                                <label className="textError">
+                                                      action non authorisée
+                                                </label>
+                                          )}
                                     </form>
                               </div>
                               <div className="button-container">
@@ -241,10 +314,6 @@ const LoginForm = (props) => {
                                           onClick={signup}
                                     >
                                           S'inscrire
-                                          {/* {emailErr && <p>Your email is invalid</p>}
-                                                            {pwdError && (
-                                                                  <p>Your password is invalid</p>
-                                                            )} */}
                                     </button>
                               </div>
                               <button
@@ -258,6 +327,5 @@ const LoginForm = (props) => {
             </div>
       );
 };
-//<Login/>
 
 export default LoginForm;

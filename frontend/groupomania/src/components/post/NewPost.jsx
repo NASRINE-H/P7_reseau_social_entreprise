@@ -94,7 +94,7 @@ const NewPost = ({ addPost }) => {
                   <form className="form">
                         <div className="input-post">
                               <label id="label-post">
-                                    Titre
+                                    titre
                                     <input
                                           id="post-titre"
                                           type="text"
@@ -105,7 +105,7 @@ const NewPost = ({ addPost }) => {
                         </div>
                         <div className="input-post">
                               <label id="label-post">
-                                    Content
+                                    content
                                     <input
                                           id="post-content"
                                           type="text"
@@ -157,7 +157,7 @@ const NewPost = ({ addPost }) => {
                                           }
                                     </p>
                                     {selectedFile && (
-                                          <div>
+                                          <div id="ImgContainer">
                                                 <img
                                                       src={preview}
                                                       alt={selectedFile.name}

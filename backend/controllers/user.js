@@ -1,7 +1,7 @@
 //on retrouve ici la logique métier en lien avec nos utilisateurs appliqué aux routes post pour les opérations 
 //d'inscription et de connexion 
 
-//  utilise l'algorithme bcrypt pour hasher le mot de passe 
+//  utilise l'algorithme pt pour hasher le mot de passe 
 const bcrypt = require('bcrypt');
 
 require('dotenv').config()
@@ -18,49 +18,69 @@ const User = require('../models/user');
 /**pour créer un nouveau utilisateur */
 exports.signup = (req, res, next) => {
     const userJson = req.body;
-    bcrypt.hash(userJson.password, 10)
-        .then(hash => {
-            const user = new User({
-                username: userJson.username,
-                email: userJson.email,
-                password: hash,
-
-            });
-            console.log("new user" + user);
-            user.save(user)
-
-            .then((user) => {
-                    if (user) {
-
-                        return res.status(200).json({
-                            userId: user.id,
-                            isAdmin: user.isAdmin,
-                            username: user.username,
-
-                            //utliliser la librairie  jwt pour generer un token 
-                            token: jwt.sign({
-                                    userId: user.id,
-                                    isAdmin: user.isAdmin,
-                                },
-                                process.env.TOKEN_KEY, {
-                                    expiresIn: '24h'
-                                }
-                            )
-                        });
-                    }
+    User.findOne({
+            where: {
+                email: userJson.email
+            }
+        })
+        .then((userFound) => {
+            if (userFound) {
+                console.log("user found:" + userFound)
+                return res.status(404).json({
+                    error: "Email existe déjà"
                 })
+            } else {
+                bcrypt.hash(userJson.password, 10)
+                    .then(hash => {
+                        const user = new User({
+                            username: userJson.username,
+                            email: userJson.email,
+                            password: hash,
+
+                        });
+                        user.save(user)
+                            .then((user) => {
+                                if (user) {
+
+                                    return res.status(200).json({
+                                        userId: user.id,
+                                        isAdmin: user.isAdmin,
+                                        username: user.username,
+
+                                        //utliliser la librairie  jwt pour generer un token 
+                                        token: jwt.sign({
+                                                userId: user.id,
+                                                isAdmin: user.isAdmin,
+                                            },
+                                            process.env.TOKEN_KEY, {
+                                                expiresIn: '24h'
+                                            }
+                                        )
+                                    });
+                                } else {
+                                    return res.status(405).json({
+                                        error
+                                    })
+                                }
+                            })
+                            .catch((error) => {
+                                res.status(400).json({
+                                    error
+                                })
+                            });
+                    })
+
                 .catch((error) => {
-                    res.status(400).json({
+                    res.status(500).json({
                         error
                     })
                 });
+            }
+        }).catch((error) => {
+            res.status(600).json({
+                error
+            })
         })
-
-    .catch((error) => {
-        res.status(500).json({
-            error
-        })
-    });
 };
 
 
@@ -85,7 +105,7 @@ exports.login = (req, res, next) => {
                 .then(valid => {
 
                     if (!valid) {
-                        return res.status(401).json({
+                        return res.status(402).json({
                             error: 'Mot de passe incorrect !'
                         });
                     }
@@ -99,8 +119,6 @@ exports.login = (req, res, next) => {
                         token: jwt.sign({
                                 userId: user.id,
                                 isAdmin: user.isAdmin,
-
-
                             },
                             process.env.TOKEN_KEY, {
                                 expiresIn: '24h'
@@ -108,7 +126,7 @@ exports.login = (req, res, next) => {
                         )
                     });
                 })
-                .catch(error => res.status(401).json({
+                .catch(error => res.status(400).json({
                     error
                 }));
         })

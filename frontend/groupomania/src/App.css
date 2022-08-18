@@ -248,11 +248,19 @@ form input {
     margin-top: 3%;
 }
 
-.user-cmnt,
-.cmnt-content {
+.user-cmnt {
     display: flex;
     justify-content: flex-start;
     font-weight: bolder;
+    font-size: 25px;
+    padding-left: 5%;
+    word-break: break-all;
+}
+
+.cmnt-content {
+    display: flex;
+    justify-content: flex-start;
+    font-weight: normal;
     font-size: 25px;
     padding-left: 5%;
     word-break: break-all;
@@ -450,12 +458,15 @@ h1 {
     font-weight: 50;
 }
 
-@media screen and (max-width:1151px) {
+@media screen and (max-width:1175px) {
     .content {
         width: 100%;
     }
     .home {
         width: 90%;
+    }
+    .logo {
+        width: 100%;
     }
     .group-logo {
         width: 30%;
@@ -467,7 +478,7 @@ h1 {
     .LogoButton1 {
         width: 20%;
         height: 50px;
-        font-size: 19px;
+        font-size: 15px;
     }
     #fileButtonDiv {
         width: 100%;
@@ -479,6 +490,11 @@ h1 {
     }
     .btn-poster {
         width: 15%;
+        font-size: 19px;
+    }
+    #btn-comment {
+        width: 15%;
+        height: 40px;
         font-size: 19px;
     }
     #label-post {
@@ -498,7 +514,7 @@ h1 {
         width: 60%;
     }
     .logo {
-        width: 30%;
+        width: 100%;
         margin: auto;
         margin-top: 10%;
     }
@@ -511,7 +527,7 @@ h1 {
         width: 100%;
     }
     .LogoButton1 {
-        width: 15%;
+        width: 10%;
         height: 50px;
         font-size: 17px;
     }
@@ -543,6 +559,10 @@ h1 {
     .home {
         width: 93%;
     }
+    #post-user {
+        font-size: 18px;
+        width: 100%;
+    }
     .group-logo {
         width: 50%;
         margin: auto;
@@ -552,15 +572,15 @@ h1 {
         margin-bottom: 5%;
     }
     .LogoButton1 {
-        width: 45%;
-        height: 55px;
-        font-size: 13px;
+        width: 30%;
+        height: 45px;
+        font-size: 18px;
     }
     #label-post {
         font-size: 18px;
     }
     #btn-comment {
-        width: 23%;
+        width: 17%;
         height: 50px;
         font-size: 17px;
     }
@@ -568,7 +588,7 @@ h1 {
         width: 100%;
     }
     #fileButton {
-        width: 17%;
+        width: 15%;
         height: 50px;
         font-size: 18px;
     }
@@ -578,6 +598,7 @@ h1 {
     }
     #post-user {
         font-size: 18px;
+        width: 100%;
     }
     #title,
     #content {
@@ -596,17 +617,17 @@ h1 {
     }
     .user-cmnt,
     .cmnt-content {
-        font-size: 20px;
+        font-size: 19px;
     }
     .cmnt {
         width: 100%;
     }
     /*----------page profile----------*/
     .container-user {
-        width: 75%;
+        width: 80%;
     }
     .btn-supp-home {
-        width: 30%;
+        width: 100%;
         margin: auto;
     }
 }
@@ -644,13 +665,17 @@ h1 {
         font-size: 15px;
     }
     #btn-comment {
-        width: 30%;
+        width: 20%;
         height: 50px;
         font-size: 15px;
     }
     /* ------------page home --------------*/
     .home {
         width: 90%;
+    }
+    #post-user {
+        font-size: 18px;
+        width: 100%;
     }
     .div-btn {
         width: 100%;
@@ -662,7 +687,7 @@ h1 {
         width: 100%;
     }
     .LogoButton1 {
-        width: 60%;
+        width: 35%;
         height: 50px;
         font-size: 13px;
     }
@@ -691,7 +716,7 @@ h1 {
         width: 85%;
     }
     .btn-supp-home {
-        width: 45%;
+        width: 100%;
         margin: auto;
     }
 }
@@ -704,7 +729,7 @@ h1 {
         width: 90%;
     }
     .logo {
-        width: 40%;
+        width: 100%;
         margin-top: 10%;
     }
     .group-logo {
@@ -735,16 +760,23 @@ h1 {
     .home {
         width: 95%;
     }
+    #post-user {
+        font-size: 18px;
+        width: 100%;
+    }
     .group-logo {
         width: 80%;
     }
     .div-btn {
         width: 100%;
     }
+    .container-user {
+        width: 98%;
+    }
     .LogoButton1 {
-        width: 60%;
-        height: 50px;
-        font-size: 13px;
+        width: 20%;
+        height: 55px;
+        font-size: 11px;
     }
     .btn-poster {
         font-size: 13px;
@@ -942,9 +974,9 @@ h1 {
         width: 30%;
     }
     #fileButton {
-        width: 30%;
+        width: 25%;
         height: 40px;
-        font-size: 11px;
+        font-size: 10px;
     }
     #postImg {
         width: 23%;
@@ -954,6 +986,7 @@ h1 {
     }
     #post-user {
         font-size: 14px;
+        width: 100%;
     }
     #title,
     #content {
@@ -965,13 +998,13 @@ h1 {
         font-size: 12px;
     }
     #btn-comment {
-        width: 30%;
+        width: 35%;
         height: 50px;
-        font-size: 13px;
+        font-size: 11px;
     }
     .user-cmnt,
     .cmnt-content {
-        font-size: 14px;
+        font-size: 13px;
     }
     .cmnt {
         width: 98%;
