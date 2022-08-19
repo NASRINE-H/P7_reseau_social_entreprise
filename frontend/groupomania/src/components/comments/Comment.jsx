@@ -24,7 +24,7 @@ const Comment = ({ comment, deleteComment }) => {
             })
                   .then((result) => {
                         if (result.status === 200 || result.status === 201) {
-                              // deleteComment(comment.id);
+                              deleteComment(comment.id);
                         }
                   })
                   .catch((error) => {
@@ -35,7 +35,6 @@ const Comment = ({ comment, deleteComment }) => {
       return (
             <div className="cmnt">
                   <h1 className="user-cmnt">"{username}" a commenté</h1>
-
                   <p className="cmnt-content">{comment.content}</p>
                   <p className="cmnt-date">
                         le "{new Date(comment.createdAt).toLocaleString()}"

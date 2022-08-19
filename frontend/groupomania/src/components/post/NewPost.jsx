@@ -92,7 +92,7 @@ const NewPost = ({ addPost }) => {
             <div className="creat-post">
                   <form className="form">
                         <div className="input-post">
-                              <label forHtml="post-titre" id="label-post">
+                              <label forhtml="post-titre" id="label-post">
                                     titre
                                     <input
                                           id="post-titre"
@@ -103,7 +103,7 @@ const NewPost = ({ addPost }) => {
                               </label>
                         </div>
                         <div className="input-post">
-                              <label forHtml="post-content" id="label-post">
+                              <label forhtml="post-content" id="label-post">
                                     content
                                     <input
                                           id="post-content"

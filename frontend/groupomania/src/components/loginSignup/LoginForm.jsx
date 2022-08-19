@@ -146,7 +146,7 @@ const LoginForm = (props) => {
                                     <form className="form-container">
                                           <div className="input-container">
                                                 <label
-                                                      forHtml="login-email"
+                                                      forhtml="login-email"
                                                       className="label-email"
                                                 >
                                                       Email
@@ -160,7 +160,7 @@ const LoginForm = (props) => {
                                           </div>
                                           <div className="input-container">
                                                 <label
-                                                      forHtml="login-pass"
+                                                      forhtml="login-pass"
                                                       className="label-password"
                                                 >
                                                       Mot de passe
@@ -231,7 +231,7 @@ const LoginForm = (props) => {
                                     <form>
                                           <div className="input-container">
                                                 <label
-                                                      forHtml="signup-username"
+                                                      forhtml="signup-username"
                                                       className="label-username"
                                                 >
                                                       Utilisateur
@@ -259,7 +259,7 @@ const LoginForm = (props) => {
                                           </div>
                                           <div className="input-container">
                                                 <label
-                                                      forHtml="signup-pass"
+                                                      forhtml="signup-pass"
                                                       className="label-password"
                                                 >
                                                       Mot de passe

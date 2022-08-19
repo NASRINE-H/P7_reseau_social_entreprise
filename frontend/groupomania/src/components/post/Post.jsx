@@ -191,10 +191,10 @@ const Post = ({ post, deletePost, updatePost }) => {
                               </div>
                         )}
                         {mode === 'editMode' && (
-                              <div className="post-div" id="post-div">
+                              <div id="post-div">
                                     <h2 id="post-user">{post.user.username}</h2>
                                     <h3 id="title1">
-                                          <label forHtml="post-titre-edit">
+                                          <label forhtml="post-titre-edit">
                                                 Titre:
                                                 <input
                                                       id="post-titre-edit"
@@ -205,7 +205,7 @@ const Post = ({ post, deletePost, updatePost }) => {
                                           </label>
                                     </h3>
                                     <p id="content1">
-                                          <label forHtml="post-content-edit">
+                                          <label forhtml="post-content-edit">
                                                 Contenu:
                                                 <input
                                                       id="post-content-edit"
