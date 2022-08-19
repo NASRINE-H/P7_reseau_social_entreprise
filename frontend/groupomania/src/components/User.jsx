@@ -13,9 +13,9 @@ const User = (props) => {
                   throw new Error('Une erreur est apparue');
             })
             .then((data) => {
-                  document.querySelector('#signup-username').value =
+                  document.querySelector('#profile-username').value =
                         data.username;
-                  document.querySelector('#signup-email').value = data.email;
+                  document.querySelector('#profile-email').value = data.email;
             })
             .catch((error) => {
                   console.log('request failed:', error);
@@ -92,26 +92,26 @@ const User = (props) => {
                         <div className="profile-form">
                               <form>
                                     <div className="input-container">
-                                          <label forHtml="signup-username">
+                                          <label forhtml="profile-username">
                                                 username
+                                                <input
+                                                      id="profile-username"
+                                                      type="text"
+                                                      name="uname"
+                                                      required
+                                                />
                                           </label>
-                                          <input
-                                                id="signup-username"
-                                                type="text"
-                                                name="uname"
-                                                required
-                                          />
                                     </div>
                                     <div className="input-container">
-                                          <label forHtml="signup-email">
+                                          <label forhtml="profile-email">
                                                 email
+                                                <input
+                                                      id="profile-email"
+                                                      type="text"
+                                                      name="email"
+                                                      required
+                                                />
                                           </label>
-                                          <input
-                                                id="signup-email"
-                                                type="text"
-                                                name="email"
-                                                required
-                                          />
                                     </div>
                               </form>
                         </div>
