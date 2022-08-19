@@ -4,7 +4,7 @@ const NewPost = ({ addPost }) => {
       const [selectedFile, setSelectedFile] = useState();
       const [preview, setPreview] = useState();
 
-      // create a preview as a side effect, whenever selected file is changed
+      //useEffect pour afficher l'image chaque fois que le fichier sélectionné est modifié
       useEffect(() => {
             if (!selectedFile) {
                   setPreview(undefined);
@@ -14,17 +14,16 @@ const NewPost = ({ addPost }) => {
             const objectUrl = URL.createObjectURL(selectedFile);
             setPreview(objectUrl);
 
-            // free memory when ever this component is unmounted
+            // libère de la mémoire dès que ce composant est démonté
             return () => URL.revokeObjectURL(objectUrl);
       }, [selectedFile]);
 
+      //pour choisir une image
       const onSelectFile = (e) => {
             if (!e.target.files || e.target.files.length === 0) {
                   setSelectedFile(undefined);
                   return;
             }
-
-            // I've kept this example simple by using the first image instead of multiple
             setSelectedFile(e.target.files[0]);
       };
 
@@ -68,7 +67,7 @@ const NewPost = ({ addPost }) => {
                                     return response.json();
                               }
                               throw new Error(
-                                    'Something went wrong:',
+                                    'Une erreur est apparue:',
                                     response.json()
                               );
                         })
@@ -84,7 +83,7 @@ const NewPost = ({ addPost }) => {
                   console.log('contenu vide');
             }
       };
-
+      //pour annuler de ne pas créer le poste
       const clearPreview = (e) => {
             setSelectedFile(undefined);
             onSelectFile(e);
@@ -123,8 +122,6 @@ const NewPost = ({ addPost }) => {
                                           name="file"
                                           id="file"
                                           className="inputfile"
-                                          // data-multiple-caption="{count} files selected"
-                                          // multiple
                                           onChange={onSelectFile}
                                     />
                               </label>

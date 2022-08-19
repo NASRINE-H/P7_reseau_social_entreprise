@@ -15,7 +15,7 @@ const Home = (props) => {
                         if (response.ok) {
                               return response.json();
                         }
-                        throw new Error('Something went wrong');
+                        throw new Error('Une erreur est apparue');
                   })
                   .then((data) => {
                         setAllPostState(data);
@@ -26,7 +26,7 @@ const Home = (props) => {
       }, []);
       return (
             <div className="home">
-                  <Logo state={props.state} setState={props.setState}  />
+                  <Logo state={props.state} setState={props.setState} />
                   <AllPost AllPostData={AllPostState} />
             </div>
       );

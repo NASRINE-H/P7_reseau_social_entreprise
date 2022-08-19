@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 
-const User = () => {
+const User = (props) => {
       let user = JSON.parse(localStorage.getItem('user'));
 
       fetch('http://localhost:3000/api/auth/' + user.userId, {})
@@ -10,7 +10,7 @@ const User = () => {
                   if (response.ok) {
                         return response.json();
                   }
-                  throw new Error('Something went wrong');
+                  throw new Error('Une erreur est apparue');
             })
             .then((data) => {
                   document.querySelector('#signup-username').value =
@@ -27,7 +27,8 @@ const User = () => {
 
       const logout = (e) => {
             localStorage.removeItem('user');
-            navigate('/signup', {
+            props.setState('Off');
+            navigate('/Login', {
                   replace: true,
             });
       };
@@ -51,7 +52,7 @@ const User = () => {
                               logout();
                               return response.ok;
                         }
-                        throw new Error('Something went wrong');
+                        throw new Error('Une erreur est apparue');
                   })
                   .catch((error) => {
                         console.log('request failed:', error);
@@ -110,11 +111,6 @@ const User = () => {
                                     </div>
                               </form>
                         </div>
-                        {/* <div className="button-container">
-                                    <button onClick={activeEdit}>
-                                          modifier
-                                    </button>
-                              </div> */}
                         <div className="btn-supp-home">
                               <button className="LogoButton1" onClick={submit}>
                                     supprimer

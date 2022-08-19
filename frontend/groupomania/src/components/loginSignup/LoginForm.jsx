@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import { validEmail, validPassword } from './regex.js';
 
 const LoginForm = (props) => {
       // Permet de switcher entre mode 'Login' et mode 'Signup'
       const [mode, setMode] = useState('login');
+
       // Permet d'activer ou non un message d'erreur lors de la connection
       const [formError, setFormError] = useState('200');
       let navigate = useNavigate();
+
       // permet d'activer le mode Signup
       const activeSignup = () => {
             setMode('signup');
@@ -55,7 +56,7 @@ const LoginForm = (props) => {
                                     setFormError('402');
                               else if (response.status === 500)
                                     setFormError('500');
-                              throw new Error('Something went wrong');
+                              throw new Error('Une erreur est apparue');
                         })
                         .then((data) => {
                               localStorage.setItem(
@@ -109,9 +110,8 @@ const LoginForm = (props) => {
                                     setFormError('500');
                               else if (response.status === 600)
                                     setFormError('600');
-                              // else if (response.status === 500)
-                              //       setFormError('500');
-                              throw new Error('Something went wrong');
+
+                              throw new Error('Une erreur est apparue');
                         })
                         .then((data) => {
                               console.log(

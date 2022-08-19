@@ -6,16 +6,13 @@ const Comment = ({ comment, deleteComment }) => {
       const [username, setUserName] = useState('Undef');
       const [currentUser, setUser] = useState({});
       useEffect(() => {
-            let usr = JSON.parse(localStorage.getItem('user'))
+            let usr = JSON.parse(localStorage.getItem('user'));
             setUser(usr);
-            if (comment.user)
-                  setUserName(comment.user.username);
-            else 
-                  setUserName(usr.username);
-            
+            if (comment.user) setUserName(comment.user.username);
+            else setUserName(usr.username);
       }, [comment]);
 
-      //pour supprimer le commentaire
+      //fetch pour supprimer le commentaire
       const deleteCmnt = (e) => {
             e.preventDefault();
             let user = JSON.parse(localStorage.getItem('user'));
@@ -27,7 +24,7 @@ const Comment = ({ comment, deleteComment }) => {
             })
                   .then((result) => {
                         if (result.status === 200 || result.status === 201) {
-                              deleteComment(comment.id);
+                              // deleteComment(comment.id);
                         }
                   })
                   .catch((error) => {
@@ -37,26 +34,25 @@ const Comment = ({ comment, deleteComment }) => {
 
       return (
             <div className="cmnt">
-                  <h1 className="user-cmnt">
-                  {username}:
-                  </h1>
+                  <h1 className="user-cmnt">"{username}" a commenté</h1>
 
                   <p className="cmnt-content">{comment.content}</p>
+                  <p className="cmnt-date">
+                        le "{new Date(comment.createdAt).toLocaleString()}"
+                  </p>
                   {(currentUser.userId === comment.userId ||
                         currentUser.isAdmin) && (
-                              
-                                    <label htmlFor="icon-delete">
-                                          <IconButton
-                                                color="primary"
-                                                aria-label="upload picture"
-                                                component="span"
-                                                onClick={deleteCmnt}>
-                                                <PhotoDelete />
-                                          </IconButton>
-                                    </label>
-                              
-                        )}
-
+                        <label htmlFor="icon-delete">
+                              <IconButton
+                                    color="primary"
+                                    aria-label="upload picture"
+                                    component="span"
+                                    onClick={deleteCmnt}
+                              >
+                                    <PhotoDelete />
+                              </IconButton>
+                        </label>
+                  )}
             </div>
       );
 };

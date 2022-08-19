@@ -40,7 +40,7 @@ const App = () => {
                                           }
                                     />
                                     <Route
-                                          path="/signup"
+                                          path="/Login"
                                           element={
                                                 <Login
                                                       state={state}

@@ -6,7 +6,7 @@ const Profile = (props) => {
       return (
             <div className="container-user">
                   <Logo state={props.state} setState={props.setState} />
-                  <User />
+                  <User setState={props.setState} />
             </div>
       );
 };

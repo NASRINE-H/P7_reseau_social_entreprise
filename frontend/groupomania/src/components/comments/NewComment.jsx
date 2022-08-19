@@ -1,22 +1,18 @@
 import React from 'react';
 
 const NewComment = ({ postid, addComment }) => {
-      //const [comment, setComment] = useState();
-
-      //pour créer un commentaire
+      // créer un nouveau commentaire
       const createNewComment = (e) => {
             e.preventDefault();
             let content = document.getElementById(
                   'comment-content' + postid
             ).value;
-            if (content !== '') {
+            let user = JSON.parse(localStorage.getItem('user'));
+            if (content !== '' && user !== '') {
+                  // créer la variable "comment" à poster dans le fetch
                   let comment = {
-                        content: document.getElementById(
-                              'comment-content' + postid
-                        ).value,
+                        content: content,
                   };
-
-                  let user = JSON.parse(localStorage.getItem('user'));
 
                   fetch('http://localhost:3000/api/comment/' + postid, {
                         method: 'POST',
@@ -28,12 +24,9 @@ const NewComment = ({ postid, addComment }) => {
                   })
                         .then((response) => {
                               if (response.ok) {
-                                    document.querySelector('#btn-comment');
-                                    //   document.querySelector('#comment-content').value =
-                                    //         '';
                                     return response.json();
                               }
-                              throw new Error('Something went wrong');
+                              throw new Error('Une erreur est apparue');
                         })
                         .then((data) => {
                               addComment(data.comment);
@@ -45,7 +38,7 @@ const NewComment = ({ postid, addComment }) => {
                               console.log('request failed:', error);
                         });
             } else {
-                  console.log('contenu vide');
+                  // contenu vide, ne rien faire
             }
       };
       return (

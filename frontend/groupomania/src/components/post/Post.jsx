@@ -8,7 +8,6 @@ import ShowAllComment from '../comments/ShowAllComment';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
-// import { useParams, useEffect, useState } from 'react';
 const Post = ({ post, deletePost, updatePost }) => {
       const [postCommentList, setCommentList] = useState([]);
       const [mode, setMode] = useState('printMode');
@@ -16,26 +15,25 @@ const Post = ({ post, deletePost, updatePost }) => {
       const [user, setUser] = useState({});
       const [preview, setPreview] = useState(post.attachement);
 
+      //permet d'afficher les button supprimer et modifier
       useEffect(() => {
             setUser(JSON.parse(localStorage.getItem('user')));
             setCommentList(post.comments);
       }, [post]);
-      // useEffect(() => {
-      //       post.date = new Date(post.createdAt);
-      // }, [post]);
-      //permet d'activer le mode modifier
-      const activeEdit = () => {
-            setMode('editMode');
-      };
-      //permet d'activer le mode afficher du poste
+
+      //permet de retourner  le mode afficher du poste
       const activePrint = () => {
             setPreview(post.attachement);
             setMode('printMode');
       };
 
+      //permet d'activer le mode modifier
+      const activeEdit = () => {
+            setMode('editMode');
+      };
+
       //permet de faire la requete delete du poste
       const delPost = (e) => {
-            // e.preventDefault();
             fetch('http://localhost:3000/api/post/' + post.id, {
                   method: 'DELETE',
                   headers: {
@@ -46,7 +44,7 @@ const Post = ({ post, deletePost, updatePost }) => {
                         if (response.ok) {
                               return response.json();
                         }
-                        throw new Error('Something went wrong');
+                        throw new Error('Une erreur est apparue');
                   })
                   .then(() => {
                         deletePost(post.id);
@@ -55,6 +53,7 @@ const Post = ({ post, deletePost, updatePost }) => {
                         console.log('delete post request failed:', error);
                   });
       };
+
       //permet de changer le state sur changement du fichier image
       const changeFile = (e) => {
             e.preventDefault();
@@ -69,6 +68,7 @@ const Post = ({ post, deletePost, updatePost }) => {
             setPreview(objectUrl);
             return () => URL.revokeObjectURL(objectUrl);
       };
+
       //permet de faire la requete PUT pour modifier le poste
       const editPost = (e) => {
             e.preventDefault();
@@ -106,17 +106,20 @@ const Post = ({ post, deletePost, updatePost }) => {
                   });
       };
 
+      //permet d'ajouter un commentaire
       const addComment = (comment) => {
             setCommentList([comment, ...postCommentList]);
             setMode('printMode');
-      }; //pour supprimer le post
+      };
 
+      //pour supprimer le commentaire
       const deleteComment = (id) => {
             setCommentList(postCommentList.filter((Cmnt) => Cmnt.id !== id));
             setMode('printMode');
       };
 
-      const submit = () => {
+      //pour faire l'alerte de la suppression
+      const confirmDelete = () => {
             confirmAlert({
                   customUI: ({ onClose }) => {
                         return (
@@ -146,14 +149,13 @@ const Post = ({ post, deletePost, updatePost }) => {
                         {mode === 'printMode' && (
                               <div id="post-div">
                                     <h2 id="post-user">
-                                          {/* postId: {post.id}, */}
-                                          {post.user.username} à
-                                          {/* {post.date.toLocaleDateString()} */}
+                                          {post.user.username} le "
                                           {new Date(
                                                 post.createdAt
                                           ).toLocaleString()}
+                                          "
                                     </h2>
-                                    <h2 id="title"> {post.titre} </h2>
+                                    <h3 id="title"> {post.titre} </h3>
                                     <p id="content"> {post.content} </p>
                                     <div id="ImgContainer">
                                           {post.attachement && (
@@ -170,7 +172,7 @@ const Post = ({ post, deletePost, updatePost }) => {
                                                 <button
                                                       id="supprimer"
                                                       type="button"
-                                                      onClick={submit}
+                                                      onClick={confirmDelete}
                                                 >
                                                       supprimer
                                                 </button>
@@ -188,19 +190,16 @@ const Post = ({ post, deletePost, updatePost }) => {
                         )}
                         {mode === 'editMode' && (
                               <div id="post-div">
-                                    <h2 id="post-user">
-                                          {/* postId: {post.id}, */}
-                                          {post.user.username}
-                                    </h2>
-                                    <h2 id="title1">
+                                    <h2 id="post-user">{post.user.username}</h2>
+                                    <h3 id="title1">
                                           Titre:
                                           <input
                                                 id="post-titre-edit"
                                                 type="text"
-                                                defaultValue={post.titre} /// il faut ajouter un onChange
+                                                defaultValue={post.titre}
                                                 required
                                           />
-                                    </h2>
+                                    </h3>
                                     <p id="content1">
                                           Contenu:
                                           <input
@@ -210,14 +209,18 @@ const Post = ({ post, deletePost, updatePost }) => {
                                                 required
                                           />
                                     </p>
-                                    <img id="postImg" src={preview} alt="" />
+                                    <img
+                                          id="postImg"
+                                          src={preview}
+                                          alt="preview"
+                                    />
                                     <div>
                                           <label htmlFor="icon-delete">
                                                 <IconButton
                                                       color="primary"
                                                       aria-label="delete post"
                                                       component="span"
-                                                      onClick={delPost}
+                                                      onClick={confirmDelete}
                                                 >
                                                       <PhotoDelete />
                                                 </IconButton>
@@ -272,7 +275,6 @@ const Post = ({ post, deletePost, updatePost }) => {
                   />
             </div>
       );
-      // };
 };
 
 export default Post;
