@@ -92,7 +92,7 @@ const NewPost = ({ addPost }) => {
             <div className="creat-post">
                   <form className="form">
                         <div className="input-post">
-                              <label id="label-post">
+                              <label forHtml="post-titre" id="label-post">
                                     titre
                                     <input
                                           id="post-titre"
@@ -103,7 +103,7 @@ const NewPost = ({ addPost }) => {
                               </label>
                         </div>
                         <div className="input-post">
-                              <label id="label-post">
+                              <label forHtml="post-content" id="label-post">
                                     content
                                     <input
                                           id="post-content"
@@ -136,7 +136,7 @@ const NewPost = ({ addPost }) => {
                               </button>
                         )}
                         {selectedFile && (
-                              <div id="post-div">
+                              <div className="post-div" id="post-div">
                                     <h1>Le post va être posté comme ça:</h1>
 
                                     <h2 id="title">

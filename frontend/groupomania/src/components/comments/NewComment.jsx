@@ -46,6 +46,7 @@ const NewComment = ({ postid, addComment }) => {
                   <form className="form">
                         <div className="input-comment">
                               <label htmlFor="comment-content" id="label-cmnt">
+                                    Ecriver un commentaire ...
                                     <input
                                           id={'comment-content' + postid}
                                           type="text"

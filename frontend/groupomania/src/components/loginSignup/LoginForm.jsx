@@ -145,7 +145,10 @@ const LoginForm = (props) => {
                               <div className="Loginform">
                                     <form className="form-container">
                                           <div className="input-container">
-                                                <label className="label-email">
+                                                <label
+                                                      forHtml="login-email"
+                                                      className="label-email"
+                                                >
                                                       Email
                                                       <input
                                                             id="login-email"
@@ -156,7 +159,10 @@ const LoginForm = (props) => {
                                                 </label>
                                           </div>
                                           <div className="input-container">
-                                                <label className="label-password">
+                                                <label
+                                                      forHtml="login-pass"
+                                                      className="label-password"
+                                                >
                                                       Mot de passe
                                                       <input
                                                             id="login-pass"
@@ -224,7 +230,10 @@ const LoginForm = (props) => {
                               <div className="Signupform">
                                     <form>
                                           <div className="input-container">
-                                                <label className="label-username">
+                                                <label
+                                                      forHtml="signup-username"
+                                                      className="label-username"
+                                                >
                                                       Utilisateur
                                                       <input
                                                             id="signup-username"
@@ -237,7 +246,7 @@ const LoginForm = (props) => {
                                           <div className="input-container">
                                                 <label
                                                       className="label-email"
-                                                      htmlFor=""
+                                                      htmlFor="signup-email"
                                                 >
                                                       Email
                                                       <input
@@ -249,7 +258,10 @@ const LoginForm = (props) => {
                                                 </label>
                                           </div>
                                           <div className="input-container">
-                                                <label className="label-password">
+                                                <label
+                                                      forHtml="signup-pass"
+                                                      className="label-password"
+                                                >
                                                       Mot de passe
                                                       <input
                                                             id="signup-pass"

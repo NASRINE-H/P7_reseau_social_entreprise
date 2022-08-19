@@ -23,7 +23,8 @@ body {
     width: 50%;
 }
 
-.logo {
+.logo,
+.input-comment {
     width: 100%;
     margin-top: 5%;
 }
@@ -104,7 +105,8 @@ body {
     border-radius: 20px;
 }
 
-.allPost {
+.allPost,
+.post-div {
     width: 100%;
 }
 
@@ -195,11 +197,11 @@ form input {
     margin-top: 5%;
 }
 
-#supprimer,
-#modifier {
+.supprimer,
+.modifier {
     background-color: #FFD7D7;
     border: #FFD7D7;
-    width: 40%;
+    width: 25%;
     height: 40px;
     font-size: 20px;
     border-radius: 20px;
@@ -333,7 +335,7 @@ h1 {
         width: 100%;
     }
     .home {
-        width: 90%;
+        width: 70%;
     }
     .logo {
         width: 100%;
@@ -373,6 +375,11 @@ h1 {
     /*--------------page profile-------------*/
     .container-user {
         width: 70%;
+    }
+    .supprimer,
+    .modifier {
+        width: 15%;
+        font-size: 15px;
     }
 }
 
@@ -480,9 +487,9 @@ h1 {
     .btn-suppmodif {
         width: 100%;
     }
-    #supprimer,
-    #modifier {
-        width: 40%;
+    .supprimer,
+    .modifier {
+        width: 25%;
         font-size: 17px;
     }
     .user-cmnt,
@@ -666,9 +673,9 @@ h1 {
     #label-post {
         font-size: 16px;
     }
-    #supprimer,
-    #modifier {
-        width: 40%;
+    .supprimer,
+    .modifier {
+        width: 30%;
         font-size: 15px;
     }
     #btn-comment {
@@ -764,14 +771,14 @@ h1 {
     #content {
         font-size: 14px;
     }
-    #supprimer,
-    #modifier {
-        width: 40%;
+    .supprimer,
+    .modifier {
+        width: 30%;
         font-size: 12px;
     }
     #btn-comment {
         width: 35%;
-        height: 50px;
+        height: 35px;
         font-size: 11px;
     }
     .user-cmnt,

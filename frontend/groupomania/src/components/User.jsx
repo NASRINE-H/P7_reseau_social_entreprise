@@ -92,7 +92,9 @@ const User = (props) => {
                         <div className="profile-form">
                               <form>
                                     <div className="input-container">
-                                          <label> username </label>
+                                          <label forHtml="signup-username">
+                                                username
+                                          </label>
                                           <input
                                                 id="signup-username"
                                                 type="text"
@@ -101,7 +103,9 @@ const User = (props) => {
                                           />
                                     </div>
                                     <div className="input-container">
-                                          <label> email </label>
+                                          <label forHtml="signup-email">
+                                                email
+                                          </label>
                                           <input
                                                 id="signup-email"
                                                 type="text"

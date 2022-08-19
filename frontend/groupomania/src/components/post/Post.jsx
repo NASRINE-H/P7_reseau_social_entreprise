@@ -147,7 +147,7 @@ const Post = ({ post, deletePost, updatePost }) => {
             <div>
                   <div className="post-Page">
                         {mode === 'printMode' && (
-                              <div id="post-div">
+                              <div className="post-div" id="post-div">
                                     <h2 id="post-user">
                                           {post.user.username} le "
                                           {new Date(
@@ -170,7 +170,8 @@ const Post = ({ post, deletePost, updatePost }) => {
                                           user.isAdmin) && (
                                           <div className="btn-suppmodif">
                                                 <button
-                                                      id="supprimer"
+                                                      id={`supprimer-${post.id}`}
+                                                      className="supprimer"
                                                       type="button"
                                                       onClick={confirmDelete}
                                                 >
@@ -178,7 +179,8 @@ const Post = ({ post, deletePost, updatePost }) => {
                                                 </button>
 
                                                 <button
-                                                      id="modifier"
+                                                      id={`modifier-${post.id}`}
+                                                      className="modifier"
                                                       type="button"
                                                       onClick={activeEdit}
                                                 >
@@ -189,25 +191,31 @@ const Post = ({ post, deletePost, updatePost }) => {
                               </div>
                         )}
                         {mode === 'editMode' && (
-                              <div id="post-div">
+                              <div className="post-div" id="post-div">
                                     <h2 id="post-user">{post.user.username}</h2>
                                     <h3 id="title1">
-                                          Titre:
-                                          <input
-                                                id="post-titre-edit"
-                                                type="text"
-                                                defaultValue={post.titre}
-                                                required
-                                          />
+                                          <label forHtml="post-titre-edit">
+                                                Titre:
+                                                <input
+                                                      id="post-titre-edit"
+                                                      type="text"
+                                                      defaultValue={post.titre}
+                                                      required
+                                                />
+                                          </label>
                                     </h3>
                                     <p id="content1">
-                                          Contenu:
-                                          <input
-                                                id="post-content-edit"
-                                                type="text"
-                                                defaultValue={post.content}
-                                                required
-                                          />
+                                          <label forHtml="post-content-edit">
+                                                Contenu:
+                                                <input
+                                                      id="post-content-edit"
+                                                      type="text"
+                                                      defaultValue={
+                                                            post.content
+                                                      }
+                                                      required
+                                                />
+                                          </label>
                                     </p>
                                     <img
                                           id="postImg"
