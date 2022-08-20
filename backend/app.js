@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 
-const { test, loadmodel } = require('./models/index');
+const {
+    test,
+    loadmodel
+} = require('./models/index');
 
 const path = require('path');
 //const auth = require("./middelware/auth");
@@ -23,7 +26,7 @@ const commentRoutes = require('./routes/comment');
 //il nous donne acces au corps de la requete
 //app.use(express.json());
 
-//CORS
+//CORS  pour pouvoir communiquer entre frontend et backend via navigateur 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -33,7 +36,9 @@ app.use((req, res, next) => {
 
 //app.use((req, res, next) => console.log(req.body));
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+    extended: true
+}));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 //app.use("/api/auth  ", authRoutes)
 //routes

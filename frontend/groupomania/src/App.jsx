@@ -18,6 +18,8 @@ const App = () => {
                         {state === 'Off' && (
                               <Routes>
                                     <Route
+                                          // quelque soit le chemin ecris sur le navigateur
+                                          // il va router vers la page login
                                           path="*"
                                           element={
                                                 <Login
@@ -34,15 +36,6 @@ const App = () => {
                                           path="/"
                                           element={
                                                 <Home
-                                                      state={state}
-                                                      setState={setStateApp}
-                                                />
-                                          }
-                                    />
-                                    <Route
-                                          path="/Login"
-                                          element={
-                                                <Login
                                                       state={state}
                                                       setState={setStateApp}
                                                 />
@@ -69,7 +62,7 @@ const App = () => {
                                     <Route
                                           path="*"
                                           element={
-                                                <Login
+                                                <Home
                                                       state={state}
                                                       setState={setStateApp}
                                                 />
