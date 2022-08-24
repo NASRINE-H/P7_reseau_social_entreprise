@@ -1,8 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+//on reste sur la meme page
 const Logo = (props) => {
       let navigate = useNavigate();
+      //fuction de se deconnecter
       const logout = () => {
             props.setState('Off');
             localStorage.removeItem('user');
@@ -10,7 +12,7 @@ const Logo = (props) => {
                   replace: true,
             });
       };
-
+      //
       const navProfile = () => {
             if (localStorage.getItem('user')) {
                   navigate('/Profile', {

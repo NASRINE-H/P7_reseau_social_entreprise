@@ -33,6 +33,8 @@ const App = () => {
                         {state === 'On' && (
                               <Routes>
                                     <Route
+                                          // quand je suis a la racine montres moi
+                                          // Home
                                           path="/"
                                           element={
                                                 <Home

@@ -336,6 +336,7 @@ h1 {
     }
     .home {
         width: 70%;
+        margin-bottom: 10%;
     }
     .logo {
         width: 100%;
@@ -435,6 +436,7 @@ h1 {
     /*---------- page home------------------- */
     .home {
         width: 93%;
+        margin-bottom: 10%;
     }
     #post-user {
         font-size: 18px;
@@ -552,6 +554,7 @@ h1 {
     /* ------------page home --------------*/
     .home {
         width: 90%;
+        margin-bottom: 10%;
     }
     #post-user {
         font-size: 18px;
@@ -639,6 +642,7 @@ h1 {
     /* --------------page home -----------------------------*/
     .home {
         width: 95%;
+        margin-bottom: 10%;
     }
     #post-user {
         font-size: 18px;
@@ -731,6 +735,7 @@ h1 {
     /*---------------- page home ------------------*/
     .home {
         width: 97%;
+        margin-bottom: 10%;
     }
     .group-logo {
         width: 60%;

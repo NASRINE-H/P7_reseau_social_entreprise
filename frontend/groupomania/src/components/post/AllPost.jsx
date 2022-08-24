@@ -8,13 +8,15 @@ const AllPost = ({ AllPostData }) => {
       useEffect(() => {
             if (AllPostData) setPostList(AllPostData);
       }, [AllPostData]);
-      //pour eviter le rechargement de la page quand on fait supprimer d'aun post
+
       const addPost = (post) => {
             setPostList([post, ...postList]);
-      }; //pour supprimer le post
+            //pour eviter le rechargement de la page quand on fait supprimer d'aun post
+      }; //pour supprimer le post sans raffrichir la page
       const deletePost = (id) => {
             setPostList(postList.filter((post) => post.id !== id));
       };
+      //permet de modifier le post sans raffrichir la page
       const updatePost = (post) => {
             let postFound = postList.find((p) => p.id === post.id);
             Object.assign(postFound, post);

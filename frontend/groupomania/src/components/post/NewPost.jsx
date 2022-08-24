@@ -33,7 +33,7 @@ const NewPost = ({ addPost }) => {
                   titre: document.getElementById('post-titre').value,
                   content: document.getElementById('post-content').value,
             };
-
+            //pour creer un body (post + image)
             if (post.titre !== '') {
                   const body = new FormData();
                   body.append('post', JSON.stringify(post));
